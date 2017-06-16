@@ -20,17 +20,15 @@ abstract class BaseActivity<T : IPresenter> : SupportActivity(), IView {
         super.onCreate(savedInstanceState)
         setContentView(getLayout())
         activity = this
-        App.instance!!.addActivity(this)
+        App.instance?.addActivity(this)
         initInject()
         initEventAndData()
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        if (mPresenter != null) {
-            mPresenter!!.detachView()
-        }
-        App.instance!!.removeActivity(this)
+        mPresenter?.detachView()
+        App.instance?.removeActivity(this)
     }
 
     protected abstract fun initEventAndData()

@@ -4,8 +4,9 @@ import android.app.Activity
 import com.jmd_news_kotlin.mvp.IPresenter
 import com.jmd_news_kotlin.mvp.IView
 import com.jmd_news_kotlin.net.ApiService
-import rx.Subscription
-import rx.subscriptions.CompositeSubscription
+import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
+import io.reactivex.functions.Action
 
 /**
  * Created by asus on 2017/6/3.
@@ -13,7 +14,7 @@ import rx.subscriptions.CompositeSubscription
 open class BasePresenter<T : IView>(protected var activity: Activity?, protected var mView: T?) : IPresenter {
 
 
-    protected var mCompositeSubscription: CompositeSubscription? = null
+    protected var mCompositeDisposable: CompositeDisposable? = null
     protected val apiService: ApiService? = null
 
     override fun detachView() {
@@ -22,17 +23,22 @@ open class BasePresenter<T : IView>(protected var activity: Activity?, protected
     }
 
     protected fun unSubscribe() {
+        mCompositeDisposable?.dispose()
 
-        if (mCompositeSubscription != null) {
-            mCompositeSubscription!!.unsubscribe()
-        }
     }
 
-    protected fun addSubscribe(subscription: Subscription) {
-
-        if (mCompositeSubscription == null) {
-            mCompositeSubscription = CompositeSubscription()
+    protected fun addSubscribe(disposable: Disposable) {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = CompositeDisposable()
         }
-        mCompositeSubscription!!.add(subscription)
+        mCompositeDisposable?.add(disposable)
     }
+
+    protected fun <U> addRxBusSubscribe(eventType: Class<U>) {
+        if (mCompositeDisposable == null) {
+            mCompositeDisposable = CompositeDisposable()
+        }
+        mCompositeDisposable?.add(RxBus.toObservable(eventType).compose(RxUtil.rxSchedulerHelper()).subscribe())
+    }
+
 }

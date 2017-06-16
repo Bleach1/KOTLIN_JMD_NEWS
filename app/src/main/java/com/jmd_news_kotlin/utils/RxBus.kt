@@ -1,5 +1,3 @@
-package com.jmd_news_kotlin.utils
-
 import io.reactivex.Flowable
 import io.reactivex.Observable
 import io.reactivex.processors.FlowableProcessor
@@ -10,6 +8,7 @@ import io.reactivex.subjects.Subject
 /**
  * Created by asus on 2017/6/3.
  */
+
 object RxBus {
 
     private val bus: Subject<Any>

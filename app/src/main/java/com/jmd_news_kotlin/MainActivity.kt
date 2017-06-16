@@ -1,17 +1,28 @@
 package com.jmd_news_kotlin
 
-import android.os.Bundle
-import android.support.v7.app.AppCompatActivity
+import com.jmd_news_kotlin.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
+import org.jetbrains.anko.toast
 
-class MainActivity : AppCompatActivity() {
+@Suppress("UNREACHABLE_CODE")
+class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
+    override fun setMsg() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
 
-    override fun onCreate(savedInstanceState: Bundle?) {
-        super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_main)
-        // Example of a call to a native method
+    override fun initEventAndData() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         sample_text.text = stringFromJNI()
+        App.instance?.let { toast("ahgaha") }
+    }
 
+    override fun initInject() {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+    }
+
+    override fun getLayout(): Int {
+        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        return R.layout.activity_main
     }
 
     /**

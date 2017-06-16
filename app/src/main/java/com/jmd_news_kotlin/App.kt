@@ -1,14 +1,13 @@
 package com.jmd_news_kotlin
 
 import android.app.Activity
-import android.app.Application
 import android.content.Context
-import java.util.*
+import android.support.multidex.MultiDexApplication
 
 /**
  * Created by asus on 2017/6/3.
  */
-class App : Application() {
+class App : MultiDexApplication() {
     private var activityList = mutableSetOf<Activity>()
     override fun onCreate() {
         super.onCreate()
