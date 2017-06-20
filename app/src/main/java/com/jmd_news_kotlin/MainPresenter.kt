@@ -1,13 +1,15 @@
 package com.jmd_news_kotlin
 
-import android.app.Activity
 import com.jmd_news_kotlin.base.BasePresenter
+import com.jmd_news_kotlin.utils.RetrofitHelper
+import com.safframework.log.L
+import javax.inject.Inject
 
-class MainPresenter(activity: Activity?, mView: MainContract.View?) : BasePresenter<MainContract.View>(activity, mView),
+class MainPresenter @Inject constructor(mRetrofitHelper: RetrofitHelper) : BasePresenter<MainContract.View>(),
         MainContract.Presenter {
+    private var retrofitHelper: RetrofitHelper = mRetrofitHelper
     override fun getMsg() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
-
+        L.i("*******************************************************")
     }
 
 

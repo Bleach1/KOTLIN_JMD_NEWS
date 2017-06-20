@@ -10,7 +10,7 @@ class RxUtil {
 
     companion object {
         fun <T> rxSchedulerHelper(): ObservableTransformer<T, T> {
-            return ObservableTransformer<T, T> { observable ->
+            return ObservableTransformer { observable ->
                 observable.subscribeOn(Schedulers.io())
                         .observeOn(AndroidSchedulers.mainThread())
             }

@@ -3,21 +3,31 @@ package com.jmd_news_kotlin
 import android.app.Activity
 import android.content.Context
 import android.support.multidex.MultiDexApplication
+import com.jmd_news_kotlin.di.component.AppComponent
+import com.jmd_news_kotlin.di.component.DaggerAppComponent
+import com.jmd_news_kotlin.di.module.AppModule
+import com.jmd_news_kotlin.di.module.HttpModule
+import java.util.*
 
 /**
  * Created by asus on 2017/6/3.
  */
 class App : MultiDexApplication() {
-    private var activityList = mutableSetOf<Activity>()
+    private var activityList = LinkedList<Activity>()
     override fun onCreate() {
         super.onCreate()
         context = applicationContext
         instance = this
+        appComponent = DaggerAppComponent.builder()
+                .appModule(AppModule(instance as App))
+                .httpModule(HttpModule())
+                .build()
     }
 
     companion object {
         var context: Context? = null
         var instance: App? = null
+        var appComponent: AppComponent? = null
     }
 
     fun addActivity(act: Activity) {

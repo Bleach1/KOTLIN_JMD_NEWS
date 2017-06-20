@@ -2,26 +2,23 @@ package com.jmd_news_kotlin
 
 import com.jmd_news_kotlin.base.BaseActivity
 import kotlinx.android.synthetic.main.activity_main.*
-import org.jetbrains.anko.toast
 
-@Suppress("UNREACHABLE_CODE")
+
 class MainActivity : BaseActivity<MainPresenter>(), MainContract.View {
     override fun setMsg() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        print("ljn")
     }
 
     override fun initEventAndData() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         sample_text.text = stringFromJNI()
-        App.instance?.let { toast("ahgaha") }
+        mPresenter?.getMsg()
     }
 
     override fun initInject() {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+        getActivityComponent().inject(this)
     }
 
     override fun getLayout(): Int {
-        TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
         return R.layout.activity_main
     }
 
