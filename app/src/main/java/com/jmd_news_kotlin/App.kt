@@ -7,6 +7,7 @@ import com.jmd_news_kotlin.di.component.AppComponent
 import com.jmd_news_kotlin.di.component.DaggerAppComponent
 import com.jmd_news_kotlin.di.module.AppModule
 import com.jmd_news_kotlin.di.module.HttpModule
+import com.jmd_news_kotlin.service.InitializeService
 import java.util.*
 
 /**
@@ -18,6 +19,7 @@ class App : MultiDexApplication() {
         super.onCreate()
         context = applicationContext
         instance = this
+        InitializeService.start(this)
         appComponent = DaggerAppComponent.builder()
                 .appModule(AppModule(instance as App))
                 .httpModule(HttpModule())

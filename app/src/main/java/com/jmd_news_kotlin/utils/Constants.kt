@@ -8,4 +8,5 @@ object Constants {
     val PATH_DATA = App.instance?.cacheDir?.absolutePath + File.separator + "data"
     val PATH_CACHE = PATH_DATA + "/NetCache"
     val DB_NAME = "myRealm.realm"
+    val ACTION_INIT = "action_init"
 }

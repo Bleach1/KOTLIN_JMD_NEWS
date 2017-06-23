@@ -4,8 +4,8 @@ import com.google.gson.GsonBuilder
 import com.jmd_news_kotlin.App
 import com.jmd_news_kotlin.BuildConfig
 import com.jmd_news_kotlin.net.CacheProviders
+import com.jmd_news_kotlin.utils.AppManager
 import com.jmd_news_kotlin.utils.Constants
-import com.jmd_news_kotlin.utils.NetUtil
 import dagger.Module
 import dagger.Provides
 import io.rx_cache2.internal.RxCache
@@ -62,13 +62,13 @@ class HttpModule {
         //cache拦截器
         val cacheInterceptor = Interceptor { chain ->
             var request = chain.request()
-            if (!NetUtil.isNetworkConnected) {
+            if (!AppManager.isNetworkConnected) {
                 request = request.newBuilder()
                         .cacheControl(CacheControl.FORCE_CACHE)
                         .build()
             }
             val response = chain.proceed(request)
-            if (NetUtil.isNetworkConnected) {
+            if (AppManager.isNetworkConnected) {
                 val maxAge = 0
                 // 有网络时, 不缓存, 最大保存时长为0
                 response.newBuilder()
