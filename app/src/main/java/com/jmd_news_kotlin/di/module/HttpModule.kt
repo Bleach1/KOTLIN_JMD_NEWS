@@ -6,6 +6,7 @@ import com.jmd_news_kotlin.BuildConfig
 import com.jmd_news_kotlin.net.CacheProviders
 import com.jmd_news_kotlin.utils.AppManager
 import com.jmd_news_kotlin.utils.Constants
+import com.safframework.log.L
 import dagger.Module
 import dagger.Provides
 import io.rx_cache2.internal.RxCache
@@ -99,6 +100,8 @@ class HttpModule {
                     //把原来的参数添加到新的构造器，（因为没找到直接添加，所以就new新的）
                     for (i in 0..formBody.size() - 1) {
                         bodyBuilder.addEncoded(formBody.encodedName(i), formBody.encodedValue(i))
+                        //拿到请求的参数
+                        L.i(formBody.name(i) + formBody.value(i))
                         params.put(formBody.encodedName(i), formBody.encodedValue(i))
                     }
                     if (!params.containsKey("v")) {

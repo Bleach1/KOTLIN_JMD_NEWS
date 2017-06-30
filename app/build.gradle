@@ -113,4 +113,6 @@ dependencies {
     compile 'com.google.android:flexbox:0.3.0-alpha2'
     //kotlin 日志
     compile 'com.safframework.log:saf-log:1.0.5'
+
+    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
 }
