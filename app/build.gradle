@@ -20,7 +20,9 @@ android {
             }
         }
         multiDexEnabled true
-
+        ndk {
+            abiFilters 'armeabi','x86'//or armeabi-v7a、arm64-v8a、x86
+        }
     }
     /* compileOptions {
          sourceCompatibility JavaVersion.VERSION_1_8
@@ -115,4 +117,10 @@ dependencies {
     compile 'com.safframework.log:saf-log:1.0.5'
 
     compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.22'
+//LuBan图片压缩
+    compile 'top.zibin:Luban:1.1.2'
+
+    compile 'id.zelory:compressor:2.1.0'
+    //Tiny
+    compile 'com.zxy.android:tiny:0.0.6'
 }

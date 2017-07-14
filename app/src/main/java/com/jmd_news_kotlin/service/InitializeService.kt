@@ -1,5 +1,6 @@
 package com.jmd_news_kotlin.service
 
+import android.app.Application
 import android.app.IntentService
 import android.content.Context
 import android.content.Intent
@@ -8,6 +9,8 @@ import com.safframework.log.L
 import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
 import com.bumptech.glide.load.model.GlideUrl
 import com.bumptech.glide.Glide
+import com.jmd_news_kotlin.App
+import com.zxy.tiny.Tiny
 import java.io.InputStream
 
 
@@ -21,6 +24,7 @@ class InitializeService : IntentService("InitializeService") {
 
     private fun initApp() {
         L.i("初始化一些第三方库...")
+        Tiny.getInstance().init(App.instance)
     }
 
     companion object {
