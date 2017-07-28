@@ -3,8 +3,12 @@
   <component name="ProjectModuleManager">
     <modules>
       <module fileurl="file://$PROJECT_DIR$/KOTLIN_JMD_NEWS.iml" filepath="$PROJECT_DIR$/KOTLIN_JMD_NEWS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/KOTLIN_JMD_NEWS.iml" filepath="$PROJECT_DIR$/KOTLIN_JMD_NEWS.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/fragmentation/fragmentation.iml" filepath="$PROJECT_DIR$/fragmentation/fragmentation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fragmentation/fragmentation.iml" filepath="$PROJECT_DIR$/fragmentation/fragmentation.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fragmentation_swipeback/fragmentation_swipeback.iml" filepath="$PROJECT_DIR$/fragmentation_swipeback/fragmentation_swipeback.iml" />
       <module fileurl="file://$PROJECT_DIR$/fragmentation_swipeback/fragmentation_swipeback.iml" filepath="$PROJECT_DIR$/fragmentation_swipeback/fragmentation_swipeback.iml" />
     </modules>
   </component>
