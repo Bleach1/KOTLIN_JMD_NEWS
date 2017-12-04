@@ -1,23 +1,18 @@
 package com.jmd_news_kotlin.service
 
-import android.app.Application
 import android.app.IntentService
 import android.content.Context
 import android.content.Intent
+import com.jmd_news_kotlin.App
 import com.jmd_news_kotlin.utils.Constants
 import com.safframework.log.L
-import com.bumptech.glide.integration.okhttp3.OkHttpUrlLoader
-import com.bumptech.glide.load.model.GlideUrl
-import com.bumptech.glide.Glide
-import com.jmd_news_kotlin.App
 import com.zxy.tiny.Tiny
-import java.io.InputStream
 
 
 class InitializeService : IntentService("InitializeService") {
 
     override fun onHandleIntent(intent: Intent?) {
-        if (Constants.ACTION_INIT.equals(intent?.action)) {
+        if (Constants.ACTION_INIT == intent?.action) {
             initApp()
         }
     }
