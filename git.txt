@@ -1,0 +1,13 @@
+git clone 地址 
+git   log
+
+git branch 分支名    （创建分支）
+git checkout 分支名  （切换分支）
+
+git checkout -b  分支名 （创建并切换）
+git branch -d 分支名 （删除分支）
+
+HEAD指向的branch 不能被删除，如删除需要用checkout把HEAD指向其他地方
+没有被合并到master的branch删除会失败  -d改成-D删除
+
+git push origin master
