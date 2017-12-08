@@ -11,3 +11,26 @@ HEAD指向的branch 不能被删除，如删除需要用checkout把HEAD指向其他地方
 没有被合并到master的branch删除会失败  -d改成-D删除
 
 git push origin master
+
+
+git merge branch1
+git merge --abort(取消合并)
+
+世界流行工作流
+1.任何新的功能（feature）或 bug 修复全都新建一个 branch 来写；
+2.branch 写完后，合并到 master，然后删掉这个 branch。
+
+
+查看历史中的多个 commit：log
+查看详细改动： git log -p
+查看大致改动：git log --stat
+查看具体某个 commit：show
+要看最新 commit ，直接输入 git show ；要看指定 commit ，输入 git show commit的引用或SHA-1
+如果还要指定文件，在 git show 的最后加上文件名
+查看未提交的内容：diff
+查看暂存区和上一条 commit 的区别：git diff --staged（或 --cached）
+查看工作目录和暂存区的区别：git diff 不加选项参数
+查看工作目录和上一条 commit 的区别：git diff HEAD...
+
+
+git rebase 目标基础点
