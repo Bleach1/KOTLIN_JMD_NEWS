@@ -20,7 +20,7 @@ git merge --abort(取消合并)
 1.任何新的功能（feature）或 bug 修复全都新建一个 branch 来写；
 2.branch 写完后，合并到 master，然后删掉这个 branch。
 
-
+退出 git  log  (press q)
 查看历史中的多个 commit：log
 查看详细改动： git log -p
 查看大致改动：git log --stat
@@ -34,3 +34,12 @@ git merge --abort(取消合并)
 
 
 git rebase 目标基础点
+
+commit --amend 可以修复当前提交的错误
+git rebase -i HEAD^^  倒数第二个提交出错误
+^ 的用法：在 commit 的后面加一个或多个 ^ 号，可以把 commit 往回偏移，偏移的数量是 ^ 的数量。
+例如：master^ 表示 master 指向的 commit 之前的那个 commit； HEAD^^ 表示 HEAD 所指向的 commit 往前数两个 commit。
+
+
+~ 的用法：在 commit 的后面加上 ~ 号和一个数，可以把 commit 往回偏移，偏移的数量是 ~ 号后面的数。
+例如：HEAD~5 表示 HEAD 指向的 commit往前数 5 个 commit。
