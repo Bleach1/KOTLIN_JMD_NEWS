@@ -43,3 +43,11 @@ git rebase -i HEAD^^  倒数第二个提交出错误
 
 ~ 的用法：在 commit 的后面加上 ~ 号和一个数，可以把 commit 往回偏移，偏移的数量是 ~ 号后面的数。
 例如：HEAD~5 表示 HEAD 指向的 commit往前数 5 个 commit。
+把 pick 修改成 edit 后，就可以退出编辑界面了（撤销的话直接删除）
+git add 笑声(修改后)
+git commit --amend
+git rebase --continue
+
+git reset --hard 目标commit
+
+git rebase --onto HEAD^^ HEAD^ branch1(撤销提交)
