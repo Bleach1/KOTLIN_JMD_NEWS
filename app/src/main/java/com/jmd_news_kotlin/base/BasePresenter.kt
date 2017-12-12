@@ -21,7 +21,7 @@ open class BasePresenter<T : IView> : IPresenter {
     }
 
     protected fun unSubscribe() {
-        mCompositeDisposable?.dispose()
+        mCompositeDisposable?.clear()
 
     }
 

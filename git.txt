@@ -50,4 +50,33 @@ git rebase --continue
 
 git reset --hard 目标commit
 
-git rebase --onto HEAD^^ HEAD^ branch1(撤销提交)
+git rebase --onto HEAD^^ HEAD^ branchcommit 写错了
+
+
+1. 出错的内容在你自己的 branch
+ git push origin branch1 -f(强行push 进行中央仓库覆盖)
+
+2. 出错的内容已经合并到 master
+
+git revert HEAD^
+在 revert 完成之后，把新的 commit 再 push 上去
+
+如果出错内容在私有 branch：在本地把内容修正后，强制 push (push -f）一次就可以解决；
+如果出错内容在 master：不要强制 push，而要用 revert 把写错的 commit 撤销。
+
+
+
+--soft 和 --hard 的区别：--hard 会清空工作目录的改动，而 --soft 则会保留工作目录的内容，并把因为保留工作目录内容所带来的新的文件差异放进暂存区。
+reset 不加参数：保留工作目录，并清空暂存区
+
+当你手头有一件临时工作要做，需要把工作目录暂时清理干净
+git stash
+你的工作目录的改动就被清空了，所有改动都被存了起来
+切回你的分支，然后：git stash pop
+
+分支找回
+git reflog
+找到分支移除哪一行commit
+所以现在就可以切换回 c08de9a，然后重新创建 branch1 ：
+git checkout c03de9a
+git checkout -b branch1

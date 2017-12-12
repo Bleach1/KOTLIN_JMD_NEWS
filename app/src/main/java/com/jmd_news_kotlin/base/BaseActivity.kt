@@ -42,6 +42,8 @@ abstract class BaseActivity<T : IPresenter> : SupportActivity(), IView {
 
     protected abstract fun getLayout(): Int
 
+    abstract val DaggerActivityComponent: Any
+
     protected fun getActivityComponent(): ActivityComponent {
         return DaggerActivityComponent.builder()
                 .appComponent(App.appComponent)

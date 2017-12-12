@@ -1,5 +1,6 @@
 package com.jmd_news_kotlin.utils
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.content.SharedPreferences
@@ -147,6 +148,7 @@ object AppManager {
      * 判断是否连网
      */
     val isNetworkConnected: Boolean
+        @SuppressLint("MissingPermission")
         get() {
             return connectivityManager.activeNetworkInfo.isConnected
         }
@@ -155,6 +157,7 @@ object AppManager {
      * 判断是否WIFI处于连接状态
      */
     val isWiFiConnected: Boolean
+        @SuppressLint("MissingPermission")
         get() {
             val networkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_WIFI)
             return networkInfo.isConnected
@@ -163,6 +166,7 @@ object AppManager {
      * 判断是否APN列表中某个渠道处于连接状态
      */
     val isMobile: Boolean
+        @SuppressLint("MissingPermission")
         get() {
             val networkInfo = connectivityManager.getNetworkInfo(ConnectivityManager.TYPE_MOBILE)
             return networkInfo.isConnected
