@@ -1,0 +1,20 @@
+Var 变量   Val 常量
+
+lateinit(不支持基础数据类型,基础数据类型like this private var mNumber: Int by Delegates.notNull()) 
+延迟初始化(ex:在Activty中初始化Context)     ...by Lazy
+
+字符串拼接：val firstName = "Amit"
+            val lastName = "Shekhar"
+            val message = "My name is: $firstName $lastName"
+
+            val s = "abc"
+            val str = "$s.length is ${s.length}" // 结果为 "abc.length is 3"
+
+isNullOrEmpty 和 isNullOrBlank 
+
+Note that this is not a class, or an object
+const val PRESENTATION_MODE_PRESENTING = "presenting"
+
+需要被继承的 open关键字
+
+internal 声明，在同一模块中的任何地方可见
