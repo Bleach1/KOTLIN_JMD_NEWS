@@ -1,0 +1,5 @@
+http://blog.csdn.net/sunnyxiaohu/article/details/50787430
+
+protocol：第一部分就是协议，例如百度使用的就是https协议
+hostname[:port]：第二部分就是主机名(还有端口号为可选参数)，一般网站默认的端口号为80，例如百度的主机名就是www.baidu.com，这个就是服务器的地址;      
+path：第三部分就是主机资源的具体地址，如目录和文件名等
