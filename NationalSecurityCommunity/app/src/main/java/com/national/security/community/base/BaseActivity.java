@@ -4,16 +4,9 @@ import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.view.View;
 import android.view.WindowManager;
 
-import com.kingja.loadsir.callback.Callback;
-import com.kingja.loadsir.core.LoadService;
-import com.kingja.loadsir.core.LoadSir;
 import com.national.security.community.App;
-import com.national.security.community.callback.EmptyCallback;
-import com.national.security.community.callback.ErrorCallback;
-import com.national.security.community.callback.LoadingCallback;
 import com.national.security.community.injection.component.ActivityComponent;
 import com.national.security.community.injection.component.DaggerActivityComponent;
 import com.national.security.community.injection.module.ActivityModule;
@@ -28,9 +21,9 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 
 /**
- @ description:  基类Activity
- @ author:  ljn
- @ time:  2018/1/2 
+ * @ description:  基类Activity
+ * @ author:  ljn
+ * @ time:  2018/1/2
  */
 public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActivity implements IView {
 
@@ -98,4 +91,5 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
     protected abstract int getLayout();
 
     protected abstract void initEventAndData();
+
 }

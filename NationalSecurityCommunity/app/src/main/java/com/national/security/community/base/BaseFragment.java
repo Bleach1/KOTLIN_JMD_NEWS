@@ -25,7 +25,7 @@ import butterknife.Unbinder;
 /**
  @ description:  基类Fragment
  @ author:  ljn
- @ time:  2018/1/2 
+ @ time:  2018/1/2
  */
 public abstract class BaseFragment<T extends IPresenter> extends Fragment implements IView {
 

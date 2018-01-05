@@ -3,6 +3,7 @@ package com.national.security.community.ui.main;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.kennyc.view.MultiStateView;
 import com.national.security.community.R;
 import com.national.security.community.base.BaseActivity;
 import com.national.security.community.event.MessageEvent;
@@ -24,6 +25,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     TextView textView;
     @BindView(R.id.iv_test)
     ImageView imageView;
+    @BindView(R.id.multiStateView)
+    MultiStateView multiStateView;
 
     @Override
     protected void initInject() {
@@ -41,7 +44,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         textView.setText(R.string.hello_world);
         mPresenter.loadHome();
         ninePatchPic.printWord();
+        multiStateView.setViewState(3);
     }
+
 
    /* private int whichDay(@EnumUtil.Num int day) {
         return 0;

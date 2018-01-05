@@ -5,12 +5,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.util.Log;
 
-import com.kingja.loadsir.core.LoadSir;
-import com.national.security.community.callback.CustomCallback;
-import com.national.security.community.callback.EmptyCallback;
-import com.national.security.community.callback.ErrorCallback;
-import com.national.security.community.callback.LoadingCallback;
-import com.national.security.community.callback.TimeoutCallback;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.smtt.sdk.QbSdk;
 
