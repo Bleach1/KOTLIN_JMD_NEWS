@@ -45,6 +45,13 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         mPresenter.loadHome();
         ninePatchPic.printWord();
         multiStateView.setViewState(3);
+//调用Room数据库
+       /* AppDatabase.getDatabase(this).getUserEntityDao().getUserList()
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(userEntities -> {
+
+                });*/
     }
 
 
