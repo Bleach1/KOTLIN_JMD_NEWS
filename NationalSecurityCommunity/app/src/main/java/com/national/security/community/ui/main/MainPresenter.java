@@ -92,6 +92,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                         Log.d(Config.TAG, permission.name + " is denied.");
                     }
                 });
+        Log.i(Config.TAG, "requestPermission: fuck");
     }
 
     @Override

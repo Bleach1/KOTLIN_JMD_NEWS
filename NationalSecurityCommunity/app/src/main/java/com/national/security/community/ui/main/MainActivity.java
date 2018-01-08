@@ -1,5 +1,10 @@
 package com.national.security.community.ui.main;
 
+import android.annotation.SuppressLint;
+import android.content.Intent;
+import android.net.Uri;
+import android.os.Build;
+import android.support.annotation.RequiresApi;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -15,6 +20,7 @@ import org.greenrobot.eventbus.EventBus;
 import javax.inject.Inject;
 
 import butterknife.BindView;
+import butterknife.OnClick;
 
 
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {
@@ -27,6 +33,12 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     ImageView imageView;
     @BindView(R.id.multiStateView)
     MultiStateView multiStateView;
+
+    @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
+    @OnClick(R.id.sample_text)
+    void onClick() {
+        mPresenter.requestPermission();
+    }
 
     @Override
     protected void initInject() {
@@ -44,7 +56,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         textView.setText(R.string.hello_world);
         mPresenter.loadHome();
         ninePatchPic.printWord();
-        multiStateView.setViewState(3);
+        multiStateView.setViewState(0);
 //调用Room数据库
        /* AppDatabase.getDatabase(this).getUserEntityDao().getUserList()
                 .subscribeOn(Schedulers.io())
@@ -74,9 +86,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     }
 
+    @SuppressLint("MissingPermission")
     @Override
     public void granted() {
-
+        Intent intent = new Intent(Intent.ACTION_CALL, Uri.parse("tel:" + "17615013866"));
+        startActivity(intent);
     }
 
     @Override
