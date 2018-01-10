@@ -1,0 +1,31 @@
+(1)ActivityManagerService:主要负责系统中四大组件的启动、切换、调度及应用程序的管理和调度等工作。
+
+AMS extend ActivityManagerNative(AMN) implement Watchdog.Monitor,BatteryStatsImpl.BatteryCallback
+AMN extend Binder implement IActivityManager   AMN将作为Binder通信的服务端为用户提供支持。
+
+在ActivityManagerNative类中定义了内部类ActivityManagerProxy implement IActivityManager 作为客户端使用的服务端代理
+
+其它进程将使用ActivityManager来使用AMS的服务。ActivityManager通过AMN提供的getDefault接口得到ActivityManagerProxy，然后再以Binder通信的方式调用AMS的接口
+
+WatchDog机制:
+1.WatchDog监控SystemServer中的线程。发现问题会杀死SystemServer进程。
+
+2.SystemServer的父进程Zygote接收到SystemServer的死亡信号后，会杀死自己。Zygote进程死亡的信号传递到Init进程后，Init进程会杀死Zygote进程所有的子进程并重启Zygote。这样整个手机相当于重启一遍。
+
+3.监听：需要由系统服务向watchdog注册。Watchdog提供两种监视方式，一种是通过monitor()回调监视服务关键区是否出现死锁或阻塞，一种是通过发送消息监视服务主线程是否阻塞
+
+4.watchdog运行时每30秒会回调monitor()方法来锁一次这个关键区，如果60秒都无法得到锁，就说明服务已经发生了死锁，必须重启设备。
+
+(2)createSystemContext
+   在启动AMS之前，调用了createSystemContext函数
+   1.ActivityThread.systemMain() 除了进行是否开启硬件渲染的判断外，主要作用是： 
+     创建出ActivityThread对象，然后调用该对象的attach函数。
+     ActivityThread的attach函数最重要的工作就是创建了Instrumentation、Application和Context
+(3)AMS初始化
+   创建完Android运行环境后，SystemServer调用startBootstrapServices，其中就创建并启动了AMS
+(4)将SystemServer纳入AMS的管理体系
+   AMS的setSystemProcess主要有四个主要的功能： 
+   1、注册一些服务； 
+   2、获取package名为“android”的应用的ApplicationInfo； 
+   3、调用ActivityThread的installSystemApplicationInfo； 
+   4、AMS进程管理相关的操作。

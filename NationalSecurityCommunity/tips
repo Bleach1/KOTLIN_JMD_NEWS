@@ -1,0 +1,33 @@
+ctrl +alt +M 提取 方法，style，layout
+ctrl +H  继承层级
+右键  find sample code
+
+ConstraintLayout:
+layout_constraint[自身控件位置]_[目标控件位置]="[目标控件ID]"
+layout_constraintLeft_toLeftOf 指自身左边缘与目标控件左边缘对齐
+layout_constraintBaseline_toBaselineOf设置两个控件之间的文字相对于baseline对齐
+
+
+当A控件 约束 在B控件的左边，B控件GONE了，此时A会额外拥有一个margin的能力，来“补充”B消失的导致的“位移”。
+   android:layout_marginRight="10dp"
+   app:layout_goneMarginRight="110dp"
+一起使用，在约束的布局gone时，起用goneMargin
+
+
+倾向（Bias）:bias属性是指在对齐父容器后，设置水平与竖直的比例
+             layout_constraintHorizontal_bias (0最左边 1最右边)
+             layout_constraintVertical_bias (0最上边 1 最底边)
+
+
+设置宽高比  前提条件是至少有一个尺寸设置为0dp
+app:layout_constraintDimensionRatio="H,16:9"
+
+layout_constraintGuide_begin=”xxdp”：基准线开始方向xxdp
+layout_constraintGuide_end=”xxdp”：基准线结束方向xxdp
+layout_constraintGuide_percent=”0.3”：基准线开始方向距离的父控件大小的百分比。
+
+layout_constraintHorizontal_chainStyle:
+                                       spread：均匀分布
+                                       spread_inside：均匀分布，但是边上的控件不均匀分布
+                                       packed：控件紧挨在一起。还可以通过bias属性设置偏移量。
+layout_constraintHorizontal_weight：跟线性布局的weight差不多 width=0

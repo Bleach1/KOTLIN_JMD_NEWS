@@ -12,6 +12,7 @@ import com.kennyc.view.MultiStateView;
 import com.national.security.community.R;
 import com.national.security.community.base.BaseActivity;
 import com.national.security.community.event.MessageEvent;
+import com.national.security.community.ui.login.LoginActivity;
 import com.national.security.community.utils.NinePatchPic;
 import com.national.security.community.utils.SharedPreferencesUtil;
 
@@ -37,7 +38,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @OnClick(R.id.sample_text)
     void onClick() {
-        mPresenter.requestPermission();
+        startActivity(new Intent(this, LoginActivity.class));
+        // mPresenter.requestPermission();
     }
 
     @Override
