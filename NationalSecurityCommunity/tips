@@ -1,6 +1,8 @@
 ctrl +alt +M 提取 方法，style，layout
 ctrl +H  继承层级
+ctrl +alt +F 提取变量
 右键  find sample code
+光标放在控件中 提取style  refactor extract style
 
 ConstraintLayout:
 layout_constraint[自身控件位置]_[目标控件位置]="[目标控件ID]"
