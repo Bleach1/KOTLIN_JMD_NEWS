@@ -46,7 +46,8 @@
         android:text="hahha"
         app:layout_constraintLeft_toRightOf="@id/button"
         app:layout_goneMarginLeft="100dp"
-        tools:ignore="MissingConstraints" />
+        tools:ignore="MissingConstraints"
+        android:layout_marginEnd="8dp" />
 
     <Button
         android:id="@+id/commit"

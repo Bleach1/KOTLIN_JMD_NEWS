@@ -5,14 +5,17 @@ import android.content.Intent;
 import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
+import android.util.Log;
 import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.kennyc.view.MultiStateView;
+import com.national.security.community.Config;
 import com.national.security.community.R;
 import com.national.security.community.base.BaseActivity;
 import com.national.security.community.event.MessageEvent;
 import com.national.security.community.ui.login.LoginActivity;
+import com.national.security.community.utils.JNIUtil;
 import com.national.security.community.utils.NinePatchPic;
 import com.national.security.community.utils.SharedPreferencesUtil;
 
@@ -66,6 +69,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 .subscribe(userEntities -> {
 
                 });*/
+        Log.i(Config.TAG, "initEventAndData: " + JNIUtil.show());
     }
 
 

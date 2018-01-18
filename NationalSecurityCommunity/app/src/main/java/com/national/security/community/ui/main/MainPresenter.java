@@ -27,19 +27,19 @@ import io.reactivex.subscribers.DisposableSubscriber;
 public class MainPresenter extends BasePresenter<MainContract.View> implements MainContract.Presenter {
 
     private RetrofitHelper mRetrofitHelper;
-    private RxAppCompatActivity activity;
+    private RxAppCompatActivity mActivity;
 
     @Inject
     MainPresenter(RetrofitHelper mRetrofitHelper, RxAppCompatActivity mActivity) {
         super(mActivity);
         this.mRetrofitHelper = mRetrofitHelper;
-        this.activity = mActivity;
+        this.mActivity = mActivity;
     }
 
     @Override
     public void loadData(String url) {
         DisposableSubscriber<TestBean> disposableSubscriber = mRetrofitHelper.fetchDailyListInfo2()
-                .compose(activity.bindToLifecycle())
+                .compose(mActivity.bindToLifecycle())
                 .compose(RxUtil.handleResult())
                 .subscribeWith(new DisposableSubscriber<TestBean>() {
                     @Override
@@ -64,7 +64,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void requestPermission() {
-        RxPermissions rxPermission = new RxPermissions(activity);
+        RxPermissions rxPermission = new RxPermissions(mActivity);
         rxPermission
                 .requestEach(Manifest.permission.ACCESS_FINE_LOCATION,
                         Manifest.permission.WRITE_EXTERNAL_STORAGE,
@@ -98,7 +98,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
     @Override
     public void loadHome() {
         mRetrofitHelper.loadHome()
-                .compose(activity.bindToLifecycle())
+                .compose(mActivity.bindToLifecycle())
                 .compose(RxUtil.handleObservableResult())
                 .subscribe(new MyObserver<HomeBean>() {
 
