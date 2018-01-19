@@ -12,7 +12,7 @@ import com.national.security.community.injection.component.DaggerActivityCompone
 import com.national.security.community.injection.module.ActivityModule;
 import com.national.security.community.mvp.IPresenter;
 import com.national.security.community.mvp.IView;
-import com.national.security.community.utils.Immersionutil;
+import com.national.security.community.utils.ImmersionUtil;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import javax.inject.Inject;
@@ -43,9 +43,9 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(getLayout());
         if (Build.VERSION.SDK_INT >= 22) {
-            Immersionutil.setTitleBarColorFive(this);
+            ImmersionUtil.setTitleBarColorFive(this);
         } else {
-            Immersionutil.setTitleBarColor(this);
+            ImmersionUtil.setTitleBarColor(this);
         }
         mUnBinder = ButterKnife.bind(this);
         mContext = this;

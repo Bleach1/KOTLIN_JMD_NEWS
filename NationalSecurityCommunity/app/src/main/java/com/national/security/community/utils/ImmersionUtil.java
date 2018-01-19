@@ -15,7 +15,7 @@ import android.widget.FrameLayout;
 
 import com.national.security.community.R;
 
-public class Immersionutil {
+public class ImmersionUtil {
 
 
     /**

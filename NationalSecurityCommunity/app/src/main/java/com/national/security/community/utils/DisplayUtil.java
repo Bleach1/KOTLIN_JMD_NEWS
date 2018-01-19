@@ -9,9 +9,9 @@ public class DisplayUtil {
     /**
      * sp 转px
      *
-     * @param context
-     * @param spVal
-     * @return
+     * @ param context
+     * @ param spVal
+     * @ return
      */
     public static int sp2px(Context context, float spVal) {
 
@@ -22,8 +22,8 @@ public class DisplayUtil {
     /**
      * px转sp
      *
-     * @param pxVal
-     * @return
+     * @ param pxVal
+     * @ return
      */
 
     public static float px2sp(Context context, float pxVal) {

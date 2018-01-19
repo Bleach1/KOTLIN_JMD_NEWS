@@ -3,7 +3,6 @@ package com.national.security.community.utils;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
@@ -12,7 +11,6 @@ import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
 import com.bumptech.glide.request.FutureTarget;
-import com.bumptech.glide.request.RequestFutureTarget;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
 import com.bumptech.glide.request.target.SimpleTarget;
@@ -21,8 +19,6 @@ import com.bumptech.glide.request.transition.Transition;
 import com.national.security.community.R;
 
 import java.io.File;
-import java.text.Format;
-import java.util.Date;
 import java.util.concurrent.ExecutionException;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;

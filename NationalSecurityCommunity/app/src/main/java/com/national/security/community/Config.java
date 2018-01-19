@@ -5,9 +5,9 @@ import android.os.Environment;
 import java.io.File;
 
 /**
- * @description: 配置
- * @author: ljn
- * @time: 2017/12/7
+ * @ description: 配置
+ * @ author: ljn
+ * @ time: 2017/12/7
  */
 public interface Config {
 

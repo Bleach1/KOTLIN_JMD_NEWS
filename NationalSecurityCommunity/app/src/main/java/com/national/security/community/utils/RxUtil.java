@@ -1,19 +1,12 @@
 package com.national.security.community.utils;
 
-import android.util.Log;
-
-import com.national.security.community.Config;
 import com.national.security.community.base.BaseBean;
 
 import org.reactivestreams.Publisher;
-import org.reactivestreams.Subscriber;
 
-import io.reactivex.Flowable;
 import io.reactivex.FlowableTransformer;
-import io.reactivex.Observable;
 import io.reactivex.ObservableSource;
 import io.reactivex.ObservableTransformer;
-import io.reactivex.Observer;
 import io.reactivex.android.schedulers.AndroidSchedulers;
 import io.reactivex.functions.Function;
 import io.reactivex.schedulers.Schedulers;

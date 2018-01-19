@@ -1,8 +1,6 @@
 package com.national.security.community.utils;
 
 /**
- * l
- *
  * @ description:  RePlugin帮助类
  * @ author:  ljn
  * @ time:  2018/1/18
