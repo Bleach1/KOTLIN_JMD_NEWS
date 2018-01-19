@@ -23,6 +23,7 @@ import java.util.LinkedList;
  * @ author: ljn
  * @ time: 2017/12/7
  */
+@SuppressWarnings("SynchronizeOnNonFinalField")
 public class App extends RePluginApplication {
 
     public static App instance;

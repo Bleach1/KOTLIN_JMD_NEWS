@@ -6,10 +6,13 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
+import android.view.KeyEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import com.kennyc.view.MultiStateView;
+import com.national.security.community.App;
 import com.national.security.community.Config;
 import com.national.security.community.R;
 import com.national.security.community.base.BaseActivity;
@@ -37,6 +40,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     ImageView imageView;
     @BindView(R.id.multiStateView)
     MultiStateView multiStateView;
+    private long mExitTime = 0;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @OnClick(R.id.sample_text)
@@ -67,7 +71,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(userEntities -> {
-
                 });*/
         Log.i(Config.TAG, "initEventAndData: " + JNIUtil.show());
     }
@@ -84,7 +87,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void showProgress() {
-
     }
 
     @Override
@@ -107,5 +109,21 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     public void denied() {
 
+    }
+
+
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (KeyEvent.KEYCODE_BACK == keyCode) {
+            if (System.currentTimeMillis() - mExitTime > 2000) {
+                Toast.makeText(MainActivity.this, R.string.exit_app,
+                        Toast.LENGTH_SHORT).show();
+                mExitTime = System.currentTimeMillis();
+            } else {
+                App.getInstance().exitApp();
+            }
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
     }
 }
