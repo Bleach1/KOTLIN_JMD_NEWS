@@ -104,7 +104,6 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
                     @Override
                     protected void _onNext(HomeBean homeBean) {
-
                     }
 
                     @Override

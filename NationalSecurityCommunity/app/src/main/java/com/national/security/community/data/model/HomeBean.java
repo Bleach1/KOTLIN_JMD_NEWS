@@ -64,7 +64,6 @@ public class HomeBean {
          * linkAddress :
          * path : http://47.93.29.96/carousel/image/68d7c12db71d4097a0566e7532c2f2af.jpg
          */
-
         private String tittle;
         private String linkAddress;
         private String path;
