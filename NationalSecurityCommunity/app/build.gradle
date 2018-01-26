@@ -31,7 +31,9 @@ android {
     }
     buildTypes {
         release {
-            minifyEnabled false
+            minifyEnabled true
+            zipAlignEnabled true
+            shrinkResources true
             proguardFiles getDefaultProguardFile('proguard-android.txt'), 'proguard-rules.pro'
         }
     }
@@ -53,11 +55,35 @@ android {
             storePassword 'gasq110'
             archivesBaseName = "国安社区"
         }
+
+        release {
+            keyAlias 'key1'
+            keyPassword 'gasq110'
+            storeFile file('key/gasq.jks')
+            storePassword 'gasq110'
+            archivesBaseName = "国安社区"
+        }
     }
 
     dexOptions {
         javaMaxHeapSize "4g"
     }
+
+
+    sourceSets {
+        main {
+            jniLibs.srcDirs = ['libs']
+        }
+    }
+    lintOptions {
+        //lint 遇到 error 时继续 构建
+        abortOnError false
+        //build release 版本 时 开启lint 检测
+        checkReleaseBuilds false
+        // 防止在发布的时候出现因MissingTranslation导致Build Failed!
+        disable 'MissingTranslation'
+    }
+
 
 }
 apply plugin: 'replugin-host-gradle'

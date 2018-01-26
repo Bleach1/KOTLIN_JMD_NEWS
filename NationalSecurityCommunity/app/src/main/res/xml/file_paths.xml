@@ -2,7 +2,7 @@
 <resources>
     <paths>
         <external-path
-            name="camera_photos"
+            name="apk_install"
             path="" />
     </paths>
 </resources>

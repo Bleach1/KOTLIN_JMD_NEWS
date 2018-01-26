@@ -104,10 +104,12 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
                     @Override
                     protected void _onNext(HomeBean homeBean) {
+                        mView.showMsg("");
                     }
 
                     @Override
                     protected void _onError(String msg) {
+                        mView.showMsg(msg);
                         Log.i(Config.TAG, "_onError: " + msg);
                     }
                 });

@@ -82,6 +82,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void showMsg(String msg) {
+        Toast.makeText(this,"弹一个",Toast.LENGTH_LONG).show();
         EventBus.getDefault().post(new MessageEvent("Hello !....."));
     }
 
