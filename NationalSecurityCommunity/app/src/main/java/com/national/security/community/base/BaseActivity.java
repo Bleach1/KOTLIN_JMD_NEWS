@@ -19,6 +19,7 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import io.realm.Realm;
 
 /**
  * @ description:  基类Activity
@@ -31,6 +32,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
     protected T mPresenter;
     protected RxAppCompatActivity mContext;
     private Unbinder mUnBinder;
+    protected Realm mRealm;
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @SuppressWarnings("unchecked")
@@ -56,6 +58,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
         }
         App.getInstance().addActivity(this);
         initEventAndData();
+        mRealm = Realm.getDefaultInstance();
     }
 
     @Override
@@ -83,6 +86,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
         }
         mUnBinder.unbind();
         App.getInstance().removeActivity(this);
+        mRealm.close();
     }
 
 

@@ -17,5 +17,9 @@ public interface Config {
 
     String PATH_CACHE = PATH_DATA + "/NetCache";
 
-    String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator + "guoAn" + File.separator + "sheQu";
+    String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
+            + "guoAn" + File.separator + "sheQu";
+
+
+    String DB_NAME = "myRealm.realm";
 }

@@ -18,6 +18,8 @@ import com.qihoo360.replugin.RePluginEventCallbacks;
 
 import java.util.LinkedList;
 
+import io.realm.Realm;
+
 /**
  * @ description: 不解释
  * @ author: ljn
@@ -34,6 +36,7 @@ public class App extends RePluginApplication {
     public void onCreate() {
         super.onCreate();
         instance = this;
+        Realm.init(this);
         InitializeService.start(this);
     }
 
@@ -150,4 +153,5 @@ public class App extends RePluginApplication {
             super.onStartActivityCompleted(plugin, activity, result);
         }
     }
+
 }

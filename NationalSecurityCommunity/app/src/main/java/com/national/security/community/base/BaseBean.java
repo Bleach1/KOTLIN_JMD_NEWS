@@ -10,6 +10,17 @@ public class BaseBean<T> {
     private int code;
     private T data;
 
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
+
+    //判断数据是否相同
+    private String id;
+
     public String getMsg() {
         return msg;
     }

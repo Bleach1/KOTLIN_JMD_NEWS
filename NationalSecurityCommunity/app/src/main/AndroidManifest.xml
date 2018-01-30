@@ -43,6 +43,7 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
         <!--享受页面视频的完整播放体验-->
         <activity
             android:name=".ui.X5WebViewActivity"
