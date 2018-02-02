@@ -1,7 +1,6 @@
 package com.national.security.community.data;
 
 
-import com.national.security.community.BuildConfig;
 import com.national.security.community.base.BaseBean;
 import com.national.security.community.data.model.HomeBean;
 import com.national.security.community.data.model.TestBean;
@@ -21,8 +20,6 @@ import retrofit2.http.QueryMap;
  */
 
 public interface ApiService {
-
-    String HOST = BuildConfig.HOST_URL;
 
     @GET("news/before/{date}")
     Flowable<BaseBean<TestBean>> getDailyBeforeList2(@Path("date") String data);

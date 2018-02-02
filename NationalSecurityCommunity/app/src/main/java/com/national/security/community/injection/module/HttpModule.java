@@ -57,7 +57,7 @@ public class HttpModule {
     @Provides
     @GankUrl
     Retrofit provideMyRetrofit(Retrofit.Builder builder, OkHttpClient client) {
-        return createRetrofit(builder, client, ApiService.HOST);
+        return createRetrofit(builder, client, Config.BASE_URL);
     }
 
     @Singleton

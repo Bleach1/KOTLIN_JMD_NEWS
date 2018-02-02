@@ -6,6 +6,7 @@ import android.net.Uri;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
+import android.util.SparseArray;
 import android.view.KeyEvent;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -73,6 +74,16 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 .subscribe(userEntities -> {
                 });*/
         Log.i(Config.TAG, "initEventAndData: " + JNIUtil.show());
+
+        SparseArray<String> sparseArray = new SparseArray<>();
+        sparseArray.put(0, "value");
+        sparseArray.put(1, "value1");
+        sparseArray.put(2, "value2");
+        sparseArray.put(3, "value3");
+        sparseArray.put(4, "value4");
+        sparseArray.put(5, "value5");
+        sparseArray.put(6, "value6");
+        Log.i(Config.TAG, "initEventAndData: " + sparseArray.toString());
     }
 
 
@@ -82,7 +93,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Override
     public void showMsg(String msg) {
-        Toast.makeText(this,"弹一个",Toast.LENGTH_LONG).show();
+        Toast.makeText(this, "弹一个", Toast.LENGTH_LONG).show();
         EventBus.getDefault().post(new MessageEvent("Hello !....."));
     }
 

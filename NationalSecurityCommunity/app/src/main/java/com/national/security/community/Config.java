@@ -22,4 +22,6 @@ public interface Config {
 
 
     String DB_NAME = "myRealm.realm";
+
+    String BASE_URL = BuildConfig.HOST_URL;
 }

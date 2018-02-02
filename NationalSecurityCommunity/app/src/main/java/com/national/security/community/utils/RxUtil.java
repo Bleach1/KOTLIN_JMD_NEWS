@@ -27,11 +27,11 @@ public class RxUtil {
 
 
     public static <T> ObservableTransformer<BaseBean<T>, T> handleObservableResult() {
-        return upstream -> upstream.flatMap(tBaseBean -> (ObservableSource<T>) observer -> {
-            if (tBaseBean.getCode() == 1) {
-                observer.onNext(tBaseBean.getData());
+        return upstream -> upstream.flatMap(baseBean -> (ObservableSource<T>) observer -> {
+            if (baseBean.getCode() == 1) {
+                observer.onNext(baseBean.getData());
             } else {
-                observer.onError(new ExceptionUtil(tBaseBean.getMsg()));
+                observer.onError(new ExceptionUtil(baseBean.getMsg()));
             }
         }).subscribeOn(Schedulers.io()).observeOn(AndroidSchedulers.mainThread());
     }

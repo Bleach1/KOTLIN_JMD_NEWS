@@ -5,7 +5,7 @@ android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
         applicationId "com.national.security.community"
-        minSdkVersion 15
+        minSdkVersion 16
         targetSdkVersion 27
         versionCode 1
         versionName "1.0"
@@ -52,7 +52,7 @@ android {
         release {
 
             buildConfigField("Boolean", "enableLog", "false")
-            buildConfigField("String", "HOST_URL", "http://47.93.29.96/weijinrong/app/")
+            buildConfigField("String", "HOST_URL", "\" http://47.93.29.96/weijinrong/app/\"")
             minifyEnabled true
             zipAlignEnabled true
             shrinkResources true
@@ -199,5 +199,4 @@ dependencies {
     implementation 'android.arch.paging:runtime:1.0.0-alpha4-1'
     implementation 'android.arch.persistence.room:rxjava2:1.0.0'
     implementation 'com.android.support:design:27.0.2'
-
 }

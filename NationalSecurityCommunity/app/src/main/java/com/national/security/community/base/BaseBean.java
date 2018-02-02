@@ -6,6 +6,7 @@ package com.national.security.community.base;
  * @ time:  2017/12/7
  */
 public class BaseBean<T> {
+
     private String msg;
     private int code;
     private T data;
