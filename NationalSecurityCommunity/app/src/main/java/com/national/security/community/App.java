@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.multidex.MultiDex;
 import android.util.Log;
 
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.national.security.community.injection.component.AppComponent;
 import com.national.security.community.injection.component.DaggerAppComponent;
 import com.national.security.community.injection.module.AppModule;
@@ -37,6 +38,11 @@ public class App extends RePluginApplication {
         super.onCreate();
         instance = this;
         Realm.init(this);
+        if (BuildConfig.DEBUG) {
+            ARouter.openLog();
+            ARouter.openDebug();
+        }
+        ARouter.init(this);
         InitializeService.start(this);
     }
 

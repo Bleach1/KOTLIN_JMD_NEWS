@@ -24,9 +24,15 @@ android {
             abiFilters 'armeabi', 'x86', 'armeabi-v7a', 'x86_64', 'arm64-v8a'
             ldLibs "log"
         }
-        javaCompileOptions {
+        /*javaCompileOptions {
             annotationProcessorOptions {
                 arguments = ["room.schemaLocation": "$projectDir/schemas".toString()]
+            }
+        }*/
+
+        javaCompileOptions {
+            annotationProcessorOptions {
+                arguments = [moduleName: project.getName()]
             }
         }
     }
@@ -199,4 +205,8 @@ dependencies {
     implementation 'android.arch.paging:runtime:1.0.0-alpha4-1'
     implementation 'android.arch.persistence.room:rxjava2:1.0.0'
     implementation 'com.android.support:design:27.0.2'
+    //ARouter
+    compile 'com.alibaba:arouter-api:1.2.2'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.3'
+
 }

@@ -97,3 +97,22 @@ apk加密技术：
 
 MongoDB是文档型的非关系型数据库，其优势在于查询功能比较强大，能存储海量数据
 Memcached相似redis:它们都是内存型数据库，数据保存在内存中，通过tcp直接存取，优势是速度快，并发高，缺点是数据类型有限，查询功能不强，一般用作缓存
+
+
+android中设计模式：
+
+·构造这模式    ex:AlertDialog.Builder
+·适配器模式    ex:Listview与Adapter
+·命令模式      ex:Handler.post
+·享元模式      ex:Message.obtain
+·单例模式      ex:InputMethodManager.getInstance
+·观察者模式    ex:ContentObserver
+·抽象工厂模式  ex:BaseActivity
+
+Polaris
+Planet
+
+1.应用卸载反馈（Native 轮询 /data/data/包名目录下）
+2.Home按键监听(广播监听)
+3.应用不能卸载(DevicePolicManager)
+4.无网络权限上传数据(记住手机浏览器)

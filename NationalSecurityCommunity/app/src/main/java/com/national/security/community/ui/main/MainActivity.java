@@ -12,11 +12,14 @@ import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.alibaba.android.arouter.facade.annotation.Route;
+import com.alibaba.android.arouter.launcher.ARouter;
 import com.kennyc.view.MultiStateView;
 import com.national.security.community.App;
 import com.national.security.community.Config;
 import com.national.security.community.R;
 import com.national.security.community.base.BaseActivity;
+import com.national.security.community.data.model.TestBean;
 import com.national.security.community.event.MessageEvent;
 import com.national.security.community.ui.login.LoginActivity;
 import com.national.security.community.utils.JNIUtil;
@@ -25,12 +28,23 @@ import com.national.security.community.utils.SharedPreferencesUtil;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.io.IOException;
+
+
 import javax.inject.Inject;
 
 import butterknife.BindView;
 import butterknife.OnClick;
+import pl.droidsonroids.gif.GifDrawable;
+import pl.droidsonroids.gif.GifImageView;
 
-
+/**
+ * @ description:  https://github.com/alibaba/ARouter
+ *  https://www.cnblogs.com/wjtaigwh/p/6689684.html 购物车动画
+ * @ author:  ljn
+ * @ time:  2018/2/5
+ */
+@Route(path = "/main/MainActivity")
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {
 
     @Inject
@@ -38,7 +52,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @BindView(R.id.sample_text)
     TextView textView;
     @BindView(R.id.iv_test)
-    ImageView imageView;
+    GifImageView imageView;
     @BindView(R.id.multiStateView)
     MultiStateView multiStateView;
     private long mExitTime = 0;
@@ -46,7 +60,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @OnClick(R.id.sample_text)
     void onClick() {
-        startActivity(new Intent(this, LoginActivity.class));
+        // startActivity(new Intent(this, LoginActivity.class));
+
+        ARouter.getInstance().build("/login/LoginActivity")
+                .withLong("key1", 666L)
+                .withString("key3", "888")
+                .withSerializable("key4", new TestBean("Jack"))
+                .navigation();
+
         // mPresenter.requestPermission();
     }
 
@@ -84,6 +105,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         sparseArray.put(5, "value5");
         sparseArray.put(6, "value6");
         Log.i(Config.TAG, "initEventAndData: " + sparseArray.toString());
+
+        try {
+            GifDrawable gifDrawable=new GifDrawable("");
+
+        } catch (IOException e) {
+            e.printStackTrace();
+        }
+
     }
 
 

@@ -6,12 +6,9 @@ buildscript {
         google()
         jcenter()
         mavenCentral()
-        maven {
-            url "http://maven.aliyun.com/nexus/content/repositories/central"
-        }
-        maven {
-            url 'https://maven.google.com'
-        }
+        maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
+        maven { url "http://maven.aliyun.com/nexus/content/repositories/central" }
+        maven { url 'https://maven.google.com' }
     }
     dependencies {
         classpath "io.realm:realm-gradle-plugin:4.3.3"
