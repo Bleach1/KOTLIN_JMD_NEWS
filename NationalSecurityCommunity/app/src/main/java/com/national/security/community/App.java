@@ -19,6 +19,7 @@ import com.qihoo360.replugin.RePluginEventCallbacks;
 
 import java.util.LinkedList;
 
+import hugo.weaving.internal.Hugo;
 import io.realm.Realm;
 
 /**

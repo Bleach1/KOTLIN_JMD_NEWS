@@ -20,7 +20,7 @@ public interface Config {
     String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
             + "guoAn" + File.separator + "sheQu";
 
-
+    String SAVE_PHOTO_PATH = PATH_DATA + "/img_path";
     String DB_NAME = "myRealm.realm";
 
     String BASE_URL = BuildConfig.HOST_URL;
