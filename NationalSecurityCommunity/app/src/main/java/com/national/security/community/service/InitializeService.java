@@ -6,8 +6,13 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.facebook.stetho.Stetho;
+import com.github.moduth.blockcanary.BlockCanary;
+import com.national.security.community.App;
 import com.national.security.community.Config;
 import com.national.security.community.data.db.User;
+import com.national.security.community.utils.AppBlockCanaryContext;
+import com.squareup.leakcanary.LeakCanary;
 import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.smtt.sdk.QbSdk;
 
@@ -52,6 +57,18 @@ public class InitializeService extends IntentService {
                 .modules(new MySchemaModule())
                 .migration(new MyMigration())
                 .build();
+
+         /*内存检测*/
+        if (LeakCanary.isInAnalyzerProcess(this)) {
+            return;
+        }
+        LeakCanary.install(App.instance);
+/*卡顿检测*/
+        BlockCanary.install(this, new AppBlockCanaryContext()).start();
+
+//调试库 在chrome中访问 chrome://inspect
+        Stetho.initializeWithDefaults(this);
+
         CrashReport.initCrashReport(getApplicationContext(), "注册时申请的APPID", false);
         //搜集本地tbs内核信息并上报服务器，服务器返回结果决定使用哪个内核。
         QbSdk.setDownloadWithoutWifi(true);//非wifi条件下允许下载X5内核

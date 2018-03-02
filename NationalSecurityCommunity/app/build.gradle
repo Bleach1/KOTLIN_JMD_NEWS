@@ -159,7 +159,7 @@ dependencies {
     compile 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     provided 'org.glassfish:javax.annotation:10.0-b28'
-    //rx 2.0.1
+    //rx 2.x
     compile 'io.reactivex.rxjava2:rxjava:2.1.7'
     compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //network
@@ -217,4 +217,13 @@ dependencies {
     compile 'com.eftimoff:android-pathview:1.0.8@aar'
     //PictureSelector
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.9'
+    implementation files('libs/commons-lang3-3.0.jar')
+//卡顿检测
+    compile 'com.github.markzhai:blockcanary-android:1.5.0'
+    //内存泄漏检测
+    debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
+    releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
+//FaceBook Stetho debug库
+    compile 'com.facebook.stetho:stetho:1.5.0'
+    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 }

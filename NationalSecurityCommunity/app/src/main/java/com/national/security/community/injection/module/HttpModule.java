@@ -1,6 +1,7 @@
 package com.national.security.community.injection.module;
 
 
+import com.facebook.stetho.okhttp3.StethoInterceptor;
 import com.google.gson.GsonBuilder;
 import com.national.security.community.App;
 import com.national.security.community.BuildConfig;
@@ -109,6 +110,8 @@ public class HttpModule {
 //        builder.addInterceptor(apikey);
         //设置缓存
         builder.addNetworkInterceptor(cacheInterceptor);
+        //debug
+        builder.addNetworkInterceptor(new StethoInterceptor());
         builder.addInterceptor(cacheInterceptor);
         builder.cache(cache);
         //设置超时
