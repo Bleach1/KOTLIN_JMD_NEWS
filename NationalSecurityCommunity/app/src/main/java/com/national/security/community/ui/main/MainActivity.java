@@ -23,6 +23,7 @@ import com.national.security.community.Config;
 import com.national.security.community.R;
 import com.national.security.community.base.BaseActivity;
 import com.national.security.community.event.MessageEvent;
+import com.national.security.community.ui.login.LoginActivity;
 import com.national.security.community.utils.JNIUtil;
 import com.national.security.community.utils.NinePatchPic;
 import com.national.security.community.utils.SharedPreferencesUtil;
@@ -60,7 +61,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @OnClick(R.id.sample_text)
     void onClick() {
-        // startActivity(new Intent(this, LoginActivity.class));
+        startActivity(new Intent(this, LoginActivity.class));
 
         /*ARouter.getInstance().build("/login/LoginActivity")
                 .withLong("key1", 666L)
@@ -72,9 +73,9 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         //  PhotoUtil.openCamera(this);
         // mPresenter.requestPermission();
 
-        Intent openAlbumIntent = new Intent(Intent.ACTION_GET_CONTENT);
-        openAlbumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "file/*");
-        startActivityForResult(openAlbumIntent, 0);
+       /* Intent openAlbumIntent = new Intent(Intent.ACTION_GET_CONTENT);
+        openAlbumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "file*//*");
+        startActivityForResult(openAlbumIntent, 0);*/
     }
 
     @Override

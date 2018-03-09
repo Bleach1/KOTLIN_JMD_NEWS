@@ -1,3 +1,11 @@
+
+
+
+在Terminal  .\gradlew clean build
+            .\gradlew -q app :dependencies build
+
+
+
 ctrl +alt +M 提取 方法，style，layout
 ctrl +H  继承层级
 ctrl +alt +F 提取变量

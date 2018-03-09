@@ -24,7 +24,6 @@ public class LoginActivity extends AppCompatActivity {
 
     private ConstraintLayout constraintLayout;
     private ConstraintSet constraintSet;
-
     @Autowired(name = "key3")
     public String name;
     @Autowired(name = "key1")
