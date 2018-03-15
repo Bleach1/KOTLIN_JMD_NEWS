@@ -6,11 +6,10 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
-import android.provider.MediaStore;
 import android.support.annotation.RequiresApi;
+import android.support.design.widget.TabLayout;
 import android.util.Log;
 import android.view.KeyEvent;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -23,10 +22,14 @@ import com.national.security.community.Config;
 import com.national.security.community.R;
 import com.national.security.community.base.BaseActivity;
 import com.national.security.community.event.MessageEvent;
-import com.national.security.community.ui.login.LoginActivity;
+import com.national.security.community.ui.home.HomeFragment;
+import com.national.security.community.ui.mine.MineFragment;
+import com.national.security.community.ui.msg.MsgFragment;
 import com.national.security.community.utils.JNIUtil;
 import com.national.security.community.utils.NinePatchPic;
 import com.national.security.community.utils.SharedPreferencesUtil;
+import com.national.security.community.widgets.BottomBar;
+import com.national.security.community.widgets.BottomBarTab;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -38,8 +41,11 @@ import java.util.concurrent.TimeUnit;
 import javax.inject.Inject;
 
 import butterknife.BindView;
-import butterknife.OnClick;
 import hugo.weaving.DebugLog;
+import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
+import me.yokeyword.fragmentation.ISupportFragment;
+import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
+import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 /**
  * @ description:  https://github.com/alibaba/ARouter
@@ -52,16 +58,19 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Inject
     NinePatchPic ninePatchPic;
-    @BindView(R.id.sample_text)
-    TextView textView;
+    /* @BindView(R.id.sample_text)
+     TextView textView;*/
     @BindView(R.id.multiStateView)
     MultiStateView multiStateView;
     private long mExitTime = 0;
+    private ISupportFragment[] mFragments = new ISupportFragment[3];
+    @BindView(R.id.bottomBar)
+    BottomBar bottomBar;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
-    @OnClick(R.id.sample_text)
-    void onClick() {
-        startActivity(new Intent(this, LoginActivity.class));
+    // @OnClick(R.id.sample_text)
+    // void onClick() {
+    //  startActivity(new Intent(this, LoginActivity.class));
 
         /*ARouter.getInstance().build("/login/LoginActivity")
                 .withLong("key1", 666L)
@@ -69,14 +78,14 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 .withSerializable("key4", new TestBean("Jack"))
                 .navigation();*/
 
-        //PhotoUtil.openAlbum(this, Config.SAVE_PHOTO_PATH);
-        //  PhotoUtil.openCamera(this);
-        // mPresenter.requestPermission();
+    //PhotoUtil.openAlbum(this, Config.SAVE_PHOTO_PATH);
+    //  PhotoUtil.openCamera(this);
+    // mPresenter.requestPermission();
 
        /* Intent openAlbumIntent = new Intent(Intent.ACTION_GET_CONTENT);
         openAlbumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "file*//*");
         startActivityForResult(openAlbumIntent, 0);*/
-    }
+    // }
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
@@ -111,10 +120,25 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @DebugLog
     @Override
     protected void initEventAndData() {
-
+        if (findFragment(HomeFragment.class) == null) {
+            mFragments[0] = HomeFragment.newInstance();
+            mFragments[1] = MsgFragment.newInstance();
+            mFragments[2] = MineFragment.newInstance();
+            loadMultipleRootFragment(R.id.container_fl,
+                    0,
+                    mFragments[0],
+                    mFragments[1],
+                    mFragments[2]);
+        } else {
+            // 这里库已经做了Fragment恢复工作，不需要额外的处理
+            // 这里我们需要拿到mFragments的引用，用下面的方法查找更方便些，也可以通过getSupportFragmentManager.getFragments()自行进行判断查找(效率更高些)
+            mFragments[0] = findFragment(HomeFragment.class);
+            mFragments[1] = findFragment(MsgFragment.class);
+            mFragments[2] = findFragment(MineFragment.class);
+        }
         long startTime = System.currentTimeMillis();
         SharedPreferencesUtil.save("ljn", "sds");
-        textView.setText(R.string.hello_world);
+        //  textView.setText(R.string.hello_world);
         mPresenter.loadHome();
         ninePatchPic.printWord();
         multiStateView.setViewState(0);
@@ -125,7 +149,33 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 .subscribe(userEntities -> {
                 });*/
         Log.i(Config.TAG, "initEventAndData: " + JNIUtil.show());
-        createThread();
+        // createThread();
+        bottomBar
+                .addItem(new BottomBarTab(this, R.drawable.homepage, "首页"))
+                .addItem(new BottomBarTab(this, R.drawable.activity, "活动"))
+                .addItem(new BottomBarTab(this, R.drawable.personal, "我的"));
+
+        // 模拟未读消息
+        bottomBar.getItem(0).setUnreadCount(9);
+
+        bottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
+            @Override
+            public void onTabSelected(int position, int prePosition) {
+                showHideFragment(mFragments[position], mFragments[prePosition]);
+            }
+
+            @Override
+            public void onTabUnselected(int position) {
+
+            }
+
+            @Override
+            public void onTabReselected(int position) {
+                // 在FirstPagerFragment,FirstHomeFragment中接收, 因为是嵌套的Fragment
+                // 主要为了交互: 重选tab 如果列表不在顶部则移动到顶部,如果已经在顶部,则刷新
+
+            }
+        });
     }
 
 
@@ -226,4 +276,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         threadPoolExecutor.shutdown();
     }
 
+    @Override
+    public FragmentAnimator onCreateFragmentAnimator() {
+        return new DefaultHorizontalAnimator();
+    }
 }

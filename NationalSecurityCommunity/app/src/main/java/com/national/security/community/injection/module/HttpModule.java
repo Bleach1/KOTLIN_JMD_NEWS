@@ -6,6 +6,7 @@ import com.google.gson.GsonBuilder;
 import com.national.security.community.App;
 import com.national.security.community.BuildConfig;
 import com.national.security.community.Config;
+import com.national.security.community.cookies.CookiesManager;
 import com.national.security.community.data.ApiService;
 import com.national.security.community.data.CacheProviders;
 import com.national.security.community.injection.qualifier.GankUrl;
@@ -120,6 +121,7 @@ public class HttpModule {
         builder.writeTimeout(20, TimeUnit.SECONDS);
         //错误重连
         builder.retryOnConnectionFailure(true);
+        builder.cookieJar(new CookiesManager());
         return builder.build();
     }
 

@@ -115,7 +115,7 @@ Planet
 1.应用卸载反馈（Native 轮询 /data/data/包名目录下）
 2.Home按键监听(广播监听)
 3.应用不能卸载(DevicePolicManager)
-4.无网络权限上传数据(记住手机浏览器
+4.无网络权限上传数据(借助手机浏览器)
 
 
 长连接：
@@ -123,3 +123,13 @@ Planet
 2.心跳机制
 3.断线重连
 4.检测存活
+
+
+1.编译时注解，运行时注解，APT
+2.ButterKnife源码分析
+
+
+Fragment空白页：
+1.viewpager.setOffscreenPageLimit(num);num为你的tab数
+2.在onCreateView里面，判断Fragment是否已经添加了contentView（第一次加载时，可以将view保存下来，再  次加载时，判断保存下来的view是否为null），如果保存的view为null，返回新的view 否则，先将保存的view从父view中移除，然后将该view返回出去   
+3.重写public void destroyItem(ViewGroup container, int position, Object object)去掉super.destroyItem(container, position, object);

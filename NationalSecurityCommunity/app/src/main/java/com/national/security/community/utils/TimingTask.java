@@ -13,7 +13,6 @@ import java.util.concurrent.TimeUnit;
  */
 public class TimingTask {
 
-
     public static void timeTask() {
         //org.apache.commons.lang3.concurrent.BasicThreadFactory
         ScheduledExecutorService executorService = new ScheduledThreadPoolExecutor(1,
