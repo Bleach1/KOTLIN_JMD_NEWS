@@ -1,10 +1,11 @@
 package com.national.security.community.ui.msg;
 
 import android.os.Bundle;
+import android.util.Log;
 
+import com.national.security.community.Config;
 import com.national.security.community.R;
 import com.national.security.community.base.BaseFragment;
-import com.national.security.community.ui.home.HomeFragment;
 
 public class MsgFragment extends BaseFragment {
     @Override
@@ -24,7 +25,7 @@ public class MsgFragment extends BaseFragment {
 
     @Override
     protected void initEventAndData() {
-
+        Log.i(Config.TAG, "initEventAndData: ");
     }
 
 

@@ -119,16 +119,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         return R.layout.activity_main;
     }
 
-    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
-    @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-        if (Build.VERSION.SDK_INT >= 22) {
-            ImmersionUtil.fullWindowFive(this);
-        } else {
-            ImmersionUtil.fullWindow(this);
-        }
-    }
 
     @RequiresApi(api = Build.VERSION_CODES.N)
     @DebugLog

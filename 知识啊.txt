@@ -239,7 +239,12 @@ FlycoTabLayout
 
 
 
-Banner+VLayout+SmartRefreshLayout实现类购物App首页多布局结构
+
+
+
+
+ljn_bleachone@163.com  
+appID(小程序) :wx31460e5491b7de33
 
 
 
