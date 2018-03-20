@@ -6,6 +6,8 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.design.widget.TabLayout;
 import android.util.Log;
@@ -25,6 +27,7 @@ import com.national.security.community.event.MessageEvent;
 import com.national.security.community.ui.home.HomeFragment;
 import com.national.security.community.ui.mine.MineFragment;
 import com.national.security.community.ui.msg.MsgFragment;
+import com.national.security.community.utils.ImmersionUtil;
 import com.national.security.community.utils.JNIUtil;
 import com.national.security.community.utils.NinePatchPic;
 import com.national.security.community.utils.SharedPreferencesUtil;
@@ -114,6 +117,17 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     protected int getLayout() {
         return R.layout.activity_main;
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        if (Build.VERSION.SDK_INT >= 22) {
+            ImmersionUtil.fullWindowFive(this);
+        } else {
+            ImmersionUtil.fullWindow(this);
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.N)

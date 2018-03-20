@@ -53,16 +53,18 @@
 
         <activity
             android:name=".ui.main.MainActivity"
-            android:launchMode="singleTask" />
-
-        <activity
-            android:name=".ui.SplashActivity"
-            android:theme="@style/SplashTheme">
+            android:launchMode="singleTask">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+
+        <activity
+            android:name=".ui.SplashActivity"
+            android:theme="@style/SplashTheme">
+
         </activity>
 
         <!--享受页面视频的完整播放体验-->

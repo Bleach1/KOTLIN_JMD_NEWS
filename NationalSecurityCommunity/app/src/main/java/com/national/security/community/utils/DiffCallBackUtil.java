@@ -65,12 +65,7 @@ public class DiffCallBackUtil extends DiffUtil.Callback {
     public boolean areContentsTheSame(int oldItemPosition, int newItemPosition) {
         BaseBean beanOld = mOldDatas.get(oldItemPosition);
         BaseBean beanNew = mNewDatas.get(newItemPosition);
-        if (!beanOld.getMsg().equals(beanNew.getMsg())) {
-            return false;//如果有内容不同，就返回false
-        }
-        if (!TextUtils.equals(beanOld.getId(), beanNew.getId())) {
-            return false;//如果有内容不同，就返回false
-        }
-        return true; //默认两个data内容是相同的
+        return !(!beanOld.getMsg().equals(beanNew.getMsg()) ||
+                !TextUtils.equals(beanOld.getId(), beanNew.getId()));
     }
 }

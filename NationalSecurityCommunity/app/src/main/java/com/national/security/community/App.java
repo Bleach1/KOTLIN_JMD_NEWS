@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Context;
 import android.content.Intent;
 import android.support.multidex.MultiDex;
+import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
@@ -12,14 +13,16 @@ import com.national.security.community.injection.component.DaggerAppComponent;
 import com.national.security.community.injection.module.AppModule;
 import com.national.security.community.injection.module.HttpModule;
 import com.national.security.community.service.InitializeService;
+import com.national.security.community.utils.DynamicTimeFormat;
 import com.qihoo360.replugin.RePluginApplication;
 import com.qihoo360.replugin.RePluginCallbacks;
 import com.qihoo360.replugin.RePluginConfig;
 import com.qihoo360.replugin.RePluginEventCallbacks;
+import com.scwang.smartrefresh.layout.SmartRefreshLayout;
+import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
 import java.util.LinkedList;
 
-import hugo.weaving.internal.Hugo;
 import io.realm.Realm;
 
 /**
@@ -33,6 +36,16 @@ public class App extends RePluginApplication {
     public static App instance;
     private LinkedList<Activity> activities;
     public static AppComponent appComponent;
+
+    static {
+        //启用矢量图兼容
+        AppCompatDelegate.setCompatVectorFromResourcesEnabled(true);
+        SmartRefreshLayout.setDefaultRefreshHeaderCreator((context, layout) -> {
+            //全局设置主题颜色
+            layout.setPrimaryColorsId(R.color.colorPrimary, android.R.color.white);
+            return new ClassicsHeader(context).setTimeFormat(new DynamicTimeFormat("更新于 %s"));
+        });
+    }
 
     @Override
     public void onCreate() {

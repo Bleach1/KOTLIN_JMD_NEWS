@@ -4,6 +4,9 @@
 在Terminal  .\gradlew clean build
             .\gradlew -q app :dependencies build
 
+            // XXX表示想打印的module的name
+            gradle XXX:dependencies
+
 
 
 ctrl +alt +M 提取 方法，style，layout

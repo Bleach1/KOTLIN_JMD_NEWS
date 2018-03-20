@@ -54,11 +54,11 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
         //屏幕常量
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_KEEP_SCREEN_ON);
         setContentView(getLayout());
-        if (Build.VERSION.SDK_INT >= 22) {
+        /*if (Build.VERSION.SDK_INT >= 22) {
             ImmersionUtil.setTitleBarColorFive(this);
         } else {
             ImmersionUtil.setTitleBarColor(this);
-        }
+        }*/
         mUnBinder = ButterKnife.bind(this);
         mContext = this;
         initInject();
