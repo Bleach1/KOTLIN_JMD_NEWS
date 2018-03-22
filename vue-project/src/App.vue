@@ -1,4 +1,5 @@
 <template>
+
   <div id="app">
     <h1>Vue Project</h1>
     <img src="./assets/logo.png">
@@ -11,11 +12,13 @@
 
 <script>
   import Users from './components/Users'
+  import Banner from './components/Banner'
 
   export default {
     name: 'App',
     components: {
-      "users": Users
+      "users": Users,
+      "banner": Banner
     },
     methods: {
       upDateContent(content) {
@@ -45,4 +48,5 @@
   h1 {
     color: purple;
   }
+
 </style>

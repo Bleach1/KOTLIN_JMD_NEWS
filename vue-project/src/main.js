@@ -6,6 +6,8 @@ import router from './router'
 import axios from 'axios'
 import VueResource from 'vue-resource'
 //import Users from './components/Users'
+import Element from 'element-ui';
+import 'element-ui/lib/theme-chalk/index.css';
 
 Vue.config.productionTip = false;
 Vue.use(VueResource);
@@ -13,6 +15,7 @@ Vue.use(VueResource);
 /* eslint-disable no-new */
 //全局注册组件   一般不用
 //Vue.component("users", Users);
+Vue.use(Element);
 new Vue({
   el: '#app',
   router,

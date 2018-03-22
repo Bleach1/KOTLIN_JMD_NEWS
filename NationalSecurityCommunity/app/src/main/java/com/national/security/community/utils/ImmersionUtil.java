@@ -58,7 +58,7 @@ public class ImmersionUtil {
         mContentView.addView(statusBarView, 0, lp);
     }
 
-    private static int getStatusBarHeight(Activity activity) {
+    public static int getStatusBarHeight(Activity activity) {
         int statusHeight = -1;
         try {
             @SuppressLint("PrivateApi") Class clazz = Class.forName("com.android.internal.R$dimen");

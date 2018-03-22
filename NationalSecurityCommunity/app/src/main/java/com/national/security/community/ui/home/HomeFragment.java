@@ -1,5 +1,6 @@
 package com.national.security.community.ui.home;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
@@ -7,9 +8,12 @@ import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
+import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
 import android.widget.ImageView;
+import android.widget.LinearLayout;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
@@ -29,6 +33,7 @@ import com.national.security.community.adapter.BaseDelegateAdapter;
 import com.national.security.community.adapter.GlideImageLoader;
 import com.national.security.community.base.BaseFragment;
 import com.national.security.community.utils.ImmersionUtil;
+import com.national.security.community.utils.StatusBarUtil;
 import com.scwang.smartrefresh.header.DeliveryHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.youth.banner.Banner;
@@ -70,12 +75,7 @@ public class HomeFragment extends BaseFragment {
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
     protected void initInject() {
-        if (Build.VERSION.SDK_INT >= 22) {
-            ImmersionUtil.fullWindowFive(getActivity());
-        } else {
-            ImmersionUtil.fullWindow(getActivity());
-        }
-
+        StatusBarUtil.setTranslucentForImageView(getActivity(), 0, smartRefreshLayoutSrl);
     }
 
     @Override
@@ -112,6 +112,11 @@ public class HomeFragment extends BaseFragment {
             alpha = 200;
         }
         toolbar.getBackground().setAlpha(alpha);
+    }
+
+    @Override
+    public void onResume() {
+        super.onResume();
     }
 
     @Override

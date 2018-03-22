@@ -6,10 +6,7 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
-import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
-import android.support.design.widget.TabLayout;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.widget.Toast;
@@ -27,16 +24,15 @@ import com.national.security.community.event.MessageEvent;
 import com.national.security.community.ui.home.HomeFragment;
 import com.national.security.community.ui.mine.MineFragment;
 import com.national.security.community.ui.msg.MsgFragment;
-import com.national.security.community.utils.ImmersionUtil;
-import com.national.security.community.utils.JNIUtil;
 import com.national.security.community.utils.NinePatchPic;
-import com.national.security.community.utils.SharedPreferencesUtil;
+import com.national.security.community.utils.StatusBarUtil;
 import com.national.security.community.widgets.BottomBar;
 import com.national.security.community.widgets.BottomBarTab;
 
 import org.greenrobot.eventbus.EventBus;
 
 import java.util.List;
+import java.util.Random;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -45,7 +41,6 @@ import javax.inject.Inject;
 
 import butterknife.BindView;
 import hugo.weaving.DebugLog;
-import me.yokeyword.eventbusactivityscope.EventBusActivityScope;
 import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
@@ -61,19 +56,19 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
     @Inject
     NinePatchPic ninePatchPic;
-    /* @BindView(R.id.sample_text)
-     TextView textView;*/
+
     @BindView(R.id.multiStateView)
     MultiStateView multiStateView;
+
     private long mExitTime = 0;
     private ISupportFragment[] mFragments = new ISupportFragment[3];
+
     @BindView(R.id.bottomBar)
     BottomBar bottomBar;
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     // @OnClick(R.id.sample_text)
     // void onClick() {
-    //  startActivity(new Intent(this, LoginActivity.class));
 
         /*ARouter.getInstance().build("/login/LoginActivity")
                 .withLong("key1", 666L)
@@ -134,15 +129,10 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                     mFragments[1],
                     mFragments[2]);
         } else {
-            // 这里库已经做了Fragment恢复工作，不需要额外的处理
-            // 这里我们需要拿到mFragments的引用，用下面的方法查找更方便些，也可以通过getSupportFragmentManager.getFragments()自行进行判断查找(效率更高些)
             mFragments[0] = findFragment(HomeFragment.class);
             mFragments[1] = findFragment(MsgFragment.class);
             mFragments[2] = findFragment(MineFragment.class);
         }
-        long startTime = System.currentTimeMillis();
-        SharedPreferencesUtil.save("ljn", "sds");
-        //  textView.setText(R.string.hello_world);
         mPresenter.loadHome();
         ninePatchPic.printWord();
         multiStateView.setViewState(0);
@@ -152,8 +142,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(userEntities -> {
                 });*/
-        Log.i(Config.TAG, "initEventAndData: " + JNIUtil.show());
-        // createThread();
         bottomBar
                 .addItem(new BottomBarTab(this, R.drawable.homepage, "首页"))
                 .addItem(new BottomBarTab(this, R.drawable.activity, "活动"))
@@ -161,11 +149,15 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
         // 模拟未读消息
         bottomBar.getItem(0).setUnreadCount(9);
-
         bottomBar.setOnTabSelectedListener(new BottomBar.OnTabSelectedListener() {
+            @SuppressLint("ResourceAsColor")
             @Override
             public void onTabSelected(int position, int prePosition) {
                 showHideFragment(mFragments[position], mFragments[prePosition]);
+                if (mFragments[position] instanceof MsgFragment) {
+
+                    ((MsgFragment) mFragments[position]).setStatusBarBackgroundColor("#3ac569");
+                }
             }
 
             @Override
@@ -180,8 +172,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
             }
         });
-    }
 
+    }
 
    /* private int whichDay(@EnumUtil.Num int day) {
         return 0;
