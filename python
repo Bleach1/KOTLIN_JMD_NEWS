@@ -1,4 +1,4 @@
-﻿http://www.runoob.com/python3/python3-tutorial.html
+http://www.runoob.com/python3/python3-tutorial.html
 https://www.liaoxuefeng.com/
 
 https://juejin.im/post/5a954e42f265da4e777fd6ea(Python入门)
@@ -18,7 +18,6 @@ String:
 3、Python中的字符串有两种索引方式，从左往右以0开始，从右往左以-1开始。
 4、Python中的字符串不能改变。
 5.在网络上传输，或者保存到磁盘上，就需要把str变为以字节为单位的bytes (x = b'ABC')
-
 
 
 yield 是一个类似 return 的关键字，只是这个函数返回的是个生成器。

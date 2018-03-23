@@ -1,12 +1,11 @@
 <template>
 
   <div id="app">
-    <h1>Vue Project</h1>
-    <img src="./assets/logo.png">
-    <router-view/>
+
     <!--2.绑定属性--Parent-->
     <!--2.绑定属性--son-->
     <users v-on:changeContent="upDateContent($event)" v-bind:title="title"/>
+    <router-view/>
   </div>
 </template>
 

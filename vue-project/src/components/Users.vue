@@ -45,11 +45,6 @@
     },//loading,
     created: function () {
       // alert("组件实例化完毕，页面没显示")
-      /* this.$http.get('http://jsonplaceholder.typicode.com/users')
-         .then((data) => {
-           console.log(data.body);
-           // this.users = data.body;
-         });*/
 
       axios.get('http://jsonplaceholder.typicode.com/users').then((response) => {
         console.log(response.data);

@@ -1,19 +1,12 @@
 package com.national.security.community.ui.home;
 
-import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.RequiresApi;
-import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
-import android.view.View;
 import android.view.ViewGroup;
-import android.view.WindowManager;
-import android.widget.FrameLayout;
-import android.widget.ImageView;
-import android.widget.LinearLayout;
 
 import com.alibaba.android.vlayout.DelegateAdapter;
 import com.alibaba.android.vlayout.VirtualLayoutManager;
@@ -32,7 +25,6 @@ import com.national.security.community.R;
 import com.national.security.community.adapter.BaseDelegateAdapter;
 import com.national.security.community.adapter.GlideImageLoader;
 import com.national.security.community.base.BaseFragment;
-import com.national.security.community.utils.ImmersionUtil;
 import com.national.security.community.utils.StatusBarUtil;
 import com.scwang.smartrefresh.header.DeliveryHeader;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;

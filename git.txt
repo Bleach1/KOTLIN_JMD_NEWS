@@ -1,4 +1,4 @@
-﻿git clone 地址 
+git clone 地址 
 git   log
 
 git branch 分支名    （创建分支）
@@ -46,7 +46,8 @@ git rebase -i HEAD^^  倒数第二个提交出错误
 把 pick 修改成 edit 后，就可以退出编辑界面了（撤销的话直接删除）
 git add 笑声(修改后)
 git commit --amend
-git rebase --continue
+git rebase --continueq
+
 
 git reset --hard 目标commit
 

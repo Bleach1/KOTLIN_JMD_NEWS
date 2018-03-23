@@ -1,16 +1,21 @@
 import Vue from 'vue'
 import Router from 'vue-router'
-import HelloWorld from '@/components/HelloWorld'
+import RouterEmpty from '@/components/RouterEmpty'
 
-Vue.use(Router)
+Vue.use(Router);
 
 export default new Router({
   routes: [
     {
       path: '/',
-      name: 'HelloWorld',
-      component: HelloWorld,
-
+      name: 'RouterEmpty',
+      component: RouterEmpty,
+    },
+    //可以配置多组
+    {
+      path: '/router',
+      name: 'RouterEmpty',
+      component: RouterEmpty,
     }
   ],
   mode: "history"

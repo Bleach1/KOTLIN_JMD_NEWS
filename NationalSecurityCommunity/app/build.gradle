@@ -255,4 +255,6 @@ dependencies {
 
     compile 'com.youth.banner:banner:1.4.10'
 
+    compile 'com.oushangfeng:PinnedSectionItemDecoration:1.2.4'
+
 }
