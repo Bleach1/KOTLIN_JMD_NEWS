@@ -22,7 +22,6 @@ import me.yokeyword.fragmentation.ISupportFragment;
 
 public class MineFragment extends BaseFragment {
 
-
     @BindView(R.id.rv_menu)
     RecyclerView mMenuRv;
 

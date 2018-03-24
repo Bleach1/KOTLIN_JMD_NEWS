@@ -46,8 +46,8 @@ public abstract class BaseFragment<T extends IPresenter> extends Fragment implem
 
     @Override
     public void onAttach(Context context) {
-        mDelegate.onAttach((Activity) context);
         mActivity = mDelegate.getActivity();
+        mDelegate.onAttach((Activity) context);
         mContext = context;
         super.onAttach(context);
     }

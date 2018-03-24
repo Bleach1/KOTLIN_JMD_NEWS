@@ -16,7 +16,14 @@ import java.util.ArrayList;
 import java.util.List;
 
 import butterknife.BindView;
+/**
+ @ description:  海底月是天上月，眼前人是新上人  海底月捞不起，心上人不可及
+ https://github.com/wjie2014/DoubleListViewLinkage
+ https://github.com/ysnows/DoubleScrollVIew
 
+ @ author:  ljn
+ @ time:  2018/3/23 
+ */
 public class ClassificationFragment extends BaseFragment {
 
     @BindView(R.id.rv_content)
@@ -118,7 +125,7 @@ public class ClassificationFragment extends BaseFragment {
             @Override
             public void onScrolled(RecyclerView recyclerView, int dx, int dy) {
                 super.onScrolled(recyclerView, dx, dy);
-
+                // strings.size()/gridLayoutManager.findFirstVisibleItemPosition();
                 if (move) {
                     move = false;
                     int n = mIndex - gridLayoutManager.findFirstVisibleItemPosition();

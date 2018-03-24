@@ -7,6 +7,24 @@ public class ContentBean implements MultiItemEntity {
     public static final int TYPE_HEADER = 1;
     public static final int TYPE_DATA = 2;
     private int itemType;
+    private String tag;
+    private String titleName;
+
+    public String getTitleName() {
+        return titleName;
+    }
+
+    public void setTitleName(String titleName) {
+        this.titleName = titleName;
+    }
+
+    public String getTag() {
+        return tag;
+    }
+
+    public void setTag(String tag) {
+        this.tag = tag;
+    }
 
     public String getPinnedHeaderName() {
         return pinnedHeaderName;
