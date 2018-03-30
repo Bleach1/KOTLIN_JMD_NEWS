@@ -1,6 +1,7 @@
 apply plugin: 'com.android.application'
 apply plugin: 'realm-android'
 apply plugin: 'com.jakewharton.hugo'
+apply plugin: 'com.google.protobuf'
 android {
     compileSdkVersion rootProject.ext.android.compileSdkVersion
     defaultConfig {
@@ -110,6 +111,10 @@ android {
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
+            proto {
+                srcDir 'src/main/proto'
+                //include '**/*.proto'
+            }
         }
     }
     lintOptions {
@@ -158,70 +163,70 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    compile 'com.android.support:support-annotations:27.1.0'
-    //compile 'com.android.support:percent:27.0.2'
+    implementation 'com.android.support:support-annotations:27.1.0'
+    //implementation 'com.android.support:percent:27.0.2'
     //di
-    compile 'com.google.dagger:dagger:2.13'
+    implementation 'com.google.dagger:dagger:2.13'
     annotationProcessor 'com.google.dagger:dagger-compiler:2.13'
-    compile 'com.jakewharton:butterknife:8.8.1'
+    implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
-    provided 'org.glassfish:javax.annotation:10.0-b28'
+    compileOnly 'org.glassfish:javax.annotation:10.0-b28'
     //rx 2.x
-    compile 'io.reactivex.rxjava2:rxjava:2.1.7'
-    compile 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
     //network
-    compile 'com.google.code.gson:gson:2.8.2'
-    compile 'com.squareup.retrofit2:retrofit:2.3.0'
-    compile 'com.squareup.retrofit2:converter-gson:2.3.0'
-    compile 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
-    compile 'com.squareup.okhttp3:okhttp:3.9.1'
-    compile 'com.squareup.okhttp3:logging-interceptor:3.9.1'
+    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.squareup.retrofit2:retrofit:2.3.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
+    implementation 'com.squareup.okhttp3:okhttp:3.9.1'
+    implementation 'com.squareup.okhttp3:logging-interceptor:3.9.1'
     implementation 'com.github.bumptech.glide:okhttp3-integration:4.3.1'
 
-    compile 'com.android.support:multidex:1.0.3'
+    implementation 'com.android.support:multidex:1.0.3'
 
-    compile 'com.orhanobut:logger:2.1.1'
+    implementation 'com.orhanobut:logger:2.1.1'
 //fragmentation
-    compile 'me.yokeyword:fragmentation:1.3.1'
-    compile 'me.yokeyword:fragmentation-swipeback:1.3.1'
-    compile 'me.yokeyword:eventbus-activity-scope:1.1.0'
+    implementation 'me.yokeyword:fragmentation:1.3.1'
+    implementation 'me.yokeyword:fragmentation-swipeback:1.3.1'
+    implementation 'me.yokeyword:eventbus-activity-scope:1.1.0'
 //rxpermissions
-    compile 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
     //rxCache
-    compile('com.github.VictorAlbertos.RxCache:runtime:1.8.0-2.x') {
+    implementation('com.github.VictorAlbertos.RxCache:runtime:1.8.0-2.x') {
         exclude module: 'rxjava'
         exclude module: 'dagger'
     }
-    compile 'com.github.VictorAlbertos.Jolyglot:gson:0.0.3'
+    implementation 'com.github.VictorAlbertos.Jolyglot:gson:0.0.3'
     //adapter 下拉刷新
-    compile 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
-    compile 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
-    compile 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
+    implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
+    implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'
 
-    compile 'top.zibin:Luban:1.1.3'
+    implementation 'top.zibin:Luban:1.1.3'
     //Glide
-    compile 'com.github.bumptech.glide:glide:4.5.0'
+    implementation 'com.github.bumptech.glide:glide:4.5.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.5.0'
     //圆角 高斯模糊等
-    compile 'jp.wasabeef:glide-transformations:3.0.1'
-    compile 'org.greenrobot:eventbus:3.1.1'
+    implementation 'jp.wasabeef:glide-transformations:3.0.1'
+    implementation 'org.greenrobot:eventbus:3.1.1'
     // BugLy
-    compile 'com.tencent.bugly:crashreport:2.6.6.1'
+    implementation 'com.tencent.bugly:crashreport:2.6.6.1'
     //rxLife
-    compile 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.1'
-    compile 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
-    compile 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.1'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.1'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
+    implementation 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.1'
 
-    compile 'com.jakewharton.rxbinding2:rxbinding:2.1.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.0'
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
-    compile 'com.airbnb.android:lottie:2.3.1'
+    implementation 'com.airbnb.android:lottie:2.3.1'
 
     implementation files('libs/tbs_sdk_thirdapp_v3.2.0.1104_43200_sharewithdownload_withfilereader_withoutGame_obfs_20170609_115346.jar')
     //宿主程序
-    compile 'com.qihoo360.replugin:replugin-host-lib:2.2.1'
-    compile 'com.github.Kennyc1012:MultiStateView:1.3.2'
+    implementation 'com.qihoo360.replugin:replugin-host-lib:2.2.1'
+    implementation 'com.github.Kennyc1012:MultiStateView:1.3.2'
     // Room
     implementation 'android.arch.persistence.room:runtime:1.0.0'
     annotationProcessor "android.arch.persistence.room:compiler:1.0.0"
@@ -229,32 +234,57 @@ dependencies {
     implementation 'android.arch.persistence.room:rxjava2:1.0.0'
 
     //ARouter
-    compile 'com.alibaba:arouter-api:1.2.2'
+    implementation 'com.alibaba:arouter-api:1.2.2'
     annotationProcessor 'com.alibaba:arouter-compiler:1.1.3'
     //SVG
-    compile 'com.eftimoff:android-pathview:1.0.8@aar'
+    implementation 'com.eftimoff:android-pathview:1.0.8@aar'
     //PictureSelector
     implementation 'com.github.LuckSiege.PictureSelector:picture_library:v2.1.9'
     implementation files('libs/commons-lang3-3.0.jar')
 //卡顿检测
-    compile 'com.github.markzhai:blockcanary-android:1.5.0'
+    implementation 'com.github.markzhai:blockcanary-android:1.5.0'
     //内存泄漏检测
     debugImplementation 'com.squareup.leakcanary:leakcanary-android:1.5.4'
     releaseImplementation 'com.squareup.leakcanary:leakcanary-android-no-op:1.5.4'
 //FaceBook Stetho debug库
-    compile 'com.facebook.stetho:stetho:1.5.0'
-    compile 'com.facebook.stetho:stetho-okhttp3:1.5.0'
+    implementation 'com.facebook.stetho:stetho:1.5.0'
+    implementation 'com.facebook.stetho:stetho-okhttp3:1.5.0'
 
-    compile 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
+    implementation 'com.flyco.tablayout:FlycoTabLayout_Lib:2.1.2@aar'
 
-    compile 'com.github.mmin18:realtimeblurview:1.1.0'
+    implementation 'com.github.mmin18:realtimeblurview:1.1.0'
 
-    compile('com.alibaba.android:vlayout:1.2.8@aar') {
+    implementation('com.alibaba.android:vlayout:1.2.8@aar') {
         transitive = true
     }
 
-    compile 'com.youth.banner:banner:1.4.10'
+    implementation 'com.youth.banner:banner:1.4.10'
 
-    compile 'com.oushangfeng:PinnedSectionItemDecoration:1.2.4'
+    implementation 'com.oushangfeng:PinnedSectionItemDecoration:1.2.4'
+
+    // 定义protobuf依赖，使用精简版
+    implementation "com.google.protobuf:protobuf-lite:3.0.0"
+    implementation('com.squareup.retrofit2:converter-protobuf:2.2.0') {
+        exclude group: 'com.google.protobuf', module: 'protobuf-java'
+    }
 
 }
+
+protobuf {
+    protoc {
+        artifact = 'com.google.protobuf:protoc:3.0.0'
+    }
+    plugins {
+        javalite {
+            artifact = 'com.google.protobuf:protoc-gen-javalite:3.0.0'
+        }
+    }
+    generateProtoTasks {
+        all().each { task ->
+            task.plugins {
+                javalite {}
+            }
+        }
+    }
+}
+

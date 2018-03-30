@@ -57,3 +57,13 @@ ES6:
 2.模板字符串
     const name = 'lux'
     console.log(`hello ${name}`) //hello lux
+
+
+
+
+VUE:
+v-text:网速很慢或者javascript出错时，会暴露我们的{{xxx}}。Vue给我们提供的v-text,就是解决这个问题的
+
+
+
+

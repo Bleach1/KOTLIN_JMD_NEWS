@@ -11,8 +11,10 @@ buildscript {
         maven { url 'https://maven.google.com' }
     }
     dependencies {
+
+        classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.2'
         classpath "io.realm:realm-gradle-plugin:5.0.0"
-        classpath 'com.android.tools.build:gradle:3.0.1'
+        classpath 'com.android.tools.build:gradle:3.1.0'
         classpath 'com.qihoo360.replugin:replugin-host-gradle:2.2.1'
         //方法执行时间测算
         classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'

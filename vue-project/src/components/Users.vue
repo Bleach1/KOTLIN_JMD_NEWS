@@ -6,7 +6,7 @@
     <h1>{{title}}</h1>
     <ul>
       <li v-for="user in users">
-        <router-link to="/">{{user.name}}</router-link>
+        <router-link to="/">{{user.name}}--{{$router.name}}</router-link>
       </li>
     </ul>
 

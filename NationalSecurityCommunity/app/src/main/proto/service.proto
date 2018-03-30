@@ -1,0 +1,9 @@
+syntax = "proto3";//声明proto协议版本
+package com.natonal.security.community.proto;//定义了Protobuf自动生成类的包名
+option java_outer_classname = "LoginInfo";//定义了Protobuf自动生成类的类名
+//消息经过Protobuf序列化后会成为一个二进制数据流，通过Key-Value组成方式写入到二进制数据流
+
+message Login {
+    string account = 1;
+    string password = 2;
+}

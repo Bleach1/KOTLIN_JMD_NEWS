@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:tools="http://schemas.android.com/tools"
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+
+        <variable
+            name="observableUser"
+            type="com.example.administrator.databinding.bean.ObservableUser" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content">
+        <!--双向绑定-->
+        <EditText
+            android:id="@+id/et_text"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="@={observableUser.firstName}"
+            android:inputType="numberPassword"
+            tools:ignore="LabelFor" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

@@ -1,8 +1,10 @@
 package com.national.security.community;
 
 import android.app.Activity;
+import android.app.Application;
 import android.content.Context;
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.support.multidex.MultiDex;
 import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
@@ -14,7 +16,7 @@ import com.national.security.community.injection.module.AppModule;
 import com.national.security.community.injection.module.HttpModule;
 import com.national.security.community.service.InitializeService;
 import com.national.security.community.utils.DynamicTimeFormat;
-import com.qihoo360.replugin.RePluginApplication;
+import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.RePluginCallbacks;
 import com.qihoo360.replugin.RePluginConfig;
 import com.qihoo360.replugin.RePluginEventCallbacks;
@@ -31,7 +33,7 @@ import io.realm.Realm;
  * @ time: 2017/12/7
  */
 @SuppressWarnings("SynchronizeOnNonFinalField")
-public class App extends RePluginApplication {
+public class App extends Application {
 
     public static App instance;
     private LinkedList<Activity> activities;
@@ -48,6 +50,30 @@ public class App extends RePluginApplication {
     }
 
     @Override
+    public void onLowMemory() {
+        super.onLowMemory();
+
+        /* Not need to be called if your application's minSdkVersion > = 14 */
+        RePlugin.App.onLowMemory();
+    }
+
+    @Override
+    public void onTrimMemory(int level) {
+        super.onTrimMemory(level);
+
+        /* Not need to be called if your application's minSdkVersion > = 14 */
+        RePlugin.App.onTrimMemory(level);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration config) {
+        super.onConfigurationChanged(config);
+
+        /* Not need to be called if your application's minSdkVersion > = 14 */
+        RePlugin.App.onConfigurationChanged(config);
+    }
+
+    @Override
     public void onCreate() {
         super.onCreate();
         instance = this;
@@ -57,6 +83,7 @@ public class App extends RePluginApplication {
             ARouter.openDebug();
         }
         ARouter.init(this);
+        RePlugin.App.onCreate();
         InitializeService.start(this);
     }
 
@@ -68,6 +95,7 @@ public class App extends RePluginApplication {
     protected void attachBaseContext(Context base) {
         super.attachBaseContext(base);
         MultiDex.install(this);
+        RePlugin.App.attachBaseContext(this);
     }
 
     public void addActivity(Activity act) {
@@ -106,7 +134,7 @@ public class App extends RePluginApplication {
     }
 
 
-    @Override
+   /* @Override
     protected RePluginConfig createConfig() {
         RePluginConfig c = new RePluginConfig();
         // 允许“插件使用宿主类”。默认为“关闭”
@@ -123,7 +151,7 @@ public class App extends RePluginApplication {
     @Override
     protected RePluginCallbacks createCallbacks() {
         return new HostCallbacks(this);
-    }
+    }*/
 
 
     /**

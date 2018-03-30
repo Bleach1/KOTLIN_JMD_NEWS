@@ -131,3 +131,50 @@ Fragment空白页：
 
 
 
+Databinding：
+
+Binding生成规则：activity_demo.xml，则会生成ActivityDemoBinding，
+                 item_search_hotel，则会生成ItemSearchHotelBinding。
+
+自定义生成的class名字：<data class=“ContactItem”>
+                        …
+                       </data>
+               
+
+零个或多个import元素可能在data元素中使用：
+                                         <data>
+                                            <import type="android.view.View"/>
+                                         </data>
+
+                              <TextView
+                                  android:text="@{user.lastName}"
+                                  android:layout_width="wrap_content"
+                                  android:layout_height="wrap_content"
+                                  android:visibility="@{user.isAdult ? View.VISIBLE : View.GONE}"/>
+
+当类名有冲突时，其中一个类名可以重命名为alias:
+                                              <import type="android.view.View"/>
+                                              <import type="com.example.real.estate.View"
+                                                      alias="Vista"/>
+
+Null Coalescing 运算符:
+           android:text="@{user.displayName ?? user.lastName}"
+                                   ||
+           android:text="@{user.displayName != null ? user.displayName : user.lastName}"
+
+
+通过 ${} 可以直接把 Java 中定义的属性值赋值给 xml 属性
+
+
+
+
+
+
+
+
+
+视频：
+Codec:对视频文件进行编码和解码
+
+视频容器文件
+Container format file:

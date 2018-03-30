@@ -11,12 +11,10 @@ import butterknife.ButterKnife;
 import butterknife.Unbinder;
 import io.reactivex.disposables.CompositeDisposable;
 
-
 /**
- * Common simple dialog fragment
- *
- * @author quchao
- * @date 2017/11/28
+ * @ description:  Common simple dialog fragment
+ * @ author:  ljn
+ * @ time:  2018/3/26
  */
 
 public abstract class AbstractSimpleDialogFragment extends DialogFragment {

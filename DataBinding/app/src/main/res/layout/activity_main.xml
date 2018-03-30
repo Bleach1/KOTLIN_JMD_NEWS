@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<layout xmlns:app="http://schemas.android.com/apk/res-auto">
+
+    <data>
+
+        <import type="com.example.administrator.databinding.utils.StringUtil" />
+
+        <import type="com.example.administrator.databinding.utils.BindUtil" />
+
+        <variable
+            name="presenter"
+            type="com.example.administrator.databinding.MainActivity.Presenter" />
+
+        <variable
+            name="UserBean"
+            type="com.example.administrator.databinding.bean.UserBean" />
+
+        <variable
+            name="presenter"
+            type="com.example.administrator.databinding.Presenter" />
+    </data>
+
+    <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+        xmlns:tools="http://schemas.android.com/tools"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        tools:context=".MainActivity">
+
+        <ProgressBar
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:onClick="@{(v)->presenter.onClick(v)}"
+            app:fadeVisible="@{BindUtil.setFadeVisible}" />
+
+        <TextView
+            android:id="@+id/tv_hello"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{presenter.onClick}"
+            android:text="@{UserBean.firstName}"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <TextView
+            android:id="@+id/tv_world"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:onClick="@{()->presenter.onClickListenerBinding(UserBean)}"
+            android:text="@{StringUtil.capitalize(UserBean.lastName)}"
+            app:layout_constraintBottom_toTopOf="@id/tv_hello"
+            app:layout_constraintLeft_toLeftOf="parent"
+            app:layout_constraintRight_toRightOf="parent" />
+
+        <ViewStub
+            android:id="@+id/view_stub"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout="@layout/view_stub" />
+
+        <include
+            layout="@layout/bind_include"
+            app:UserBean="@{UserBean}" />
+    </android.support.constraint.ConstraintLayout>
+</layout>

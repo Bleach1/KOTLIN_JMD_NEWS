@@ -73,6 +73,10 @@ services.msc
 开心时，听歌入耳；伤心时，听歌入心
 
 http://www.windows7en.com/Win7/25930.html（修复win7 浏览服务）
+http://www.xitongcity.com/jiaocheng/win7_content_3847.html
+
+
+
 https://juejin.im/post/5a5bc8c36fb9a01ca26774eb(前端视频)
 
 开发者选项布局边界打开    Native？
@@ -132,6 +136,33 @@ FlycoTabLayout
 ljn_bleachone@163.com  
 appID(小程序) :wx31460e5491b7de33
 
+3.26   周一
+
+http://services.gradle.org/distributions/(gradle地址)
+
+
+
+
+算法：n（很大）个无序数中找最大的10个数；
+Intent传值有大小限制吗，为什么，如何处理；
+如何实现圆形ImageView；
+注解；
+TabLayout中如何让当前标签永远位于屏幕中间；
+EventBus原理；
+算法：归并排序
+手写代码：遍历文件目录；
+电梯运行的算法分析；
+算法：手写冒泡排序；
+视频播放器的手势控制如何处理；
+手写实现单链表的get操作；
+生产者、消费者模式；
+动态代理的作用；
+EventBus如何做到黏性发送的；
+TextView调用setText方法的内部执行流程；
+
+compile    implementation
+provided   compileOnly
+debugCompile debugImplementation
 
 
 
@@ -139,3 +170,34 @@ appID(小程序) :wx31460e5491b7de33
 
 
 
+
+
+高新园区：
+
+万科樱花园二期
+海尚明珠
+国宝星月湾
+悦龙居
+海创七贤贡院
+中国航天揽月湾
+
+
+甘井子：
+钰桥中央庭院
+恒峰天泉小镇
+金地V时代
+枫丹丽城
+桑尼小镇
+恒峰天泉小镇
+保利西山林语
+
+
+沙河口-马栏
+万棵树
+
+
+
+
+交通驾校
+平安驾校
+胜利驾校

@@ -1,0 +1,11 @@
+内存泄漏：内存不在GC的掌控情况下
+GC：某对象不再有任何引用的时候才进行回收
+GC Root引用点：
+              1.javaStack中引用的对象
+              2.方法区中静态引用指向的对象
+              3.方法区中常量引用指向对象
+              4.Native方法中JNI引用的对象
+              5.Thread"活着的线程"
+
+粗略判断：adb shell dumpsys meminfo packagename -d
+反复执行某一动作，查看内存变化              

@@ -328,7 +328,13 @@ python manage.py runserver  9999(端口号)
 创建应用
 python manage.py  startapp blog
 创建数据表
-python manage.py makeimgrations  app名字（可选）
+python manage.py makemigrations  app名字（可选）
 python manage.py  migrate
+python manage.py sqlmigrate 应用名 文件id  查看SQL语句
+
 创建用户
-python manage.py createsuperuser
+python manage.py createsuperuser     --username=ljn --email=ljn_bleachone@163.com
+pws:ljn110ca
+
+
+ljn  ljn***110***Cao
