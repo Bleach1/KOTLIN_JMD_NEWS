@@ -163,9 +163,14 @@ Null Coalescing 运算符:
            android:text="@{user.displayName != null ? user.displayName : user.lastName}"
 
 
-通过 ${} 可以直接把 Java 中定义的属性值赋值给 xml 属性
 
 
+进程通讯：
+1.Aidl
+2.Messager
+3.Content provider
+4.Socket
+5.文件共享
 
 
 
