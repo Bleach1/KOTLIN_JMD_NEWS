@@ -15,9 +15,9 @@ public class SingleClickAspect {
 
     private static final String TAG = "SingleClickAspect";
     private static final int MIN_CLICK_DELAY_TIME = 600;
-    static int TIME_TAG = R.id.click_time;
+    private static final int TIME_TAG = R.id.click_time;
 
-    @Pointcut("execution(@com.ditclear.app.aop.annotation.SingleClick * *(..))")//方法切入点
+    @Pointcut("execution(@com.example.administrator.databinding.SingleClick * *(..))")//方法切入点
     public void methodAnnotated() {
 
     }

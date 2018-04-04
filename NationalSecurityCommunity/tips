@@ -1,6 +1,16 @@
 
 
 
+
+beforeDescendants：ViewGroup 会优先其子类控件而获取到焦点
+afterDescendants：ViewGroup 只有当其子类控件不需要获取焦点时才获取焦点
+blocksDescendants：ViewGroup 会覆盖子类控件而直接获得焦点
+即在Item布局的根布局加上android:descendantFocusability=”blocksDescendants”
+
+
+
+
+
 在Terminal  .\gradlew clean build
             .\gradlew -q app :dependencies build
 

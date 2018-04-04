@@ -23,5 +23,4 @@ public interface Config {
     String SAVE_PHOTO_PATH = PATH_DATA + "/img_path";
     String DB_NAME = "myRealm.realm";
 
-    String BASE_URL = BuildConfig.HOST_URL;
 }
