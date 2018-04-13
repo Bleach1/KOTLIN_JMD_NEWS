@@ -1,0 +1,83 @@
+git clone 地址 
+git   log
+
+git branch 分支名    （创建分支）
+git checkout 分支名  （切换分支）
+
+git checkout -b  分支名 （创建并切换）
+git branch -d 分支名 （删除分支）
+
+HEAD指向的branch 不能被删除，如删除需要用checkout把HEAD指向其他地方
+没有被合并到master的branch删除会失败  -d改成-D删除
+
+git push origin master
+
+
+git merge branch1
+git merge --abort(取消合并)
+
+世界流行工作流
+1.任何新的功能（feature）或 bug 修复全都新建一个 branch 来写；
+2.branch 写完后，合并到 master，然后删掉这个 branch。
+
+退出 git  log  (press q)
+查看历史中的多个 commit：log
+查看详细改动： git log -p
+查看大致改动：git log --stat
+查看具体某个 commit：show
+要看最新 commit ，直接输入 git show ；要看指定 commit ，输入 git show commit的引用或SHA-1
+如果还要指定文件，在 git show 的最后加上文件名
+查看未提交的内容：diff
+查看暂存区和上一条 commit 的区别：git diff --staged（或 --cached）
+查看工作目录和暂存区的区别：git diff 不加选项参数
+查看工作目录和上一条 commit 的区别：git diff HEAD...
+
+
+git rebase 目标基础点
+
+commit --amend 可以修复当前提交的错误
+git rebase -i HEAD^^  倒数第二个提交出错误
+^ 的用法：在 commit 的后面加一个或多个 ^ 号，可以把 commit 往回偏移，偏移的数量是 ^ 的数量。
+例如：master^ 表示 master 指向的 commit 之前的那个 commit； HEAD^^ 表示 HEAD 所指向的 commit 往前数两个 commit。
+
+
+~ 的用法：在 commit 的后面加上 ~ 号和一个数，可以把 commit 往回偏移，偏移的数量是 ~ 号后面的数。
+例如：HEAD~5 表示 HEAD 指向的 commit往前数 5 个 commit。
+把 pick 修改成 edit 后，就可以退出编辑界面了（撤销的话直接删除）
+git add 笑声(修改后)
+git commit --amend
+git rebase --continueq
+
+
+git reset --hard 目标commit
+
+git rebase --onto HEAD^^ HEAD^ branchcommit 写错了
+
+
+1. 出错的内容在你自己的 branch
+ git push origin branch1 -f(强行push 进行中央仓库覆盖)
+
+2. 出错的内容已经合并到 master
+
+git revert HEAD^
+在 revert 完成之后，把新的 commit 再 push 上去
+
+如果出错内容在私有 branch：在本地把内容修正后，强制 push (push -f）一次就可以解决；
+如果出错内容在 master：不要强制 push，而要用 revert 把写错的 commit 撤销。
+
+
+
+--soft 和 --hard 的区别：--hard 会清空工作目录的改动，而 --soft 则会保留工作目录的内容，并把因为保留工作目录内容所带来的新的文件差异放进暂存区。
+reset 不加参数：保留工作目录，并清空暂存区
+
+当你手头有一件临时工作要做，需要把工作目录暂时清理干净
+git stash
+你的工作目录的改动就被清空了，所有改动都被存了起来
+切回你的分支，然后：git stash pop
+
+分支找回
+git reflog
+找到分支移除哪一行commit
+所以现在就可以切换回 c08de9a，然后重新创建 branch1 ：
+git checkout c03de9a
+git checkout -b branch1

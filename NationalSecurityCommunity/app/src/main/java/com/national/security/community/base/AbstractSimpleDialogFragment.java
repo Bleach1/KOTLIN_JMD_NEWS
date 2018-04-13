@@ -37,6 +37,7 @@ public abstract class AbstractSimpleDialogFragment extends DialogFragment {
     public void onResume() {
         super.onResume();
         initEventAndData();
+
     }
 
     @Override

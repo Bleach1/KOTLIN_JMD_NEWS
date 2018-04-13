@@ -163,17 +163,17 @@ dependencies {
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.1'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.1'
-    implementation 'com.android.support:support-annotations:27.1.0'
+    implementation 'com.android.support:support-annotations:27.1.1'
     //implementation 'com.android.support:percent:27.0.2'
     //di
-    implementation 'com.google.dagger:dagger:2.13'
-    annotationProcessor 'com.google.dagger:dagger-compiler:2.13'
+    implementation 'com.google.dagger:dagger:2.15'
+    annotationProcessor 'com.google.dagger:dagger-compiler:2.15'
     implementation 'com.jakewharton:butterknife:8.8.1'
     annotationProcessor 'com.jakewharton:butterknife-compiler:8.8.1'
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
     //rx 2.x
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
-    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.11'
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
     //network
     implementation 'com.google.code.gson:gson:2.8.2'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
@@ -217,7 +217,7 @@ dependencies {
     implementation 'com.trello.rxlifecycle2:rxlifecycle-components:2.2.1'
     implementation 'com.trello.rxlifecycle2:rxlifecycle-android:2.2.1'
 
-    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.0'
+    implementation 'com.jakewharton.rxbinding2:rxbinding:2.1.1'
 
     implementation 'com.github.PhilJay:MPAndroidChart:v3.0.3'
 
@@ -267,7 +267,7 @@ dependencies {
     implementation('com.squareup.retrofit2:converter-protobuf:2.2.0') {
         exclude group: 'com.google.protobuf', module: 'protobuf-java'
     }
-
+    implementation 'com.google.android:flexbox:0.3.2'
 }
 
 protobuf {

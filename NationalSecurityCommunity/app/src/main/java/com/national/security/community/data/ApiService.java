@@ -9,9 +9,12 @@ import java.util.Map;
 
 import io.reactivex.Flowable;
 import io.reactivex.Observable;
+import retrofit2.http.Body;
 import retrofit2.http.GET;
+import retrofit2.http.POST;
 import retrofit2.http.Path;
 import retrofit2.http.QueryMap;
+import retrofit2.http.Url;
 
 /**
  * @ description:  具体请求
@@ -30,6 +33,13 @@ public interface ApiService {
 
     @GET("test")
     Observable<BaseBean> test(@QueryMap Map<String, String> value);
+
+    //动态修改地址
+    @POST()
+    Observable<BaseBean> post(@Url String url, @QueryMap Map<String, String> map);
+
+    @POST("api/{url}/newsList")
+    Observable<BaseBean> login(@Path("url") String url, @Body BaseBean post);
 
 
 }

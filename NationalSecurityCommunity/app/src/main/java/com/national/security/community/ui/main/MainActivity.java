@@ -26,6 +26,7 @@ import com.national.security.community.ui.mine.MineFragment;
 import com.national.security.community.ui.msg.MsgFragment;
 import com.national.security.community.utils.NinePatchPic;
 import com.national.security.community.utils.StatusBarUtil;
+import com.national.security.community.utils.UniqueIDUtil;
 import com.national.security.community.widgets.BottomBar;
 import com.national.security.community.widgets.BottomBarTab;
 
@@ -119,6 +120,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @DebugLog
     @Override
     protected void initEventAndData() {
+
+        Log.i(Config.TAG, "initEventAndData: " + UniqueIDUtil.getUniqueID());
         if (findFragment(HomeFragment.class) == null) {
             mFragments[0] = HomeFragment.newInstance();
             mFragments[1] = MsgFragment.newInstance();

@@ -1,0 +1,7 @@
+fromArray：遍历数组
+timer：定时延迟
+interval：隔指定时间发送时间(轮询)
+Map:将被观察者发送的事件转换为任意的类型事件(Bean类型之间转换)
+FlatMap:将被观察者发送的事件序列进行拆分、单独转换,再合并成一个新的事件序列，最后再进行发送(嵌套请求)
+ConcatMap:类似FlatMap  事件序列同原始发送数据序列
+combineLatest：合并事件 & 联合判断

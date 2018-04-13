@@ -1,6 +1,7 @@
 package com.national.security.community.ui.main;
 
 import android.Manifest;
+import android.annotation.SuppressLint;
 import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
@@ -62,6 +63,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     }
 
+    @SuppressLint("CheckResult")
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void requestPermission() {
