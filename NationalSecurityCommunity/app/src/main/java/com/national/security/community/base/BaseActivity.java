@@ -1,5 +1,6 @@
 package com.national.security.community.base;
 
+import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;

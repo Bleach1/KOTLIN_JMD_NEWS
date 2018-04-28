@@ -13,7 +13,6 @@ import com.national.security.community.data.model.TestBean;
 import com.national.security.community.helper.RetrofitHelper;
 import com.national.security.community.utils.MyObserver;
 import com.national.security.community.utils.RxUtil;
-import com.natonal.security.community.proto.LoginInfo;
 import com.tbruyelle.rxpermissions2.RxPermissions;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 

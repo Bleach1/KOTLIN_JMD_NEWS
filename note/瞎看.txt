@@ -187,3 +187,12 @@ Container format file:
 
 
 App架构基本原则：SOC原则(Separation of concerns 分离关注点)->模块化，低耦合
+
+
+
+属性动画原理：
+       
+             Android 屏幕刷新的关键Choreographer 
+             1.通过Choreographer向底层注册下一个屏幕刷新信号监听
+             2.将需要运行的动画添加到列表中
+             3.如果动画是一个延迟开始的动画，那么加入Delay队列里

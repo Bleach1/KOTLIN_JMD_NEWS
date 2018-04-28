@@ -17,6 +17,7 @@ import com.tencent.bugly.crashreport.CrashReport;
 import com.tencent.smtt.sdk.QbSdk;
 
 import io.realm.DynamicRealm;
+import io.realm.Realm;
 import io.realm.RealmConfiguration;
 import io.realm.RealmMigration;
 import io.realm.annotations.RealmModule;
@@ -57,13 +58,14 @@ public class InitializeService extends IntentService {
                 .modules(new MySchemaModule())
                 .migration(new MyMigration())
                 .build();
+        Realm.setDefaultConfiguration(myConfig);
 
-         /*内存检测*/
+        /*内存检测*/
         if (LeakCanary.isInAnalyzerProcess(this)) {
             return;
         }
         LeakCanary.install(App.instance);
-/*卡顿检测*/
+        /*卡顿检测*/
         BlockCanary.install(this, new AppBlockCanaryContext()).start();
 
 //调试库 在chrome中访问 chrome://inspect

@@ -136,11 +136,9 @@ FlycoTabLayout
 ljn_bleachone@163.com  
 appID(小程序) :wx31460e5491b7de33
 
-3.26   周一
+4.25  周3
 
 http://services.gradle.org/distributions/(gradle地址)
-
-
 
 
 算法：n（很大）个无序数中找最大的10个数；
@@ -164,7 +162,27 @@ compile    implementation
 provided   compileOnly
 debugCompile debugImplementation
 
-1.Android 刘海屏适配
-2.Android Lint代码检查
-3.FlexBoxLayout使用
-4.JobService使用
+
+
+key=b5b2a0fad04141ac9ea4cd8c25c9a717 
+
+https://free-api.heweather.com/s6/weather/now?parameters?location=dalian&key=b5b2a0fad04141ac9ea4cd8c25c9a717 
+
+
+
+https://tonnyl.github.io/2018/04/22/Translation-Exploring-the-v28-Android-Design-Support-Library-Additions/
+
+
+
+使用minWidth、minHeight、lines等属性
+
+
+
+
+
+
+
+
+
+
+
