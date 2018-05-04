@@ -10,7 +10,6 @@ import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
-import com.national.security.community.helper.RealmHelper;
 import com.national.security.community.injection.component.AppComponent;
 import com.national.security.community.injection.component.DaggerAppComponent;
 import com.national.security.community.injection.module.AppModule;
@@ -19,16 +18,13 @@ import com.national.security.community.service.InitializeService;
 import com.national.security.community.utils.DynamicTimeFormat;
 import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.RePluginCallbacks;
-import com.qihoo360.replugin.RePluginConfig;
 import com.qihoo360.replugin.RePluginEventCallbacks;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
 
 import java.util.LinkedList;
-import java.util.List;
 
 import io.realm.Realm;
-import io.realm.RealmObject;
 
 /**
  * @ description: 不解释

@@ -1,13 +1,15 @@
 package com.national.security.community.base;
 
+import com.national.security.community.data.db.User;
+
 import io.realm.RealmList;
 import io.realm.RealmObject;
 import io.realm.annotations.PrimaryKey;
 
-public class BaseRealmBean<T> extends RealmObject {
+public class BaseRealmBean extends RealmObject {
     @PrimaryKey
     private int id;
-    private RealmList<T> tRealmList;
+    private RealmList<User> tRealmList;
 
     public int getId() {
         return id;
@@ -17,11 +19,11 @@ public class BaseRealmBean<T> extends RealmObject {
         this.id = id;
     }
 
-    public RealmList<T> gettRealmList() {
+    public RealmList<User> gettRealmList() {
         return tRealmList;
     }
 
-    public void settRealmList(RealmList<T> tRealmList) {
+    public void settRealmList(RealmList<User> tRealmList) {
         this.tRealmList = tRealmList;
     }
 }

@@ -6,6 +6,7 @@ import android.content.Intent;
 import android.support.annotation.NonNull;
 import android.util.Log;
 
+import com.bolex.autoEx.AutoEx;
 import com.facebook.stetho.Stetho;
 import com.github.moduth.blockcanary.BlockCanary;
 import com.national.security.community.App;
@@ -51,6 +52,9 @@ public class InitializeService extends IntentService {
     }
 
     private void initApplication() {
+
+        AutoEx.apply(this);
+        // public static void apply(Context mApp, int maxSize, String tag, boolean isDebug)
         RealmConfiguration myConfig = new RealmConfiguration.Builder()
                 .name(Config.DB_NAME)
                 .schemaVersion(1)

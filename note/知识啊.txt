@@ -1,11 +1,9 @@
 国安社区项目管理
 http://10.22.1.207/zentao/    admin/123456
 liujianan2018        密码：test123456
-
+vivio:四小 嘎子
 
 顶级毒鸡汤：
-
-vivio:四小 嘎子
 
 1.陪你聊几天你就喜欢他，谈恋爱还没几个月就想过一辈子，交个朋友稍微对你好点就想来往一生，难怪你的怨气那么重、悲伤那么多，这都是天真的代价
 
@@ -49,8 +47,6 @@ vivio:四小 嘎子
 
 15.请不要假装很努力，因为结果不会陪你演戏
 
-https://www.zhihu.com/question/20321058（巨蟹）
-
 http://portal.gatz.citic/logon/password.jsp
 liujn   Ljn8573619***
 
@@ -75,8 +71,6 @@ services.msc
 http://www.windows7en.com/Win7/25930.html（修复win7 浏览服务）
 http://www.xitongcity.com/jiaocheng/win7_content_3847.html
 
-
-
 https://juejin.im/post/5a5bc8c36fb9a01ca26774eb(前端视频)
 
 开发者选项布局边界打开    Native？
@@ -97,8 +91,6 @@ PathClassLoader只能加载已经安装在Android系统内APK文件（ /data/app
 
 
 https://github.com/yipianfengye/AndroidSource(源码解析)
-https://github.com/janishar/PlaceHolderView
-https://github.com/amitshekhariitbhu/Fast-Android-Networking（网络库）
 
 
 解析类	Parser 为后缀标识
@@ -124,19 +116,10 @@ Calligraphy（字体库）
 当你看到一个男人的生活放荡不羁，每天灯红酒绿对爱情见异思迁的时候，你不妨问一问他，他认真的时候树的有多惨
 
 
-百度定位
-SmartRefreshLayout
-CoordinatorLayout
-TabLayout
-BaseRecyclerViewAdapterHelper(v-layout)
-BottomBar
-Zxing
-FlycoTabLayout
-
 ljn_bleachone@163.com  
 appID(小程序) :wx31460e5491b7de33
 
-4.25  周3
+5.2 周3
 
 http://services.gradle.org/distributions/(gradle地址)
 
@@ -163,15 +146,11 @@ provided   compileOnly
 debugCompile debugImplementation
 
 
-
 key=b5b2a0fad04141ac9ea4cd8c25c9a717 
 
 https://free-api.heweather.com/s6/weather/now?parameters?location=dalian&key=b5b2a0fad04141ac9ea4cd8c25c9a717 
 
-
-
 https://tonnyl.github.io/2018/04/22/Translation-Exploring-the-v28-Android-Design-Support-Library-Additions/
-
 
 
 使用minWidth、minHeight、lines等属性
@@ -188,7 +167,7 @@ https://tonnyl.github.io/2018/04/22/Translation-Exploring-the-v28-Android-Design
 我爱我家三期
 
 
-
+https://github.com/jeasonlzy/okhttp-OkGo
 
 
 
