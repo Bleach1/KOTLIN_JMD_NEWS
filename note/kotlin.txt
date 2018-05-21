@@ -43,34 +43,74 @@ fun hello(vararg names: String){ }
 apply:在写需要设置大量回调与属性的UI代码上相当好用
 
 
+Kotlin tips：
+
+ if (savedInstanceState == null) {
+            mNumFailedAttempts = 0
+        } else {
+            mNumFailedAttempts = savedInstanceState.getInt("num_failed_attempts")
+        } ==>>
+               mNumFailedAttempts = savedInstanceState?.getInt("num_failed_attempts") ?: 0
 
 
 
+ return try {
+            true
+        } catch (e: Exception) {
+            e.printStackTrace()
+            false
+        }
+
+？操作符
+表示这个对象可能为空
+
+==判断值是否相等，===判断值及引用是否完全相等、
+
+in  判断一个对象是否在某一个区间内
+if (x in 1..y-1) 
+
+is  判断一个对象是否为一个类的实例
+if (obj is String)
+
+vararg 变长参数
+fun hello(vararg names: String) {}
+
+yield 协程
+suspend，用作修饰会被暂停的函数，被标记为 suspend 的函数只能运行在协程或者其他 suspend 函数当中
+
+遍历Map
+for ((k, v) in map) {
+    println("$k -> $v")
+}
+
+for (i in 1..100) { …… }  // 闭区间：包含 100
+for (i in 1 until 100) { …… } // 半开区间：不包含 100
+for (x in 2..10 step 2) { …… }
+for (x in 10 downTo 1) { …… }
+if (x in 1..10) { …… }
+
+字符串模板
+val i = 10
+println("i = $i") // 输出“i = 10”
 
 
+val s = "abc"
+println("$s.length is ${s.length}") // 输出“abc.length is 3”
 
 
+中缀表示法
+它们必须是成员函数或扩展函数；
+它们必须只有一个参数；
+其参数不得接受可变数量的参数且不能有默认值
 
+infix fun Int.shl(x: Int): Int {}
+1 shl 2
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+列表：List/MutableList；
+集：Set/MutableSet；
+映射：Map/MutableMap；
+集合：Collection/MutableCollection；
+迭代器：Iterable/MutableIterable；
 
 
 

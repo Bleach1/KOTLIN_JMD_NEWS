@@ -20,5 +20,7 @@ import io.rx_cache2.Reply;
 public interface CacheProviders {
 
     @LifeCache(duration = 2, timeUnit = TimeUnit.MINUTES)
-    Flowable<Reply<BaseBean<TestBean>>> getfetchVersionInfo(Flowable<BaseBean<TestBean>> fetchVersionInfo, DynamicKey userName, EvictDynamicKey evictDynamicKey);
+    Flowable<Reply<BaseBean<TestBean>>> getfetchVersionInfo(Flowable<BaseBean<TestBean>> fetchVersionInfo,
+                                                            DynamicKey userName,
+                                                            EvictDynamicKey evictDynamicKey);
 }

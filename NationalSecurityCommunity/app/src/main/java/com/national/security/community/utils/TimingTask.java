@@ -1,9 +1,13 @@
 package com.national.security.community.utils;
 
+import com.national.security.community.utils.thread_pool.BackgroundThreadFactory;
+
 import org.apache.commons.lang3.concurrent.BasicThreadFactory;
 
+import java.util.concurrent.LinkedBlockingDeque;
 import java.util.concurrent.ScheduledExecutorService;
 import java.util.concurrent.ScheduledThreadPoolExecutor;
+import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
 
 /**
@@ -22,5 +26,14 @@ public class TimingTask {
         }, 1, 1, TimeUnit.SECONDS);
     }
 
+    public static ThreadPoolExecutor getThreadPoolExecutor() {
+        return new ThreadPoolExecutor(5,
+                200,
+                0L,
+                TimeUnit.MILLISECONDS,
+                new LinkedBlockingDeque<>(1024),
+                new BackgroundThreadFactory()
+        );
+    }
 
 }

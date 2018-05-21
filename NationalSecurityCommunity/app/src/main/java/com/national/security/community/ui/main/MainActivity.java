@@ -1,11 +1,14 @@
 package com.national.security.community.ui.main;
 
 import android.annotation.SuppressLint;
+import android.arch.lifecycle.Lifecycle;
+import android.arch.lifecycle.LifecycleOwner;
 import android.content.ActivityNotFoundException;
 import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.KeyEvent;
@@ -24,15 +27,20 @@ import com.national.security.community.event.MessageEvent;
 import com.national.security.community.ui.home.HomeFragment;
 import com.national.security.community.ui.mine.MineFragment;
 import com.national.security.community.ui.msg.MsgFragment;
+import com.national.security.community.utils.CustomWorker;
+import com.national.security.community.utils.MyObserver;
 import com.national.security.community.utils.NinePatchPic;
 import com.national.security.community.utils.StatusBarUtil;
+import com.national.security.community.utils.TimingTask;
 import com.national.security.community.utils.UniqueIDUtil;
 import com.national.security.community.widgets.BottomBar;
 import com.national.security.community.widgets.BottomBarTab;
 
 import org.greenrobot.eventbus.EventBus;
 
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Random;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
@@ -40,8 +48,13 @@ import java.util.concurrent.TimeUnit;
 
 import javax.inject.Inject;
 
+import androidx.work.Constraints;
+import androidx.work.OneTimeWorkRequest;
+import androidx.work.PeriodicWorkRequest;
+import androidx.work.WorkManager;
 import butterknife.BindView;
 import hugo.weaving.DebugLog;
+import io.reactivex.Observable;
 import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
@@ -116,11 +129,11 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     }
 
 
+    @SuppressLint("CheckResult")
     @RequiresApi(api = Build.VERSION_CODES.N)
     @DebugLog
     @Override
     protected void initEventAndData() {
-
         Log.i(Config.TAG, "initEventAndData: " + UniqueIDUtil.getUniqueID());
         if (findFragment(HomeFragment.class) == null) {
             mFragments[0] = HomeFragment.newInstance();

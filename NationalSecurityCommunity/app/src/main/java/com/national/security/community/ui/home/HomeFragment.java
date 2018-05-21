@@ -269,7 +269,6 @@ public class HomeFragment extends BaseFragment {
             }
         });
 
-
         delegateAdapter.setAdapters(adapters);
 
 

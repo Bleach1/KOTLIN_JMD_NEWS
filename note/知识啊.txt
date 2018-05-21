@@ -2,6 +2,9 @@
 http://10.22.1.207/zentao/    admin/123456
 liujianan2018        密码：test123456
 vivio:四小 嘎子
+americanlaji@gmail.com
+
+
 
 顶级毒鸡汤：
 
@@ -50,6 +53,12 @@ vivio:四小 嘎子
 http://portal.gatz.citic/logon/password.jsp
 liujn   Ljn8573619***
 
+
+liujn@gacs.citic
+ljn8573619Cao
+
+
+
 好看的皮囊千篇一律，有趣的灵魂万里挑一
 
 深爱之人藏心不挂嘴 久念之人在梦不在眼
@@ -59,6 +68,7 @@ liujn   Ljn8573619***
 我什么也没忘，可有些事情只适合收藏。
 
 泉思如尿崩 谁与我争锋
+Love doesn't walk away, people do
 
 
 calc
@@ -87,7 +97,8 @@ PathClassLoader只能加载已经安装在Android系统内APK文件（ /data/app
 
 动态加载方案：
              合并dexElements数组(插件之间甚至插件与宿主之间使用的类库有冲突，就会崩溃)
-             替换LoadedApk中的mClassLoader(除了Hook过程复杂外，每一个版本的apk解析都有差别，使用的PackageParser的兼容性就比较差，根据不同版本来分别Hook)
+             替换LoadedApk中的mClassLoader(除了Hook过程复杂外，每一个版本的apk解析都有差别，
+             使用的PackageParser的兼容性就比较差，根据不同版本来分别Hook)
 
 
 https://github.com/yipianfengye/AndroidSource(源码解析)
@@ -145,31 +156,29 @@ compile    implementation
 provided   compileOnly
 debugCompile debugImplementation
 
-
 key=b5b2a0fad04141ac9ea4cd8c25c9a717 
 
 https://free-api.heweather.com/s6/weather/now?parameters?location=dalian&key=b5b2a0fad04141ac9ea4cd8c25c9a717 
 
 https://tonnyl.github.io/2018/04/22/Translation-Exploring-the-v28-Android-Design-Support-Library-Additions/
 
-
 使用minWidth、minHeight、lines等属性
 
+jcenterLjn
+ljn8573619cao
 
-恒峰天泉小镇
-万棵树
-万科新里城
-国宝星月湾
-大连天地悦龙居II期
-柒贤贡院
-中华城·领第
-益海美利山
-我爱我家三期
+vue + vuex+ vue-resource + vue-router + webpack + es6 + less
 
-
-https://github.com/jeasonlzy/okhttp-OkGo
-
-
+做个俗人 浪荡一生 干净自由
+做个俗人 别无他求 安慰自由
+做个俗人 不碰爱情 不染烟酒
+做个俗人 没心没肺 没感情
+做个俗人 活的像野狗流浪也自由
+做个俗人 谈笑风生不动情
+做个俗人 贪财好色 一世风流
+做个俗人 知世俗而不俗
 
 
+Kotlin操作符使用
+Kotlin 基础复习
 

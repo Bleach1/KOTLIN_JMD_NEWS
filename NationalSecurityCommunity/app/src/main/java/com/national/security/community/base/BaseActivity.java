@@ -8,6 +8,7 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.view.MotionEvent;
 import android.view.WindowManager;
+import android.widget.TextView;
 
 import com.national.security.community.App;
 import com.national.security.community.injection.component.ActivityComponent;
@@ -22,6 +23,7 @@ import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
+import dagger.android.AndroidInjection;
 import io.realm.Realm;
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportActivity;
@@ -49,6 +51,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+       // AndroidInjection.inject(this);
         mDelegate.onCreate(savedInstanceState);
         //禁止截屏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);

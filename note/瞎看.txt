@@ -78,8 +78,6 @@ POS:权益证明是区块链网络中的使用的另一种共识算法，在基�
 简单来说，共识算法就是保证少数服从多数          
 
 
-
-
 apk加密技术：
 1.代码混淆
 2.自我校验--在程序中加一些对自己应用的完整性校验，可以借助签名、或计算自己应用dex的md5值等等来完成
@@ -130,7 +128,6 @@ Fragment空白页：
 3.重写public void destroyItem(ViewGroup container, int position, Object object)去掉super.destroyItem(container, position, object);
 
 
-
 Databinding：
 
 Binding生成规则：activity_demo.xml，则会生成ActivityDemoBinding，
@@ -163,19 +160,13 @@ Null Coalescing 运算符:
            android:text="@{user.displayName != null ? user.displayName : user.lastName}"
 
 
-
-
 进程通讯：
-1.Aidl
+1.Aidl(Binder)
 2.Messager
 3.Content provider
 4.Socket
 5.文件共享
-
-
-
-
-
+6.Intent(Bundle)
 
 
 视频：
@@ -184,11 +175,7 @@ Codec:对视频文件进行编码和解码
 视频容器文件
 Container format file:
 
-
-
 App架构基本原则：SOC原则(Separation of concerns 分离关注点)->模块化，低耦合
-
-
 
 属性动画原理：
        
@@ -196,3 +183,9 @@ App架构基本原则：SOC原则(Separation of concerns 分离关注点)->模�
              1.通过Choreographer向底层注册下一个屏幕刷新信号监听
              2.将需要运行的动画添加到列表中
              3.如果动画是一个延迟开始的动画，那么加入Delay队列里
+
+Maven：implementation 'com.tsy:pay:1.0.0'  //groupid:projectid:version
+https://blog.csdn.net/qq_23179075/article/details/71123452(将开源库发布到Jcenter上)
+
+
+物理学上有四大神兽，薛定谔的猫，芝诺的乌龟，麦克斯韦的妖精和拉普拉斯妖。
