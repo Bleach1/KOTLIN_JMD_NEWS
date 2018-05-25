@@ -30,6 +30,7 @@ public class CustomWorker extends Worker {
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void test() {
         //2. https://developer.android.google.cn/topic/libraries/architecture/workmanager
+        //https://blog.csdn.net/guiying712/article/details/80386338
         OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(CustomWorker.class).build();
         WorkManager.getInstance().enqueue(workRequest);
        /* WorkManager.getInstance().getStatusById(workRequest.getId())

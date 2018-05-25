@@ -179,6 +179,11 @@ vue + vuex+ vue-resource + vue-router + webpack + es6 + less
 做个俗人 知世俗而不俗
 
 
-Kotlin操作符使用
-Kotlin 基础复习
+我若成佛 天下无魔  我若成魔 佛奈我何
+狼若回头 必有缘由 不是报恩 就是报仇
+别在我的坟前哭 脏了我的轮回路
+天若赐我辉煌 我定比天狂
+
+
+https://www.jianshu.com/p/cd984dd5aae8
 

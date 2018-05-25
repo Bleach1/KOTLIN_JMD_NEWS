@@ -1,6 +1,5 @@
 package com.national.security.community.base;
 
-import android.content.Intent;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -8,7 +7,6 @@ import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.view.MotionEvent;
 import android.view.WindowManager;
-import android.widget.TextView;
 
 import com.national.security.community.App;
 import com.national.security.community.injection.component.ActivityComponent;
@@ -16,14 +14,12 @@ import com.national.security.community.injection.component.DaggerActivityCompone
 import com.national.security.community.injection.module.ActivityModule;
 import com.national.security.community.mvp.IPresenter;
 import com.national.security.community.mvp.IView;
-import com.national.security.community.utils.ImmersionUtil;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import javax.inject.Inject;
 
 import butterknife.ButterKnife;
 import butterknife.Unbinder;
-import dagger.android.AndroidInjection;
 import io.realm.Realm;
 import me.yokeyword.fragmentation.ExtraTransaction;
 import me.yokeyword.fragmentation.ISupportActivity;
@@ -51,7 +47,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-       // AndroidInjection.inject(this);
+        // AndroidInjection.inject(this);
         mDelegate.onCreate(savedInstanceState);
         //禁止截屏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);

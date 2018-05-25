@@ -113,6 +113,11 @@ infix fun Int.shl(x: Int): Int {}
 迭代器：Iterable/MutableIterable；
 
 
+如果函数接收的参数是可变参数，传入数组默认不会展开，需要在前面添加*号
+* array
+
+
+
 
 有天我睡醒看到我的身边没有你
 在我的右边是你曾经喜欢的玩具
