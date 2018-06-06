@@ -185,5 +185,5 @@ vue + vuex+ vue-resource + vue-router + webpack + es6 + less
 天若赐我辉煌 我定比天狂
 
 
-https://www.jianshu.com/p/cd984dd5aae8
+Navigation管理Fragment
 

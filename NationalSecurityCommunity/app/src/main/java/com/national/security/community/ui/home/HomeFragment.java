@@ -212,9 +212,9 @@ public class HomeFragment extends BaseFragment {
         });
 
 //吸X布局
-        StickyLayoutHelper stickytHelper = new StickyLayoutHelper();
-        stickytHelper.setAspectRatio(4);
-        adapters.add(new BaseDelegateAdapter(getActivity(), stickytHelper, R.layout.item, 1, 5) {
+        StickyLayoutHelper stickyHelper = new StickyLayoutHelper();
+        stickyHelper.setAspectRatio(4);
+        adapters.add(new BaseDelegateAdapter(getActivity(), stickyHelper, R.layout.item, 1, 5) {
             @Override
             public void onBindViewHolder(BaseViewHolder holder, int position) {
                 super.onBindViewHolder(holder, position);

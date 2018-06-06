@@ -10,7 +10,6 @@ public class BaseBean<T> {
     private String msg;
     private int code;
     private T data;
-
     public String getId() {
         return id;
     }

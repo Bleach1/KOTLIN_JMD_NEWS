@@ -189,3 +189,9 @@ https://blog.csdn.net/qq_23179075/article/details/71123452(将开源库发布到
 
 
 物理学上有四大神兽，薛定谔的猫，芝诺的乌龟，麦克斯韦的妖精和拉普拉斯妖。
+
+
+https://blog.csdn.net/freekiteyu/article/details/79318031(App启动)
+
+
+android  文件存储位置及其用途
