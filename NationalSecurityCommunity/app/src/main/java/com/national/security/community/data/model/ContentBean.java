@@ -39,10 +39,12 @@ public class ContentBean implements MultiItemEntity {
     public ContentBean(int itemType) {
         this.itemType = itemType;
     }
+
     public ContentBean(int itemType, String pinnedHeaderName) {
         this(itemType);
         this.pinnedHeaderName = pinnedHeaderName;
     }
+
     @Override
     public int getItemType() {
         return itemType;

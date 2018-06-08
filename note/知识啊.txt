@@ -130,7 +130,7 @@ Calligraphy（字体库）
 ljn_bleachone@163.com  
 appID(小程序) :wx31460e5491b7de33
 
-5.2 周3
+6.5 周2
 
 http://services.gradle.org/distributions/(gradle地址)
 
@@ -184,6 +184,7 @@ vue + vuex+ vue-resource + vue-router + webpack + es6 + less
 别在我的坟前哭 脏了我的轮回路
 天若赐我辉煌 我定比天狂
 
+ 
+ 添加全局网络状态监听
 
-Navigation管理Fragment
 

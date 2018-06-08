@@ -6,10 +6,11 @@ import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import io.reactivex.disposables.CompositeDisposable;
 import io.reactivex.disposables.Disposable;
+
 /**
- @ description:  Presenter基类
- @ author:  ljn
- @ time:  2018/1/2
+ * @ description:  Presenter基类
+ * @ author:  ljn
+ * @ time:  2018/1/2
  */
 public class BasePresenter<T extends IView> implements IPresenter<T> {
 

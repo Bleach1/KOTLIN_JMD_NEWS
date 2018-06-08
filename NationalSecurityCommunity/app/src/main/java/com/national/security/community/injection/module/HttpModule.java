@@ -10,7 +10,7 @@ import com.national.security.community.cookies.CookiesManager;
 import com.national.security.community.data.ApiService;
 import com.national.security.community.data.CacheProviders;
 import com.national.security.community.injection.qualifier.GankUrl;
-import com.national.security.community.utils.NetUtil;
+import com.national.security.community.utils.network.NetWorkUtil;
 
 import java.io.File;
 import java.util.concurrent.TimeUnit;
@@ -74,13 +74,13 @@ public class HttpModule {
         Cache cache = new Cache(cacheFile, 1024 * 1024 * 50);
         Interceptor cacheInterceptor = chain -> {
             Request request = chain.request();
-            if (!NetUtil.isNetworkConnected()) {
+            if (!NetWorkUtil.isNetworkConnected(App.getInstance())) {
                 request = request.newBuilder()
                         .cacheControl(CacheControl.FORCE_CACHE)
                         .build();
             }
             Response response = chain.proceed(request);
-            if (NetUtil.isNetworkConnected()) {
+            if (NetWorkUtil.isNetworkConnected(App.getInstance())) {
                 int maxAge = 0;
                 // 有网络时, 不缓存, 最大保存时长为0
                 response.newBuilder()

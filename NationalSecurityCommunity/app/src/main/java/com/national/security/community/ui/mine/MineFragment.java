@@ -4,13 +4,10 @@ import android.os.Bundle;
 import android.support.v7.widget.DividerItemDecoration;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.util.Log;
 import android.view.View;
-import android.widget.Toast;
 
 import com.chad.library.adapter.base.BaseQuickAdapter;
 import com.chad.library.adapter.base.BaseViewHolder;
-import com.national.security.community.Config;
 import com.national.security.community.R;
 import com.national.security.community.base.BaseFragment;
 import com.national.security.community.ui.Classification.ClassificationFragment;
@@ -66,7 +63,7 @@ public class MineFragment extends BaseFragment {
                 helper.setText(R.id.tv_title, item);
             }
         };
-        ClassificationFragment contentFragment= (ClassificationFragment) classificationFragment;
+        ClassificationFragment contentFragment = (ClassificationFragment) classificationFragment;
         adapter.setOnItemClickListener((adapter1, view, position) -> {
             int count = 0;
             for (int i = 0; i < position; i++) {

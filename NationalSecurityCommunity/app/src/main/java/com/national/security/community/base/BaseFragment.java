@@ -95,7 +95,7 @@ public abstract class BaseFragment<T extends IPresenter> extends Fragment implem
     }
 
     @Override
-    public void onSaveInstanceState(Bundle outState) {
+    public void onSaveInstanceState(@NonNull Bundle outState) {
         super.onSaveInstanceState(outState);
         mDelegate.onSaveInstanceState(outState);
     }

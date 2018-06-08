@@ -14,6 +14,9 @@ import com.national.security.community.injection.component.DaggerActivityCompone
 import com.national.security.community.injection.module.ActivityModule;
 import com.national.security.community.mvp.IPresenter;
 import com.national.security.community.mvp.IView;
+import com.national.security.community.utils.network.NetChangeObserver;
+import com.national.security.community.utils.network.NetStateReceiver;
+import com.national.security.community.utils.network.NetWorkUtil;
 import com.trello.rxlifecycle2.components.support.RxAppCompatActivity;
 
 import javax.inject.Inject;
@@ -64,7 +67,32 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
         App.getInstance().addActivity(this);
         initEventAndData();
         mRealm = Realm.getDefaultInstance();
+        mNetChangeObserver = new NetChangeObserver() {
+            @Override
+            public void onNetConnected(NetWorkUtil.NetType type) {
+                onNetworkConnected(type);
+            }
+
+            @Override
+            public void onNetDisConnect() {
+                onNetworkDisConnected();
+            }
+        };
     }
+
+    /**
+     * 网络连接状态
+     *
+     * @param type 网络状态
+     */
+    protected abstract void onNetworkConnected(NetWorkUtil.NetType type);
+
+    /**
+     * 网络断开的时候调用
+     */
+    protected abstract void onNetworkDisConnected();
+
+    protected NetChangeObserver mNetChangeObserver = null;
 
     @Override
     protected void onResume() {
@@ -93,6 +121,7 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
         mUnBinder.unbind();
         App.getInstance().removeActivity(this);
         mRealm.close();
+        NetStateReceiver.removeRegisterObserver(mNetChangeObserver);
     }
 
 

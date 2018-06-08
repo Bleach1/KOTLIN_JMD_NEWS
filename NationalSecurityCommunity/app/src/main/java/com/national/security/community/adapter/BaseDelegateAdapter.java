@@ -1,6 +1,7 @@
 package com.national.security.community.adapter;
 
 import android.content.Context;
+import android.support.annotation.NonNull;
 import android.view.LayoutInflater;
 import android.view.ViewGroup;
 
@@ -34,8 +35,9 @@ public class BaseDelegateAdapter extends DelegateAdapter.Adapter<BaseViewHolder>
         return mLayoutHelper;
     }
 
+    @NonNull
     @Override
-    public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+    public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
         if (viewType == mViewTypeItem) {
             return new BaseViewHolder(LayoutInflater.from(mContext).inflate(mLayoutId, parent, false));
         }

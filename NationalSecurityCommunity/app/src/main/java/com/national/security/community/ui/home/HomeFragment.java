@@ -2,6 +2,7 @@ package com.national.security.community.ui.home;
 
 import android.os.Build;
 import android.os.Bundle;
+import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
@@ -143,7 +144,7 @@ public class HomeFragment extends BaseFragment {
         //banner
         adapters.add(new BaseDelegateAdapter(getActivity(), new LinearLayoutHelper(), R.layout.banner_ljn, 1, 1) {
             @Override
-            public BaseViewHolder onCreateViewHolder(ViewGroup parent, int viewType) {
+            public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 if (viewType == 1) {
                     banner = (Banner) LayoutInflater.from(getActivity())
                             .inflate(R.layout.banner_ljn, parent, false);

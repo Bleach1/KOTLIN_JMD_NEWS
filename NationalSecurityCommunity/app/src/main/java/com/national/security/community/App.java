@@ -16,6 +16,7 @@ import com.national.security.community.injection.module.AppModule;
 import com.national.security.community.injection.module.HttpModule;
 import com.national.security.community.service.InitializeService;
 import com.national.security.community.utils.DynamicTimeFormat;
+import com.national.security.community.utils.network.NetStateReceiver;
 import com.qihoo360.replugin.RePlugin;
 import com.qihoo360.replugin.RePluginCallbacks;
 import com.qihoo360.replugin.RePluginEventCallbacks;
@@ -51,9 +52,11 @@ public class App extends Application {
     @Override
     public void onLowMemory() {
         super.onLowMemory();
-
-        /* Not need to be called if your application's minSdkVersion > = 14 */
-        RePlugin.App.onLowMemory();
+        if (instance != null) {
+            NetStateReceiver.unRegisterNetworkStateReceiver(instance);
+            /* Not need to be called if your application's minSdkVersion > = 14 */
+            RePlugin.App.onLowMemory();
+        }
     }
 
     @Override
@@ -84,6 +87,7 @@ public class App extends Application {
         ARouter.init(this);
         RePlugin.App.onCreate();
         InitializeService.start(this);
+        NetStateReceiver.registerNetworkStateReceiver(this);
     }
 
     public static synchronized App getInstance() {
@@ -131,7 +135,6 @@ public class App extends Application {
         }
         return appComponent;
     }
-
 
    /* @Override
     protected RePluginConfig createConfig() {

@@ -51,16 +51,6 @@ href="#"与href="javascript:void(0)"的区别
 
 而javascript:void(0), 仅仅表示一个死链接。
 -----------------------------------------------------------------------------------------------------
-ES6:
-1.let表示变量、const表示常量。let和const都是块级作用域
-{在一个函数内部在一个代码块内部}
-2.模板字符串
-    const name = 'lux'
-    console.log(`hello ${name}`) //hello lux
-
-
-
-
 VUE:
 v-text:网速很慢或者javascript出错时，会暴露我们的{{xxx}}。Vue给我们提供的v-text,就是解决这个问题的
 
