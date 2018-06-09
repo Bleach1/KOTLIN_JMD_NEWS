@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.bumptech.glide.Glide;
 import com.national.security.community.injection.component.AppComponent;
 import com.national.security.community.injection.component.DaggerAppComponent;
 import com.national.security.community.injection.module.AppModule;
@@ -57,12 +58,16 @@ public class App extends Application {
             /* Not need to be called if your application's minSdkVersion > = 14 */
             RePlugin.App.onLowMemory();
         }
+        Glide.get(this).clearMemory();
     }
 
     @Override
     public void onTrimMemory(int level) {
         super.onTrimMemory(level);
-
+        if (level == TRIM_MEMORY_UI_HIDDEN) {
+            Glide.get(this).clearMemory();
+        }
+        Glide.get(this).trimMemory(level);
         /* Not need to be called if your application's minSdkVersion > = 14 */
         RePlugin.App.onTrimMemory(level);
     }

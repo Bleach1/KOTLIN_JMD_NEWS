@@ -4,6 +4,7 @@ import android.annotation.SuppressLint;
 import android.annotation.TargetApi;
 import android.app.Activity;
 import android.content.ClipData;
+import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
@@ -32,6 +33,10 @@ import android.webkit.WebResourceResponse;
 import android.webkit.WebSettings;
 import android.webkit.WebView;
 import android.webkit.WebViewClient;
+
+import com.national.security.community.BuildConfig;
+
+import java.lang.reflect.Field;
 
 public class CommonWebviewActivity extends AppCompatActivity {
     private WebView webView;
@@ -110,11 +115,8 @@ public class CommonWebviewActivity extends AppCompatActivity {
         //2.WebView调用JavScript有参无返回值函数
         webView.loadUrl("javascript:methodName(parameterValues)");
         //3.WebView调用JavaScript有参数有返回值的函数
-        webView.evaluateJavascript("methodName()", new ValueCallback<String>() {
-            @Override
-            public void onReceiveValue(String value) {
+        webView.evaluateJavascript("methodName()", value -> {
 
-            }
         });
 
     }
@@ -489,8 +491,12 @@ public class CommonWebviewActivity extends AppCompatActivity {
     @SuppressLint("SetJavaScriptEnabled")
     private void initWebViewSetting() {
         settings = webView.getSettings();
-//设置WebView是否可以运行JavaScript
+        //设置WebView是否可以运行JavaScript
         settings.setJavaScriptEnabled(true);
+
+        String appCacheDir = getApplicationContext().getDir("cache", Context.MODE_PRIVATE).getPath();
+        settings.setAppCachePath(appCacheDir);
+
         //设置WebView是否可以由JavaScript自动打开窗口，默认为false，通常与JavaScript的window.open()配合使用。
         settings.setJavaScriptCanOpenWindowsAutomatically(false);
         //启用或禁用WebView访问文件数据
@@ -499,6 +505,8 @@ public class CommonWebviewActivity extends AppCompatActivity {
         settings.setSupportZoom(false);
         //显示或不显示缩放按钮
         settings.setBuiltInZoomControls(false);
+        //隐藏原生的缩放控件
+        settings.setDisplayZoomControls(true);
         //设置WebView是否支持多窗口
         settings.setSupportMultipleWindows(false);
         //指定WebView的页面布局显示形式，调用该方法会引起页面重绘
@@ -535,6 +543,11 @@ public class CommonWebviewActivity extends AppCompatActivity {
         settings.setMinimumFontSize(10);
         //设置最小逻辑字体
         settings.setMinimumLogicalFontSize(10);
+        //设置自适应屏幕，两者合用
+        settings.setUseWideViewPort(true);
+        settings.setLoadWithOverviewMode(true);
+
+
         //混合加载
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.KITKAT) {
             settings.setLoadsImagesAutomatically(true);
@@ -593,6 +606,49 @@ public class CommonWebviewActivity extends AppCompatActivity {
         webView.pageDown(true);
     }
 
+    @SuppressLint("ObsoleteSdkInt")
+    @SuppressWarnings("JavaReflectionMemberAccess")
+    public void releaseAllWebViewCallback() {
+        if (Build.VERSION.SDK_INT < Build.VERSION_CODES.JELLY_BEAN) {
+            try {
+                Field field = WebView.class.getDeclaredField("mWebViewCore");
+                field = field.getType().getDeclaredField("mBrowserFrame");
+                field = field.getType().getDeclaredField("sConfigCallback");
+                field.setAccessible(true);
+                field.set(null, null);
+            } catch (NoSuchFieldException e) {
+                if (BuildConfig.DEBUG) {
+                    e.printStackTrace();
+                }
+            } catch (IllegalAccessException e) {
+                if (BuildConfig.DEBUG) {
+                    e.printStackTrace();
+                }
+            }
+        } else {
+            try {
+                @SuppressLint("PrivateApi") Field sConfigCallback = Class.forName("android.webkit.BrowserFrame").getDeclaredField("sConfigCallback");
+                if (sConfigCallback != null) {
+                    sConfigCallback.setAccessible(true);
+                    sConfigCallback.set(null, null);
+                }
+            } catch (NoSuchFieldException e) {
+                if (BuildConfig.DEBUG) {
+                    e.printStackTrace();
+                }
+            } catch (ClassNotFoundException e) {
+                if (BuildConfig.DEBUG) {
+                    e.printStackTrace();
+                }
+            } catch (IllegalAccessException e) {
+                if (BuildConfig.DEBUG) {
+                    e.printStackTrace();
+                }
+            }
+        }
+    }
+
+
     @Override
     public boolean onKeyDown(int keyCode, KeyEvent event) {
         if (keyCode == KeyEvent.KEYCODE_BACK && webView.canGoBack()) {
@@ -602,11 +658,19 @@ public class CommonWebviewActivity extends AppCompatActivity {
         return super.onKeyDown(keyCode, event);
     }
 
+    @SuppressLint("SetJavaScriptEnabled")
     @Override
     protected void onResume() {
         webView.onResume();
         webView.resumeTimers();
+        settings.setJavaScriptEnabled(true);
         super.onResume();
+    }
+
+    @Override
+    protected void onStop() {
+        super.onStop();
+        settings.setJavaScriptEnabled(false);
     }
 
     @Override
@@ -624,12 +688,14 @@ public class CommonWebviewActivity extends AppCompatActivity {
             webView.clearHistory();
             webView.loadUrl("about:blank");
             webView.stopLoading();
+            webView.setVisibility(View.GONE);
             webView.setWebChromeClient(null);
             webView.setWebViewClient(null);
             ((ViewGroup) webView.getParent()).removeView(webView);
             webView.destroy();
             webView = null;
         }
+        releaseAllWebViewCallback();
         super.onDestroy();
     }
 

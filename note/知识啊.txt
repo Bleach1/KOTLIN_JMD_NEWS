@@ -185,6 +185,6 @@ vue + vuex+ vue-resource + vue-router + webpack + es6 + less
 天若赐我辉煌 我定比天狂
 
  
- 添加全局网络状态监听
+Glide配置 优化
 
 

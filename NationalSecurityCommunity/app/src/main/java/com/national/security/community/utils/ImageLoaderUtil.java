@@ -1,8 +1,10 @@
 package com.national.security.community.utils;
 
+import android.annotation.SuppressLint;
 import android.content.Context;
 import android.graphics.Bitmap;
 import android.graphics.drawable.Drawable;
+import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
@@ -25,11 +27,18 @@ import jp.wasabeef.glide.transformations.BlurTransformation;
 
 public class ImageLoaderUtil {
 
+    @SuppressLint("CheckResult")
     public static void loadImg(String url, Context context, ImageView imageView) {
+
+        RequestOptions gifOptions = new RequestOptions();
+        gifOptions.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
+        Glide.with(context).asGif().load(url).apply(gifOptions).into(imageView);
+
+
 
         SimpleTarget<Drawable> simpleTarget = new SimpleTarget<Drawable>() {
             @Override
-            public void onResourceReady(Drawable resource, Transition<? super Drawable> transition) {
+            public void onResourceReady(@NonNull Drawable resource, Transition<? super Drawable> transition) {
                 imageView.setImageDrawable(resource);
             }
         };
