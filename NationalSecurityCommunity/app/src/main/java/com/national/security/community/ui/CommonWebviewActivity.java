@@ -39,15 +39,14 @@ import com.national.security.community.BuildConfig;
 import java.lang.reflect.Field;
 
 public class CommonWebviewActivity extends AppCompatActivity {
+
     private WebView webView;
     private static final String url = "";
     private WebSettings settings;
 
-
     private ValueCallback<Uri> uploadMessage;
     private ValueCallback<Uri[]> uploadMessageAboveL;
     private final static int FILE_CHOOSER_RESULT_CODE = 10000;
-
 
     @RequiresApi(api = Build.VERSION_CODES.KITKAT)
     @Override
