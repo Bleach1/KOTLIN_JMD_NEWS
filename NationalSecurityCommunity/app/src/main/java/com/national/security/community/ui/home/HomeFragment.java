@@ -89,7 +89,10 @@ public class HomeFragment extends BaseFragment {
     public void onStop() {
         super.onStop();
         //结束轮播
-        banner.stopAutoPlay();
+        if (banner != null) {
+            banner.stopAutoPlay();
+        }
+
     }
 
     private int mDistance = 0;

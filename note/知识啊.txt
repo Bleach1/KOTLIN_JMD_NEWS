@@ -185,13 +185,31 @@ vue + vuex+ vue-resource + vue-router + webpack + es6 + less
 天若赐我辉煌 我定比天狂
 
 
-触摸反馈
+
+
 改善国安钱包秘钥存储方式
 
-Glide配置 优化
+1.Glide配置 优化
+2.view触摸反馈
 
 android  文件存储位置及其用途
 
 NDK
 H5 CSS JS
+
+
+
+
+贷款产品：LoanFragment  LoanListAdapter item_loan_list
+产品详情：LoanDetailActivity activity_loan_detail
+实名认证：PersonAuthActivity
+绑定银行卡：AddBankCardActivity
+借贷申请资料：PersonInformationAllActivity
+借款申请：ApplyLoanActivity
+MyIndexBean 加参数
+
+gaotianyi
+shengli945
+
+1087 马教练 6:00
 

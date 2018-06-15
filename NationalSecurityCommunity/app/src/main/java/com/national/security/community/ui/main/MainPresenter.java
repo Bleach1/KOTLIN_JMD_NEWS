@@ -6,6 +6,8 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
+import com.blankj.utilcode.util.DeviceUtils;
+import com.blankj.utilcode.util.PhoneUtils;
 import com.national.security.community.Config;
 import com.national.security.community.base.BasePresenter;
 import com.national.security.community.data.model.HomeBean;
@@ -62,7 +64,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
 
     }
 
-    @SuppressLint("CheckResult")
+    @SuppressLint({"CheckResult", "MissingPermission"})
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     @Override
     public void requestPermission() {
@@ -83,6 +85,18 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                     if (permission.granted) {
                         // 用户已经同意该权限
                         Log.d(Config.TAG, permission.name + " is granted.");
+                        Log.i("ljn", "onCreate: \n"
+                                + "设备系统版本号:" + DeviceUtils.getSDKVersionName() + "\n"
+                                + "设备系统版本码:" + DeviceUtils.getSDKVersionCode() + "\n"
+                                + "设备 AndroidID:" + DeviceUtils.getAndroidID() + "\n"
+                                + "设备 MAC 地址:" + DeviceUtils.getMacAddress() + "\n"
+                                + "设备厂商:" + DeviceUtils.getManufacturer() + "\n"
+                                + "设备型号:" + DeviceUtils.getModel() + "\n"
+                                + "设备码:" + PhoneUtils.getDeviceId() + "\n"
+                                + "IMEI 码:" + PhoneUtils.getIMEI() + "\n"
+                                + "移动终端类型:" + PhoneUtils.getPhoneType() + "\n"
+                                + "IMSI 码:" + PhoneUtils.getIMSI() + "\n"
+                        );
                         mView.granted();
                     } else if (permission.shouldShowRequestPermissionRationale) {
                         // 用户拒绝了该权限，没有选中『不再询问』（Never ask again）,那么下次再次启动时，还会提示请求权限的对话框

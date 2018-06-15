@@ -10,6 +10,7 @@ import android.support.v7.app.AppCompatDelegate;
 import android.util.Log;
 
 import com.alibaba.android.arouter.launcher.ARouter;
+import com.blankj.utilcode.util.Utils;
 import com.bumptech.glide.Glide;
 import com.national.security.community.injection.component.AppComponent;
 import com.national.security.community.injection.component.DaggerAppComponent;
@@ -89,6 +90,7 @@ public class App extends Application {
             ARouter.openLog();
             ARouter.openDebug();
         }
+        Utils.init(this);
         ARouter.init(this);
         RePlugin.App.onCreate();
         InitializeService.start(this);
