@@ -193,7 +193,11 @@ vue + vuex+ vue-resource + vue-router + webpack + es6 + less
 2.view触摸反馈
 
 android  文件存储位置及其用途
+SPI(Services Provider Interface)在android中的简单应用
+Span使用
+无埋点数据采集技术在Android端实践
 
+美团外卖Android Crash经验学习
 NDK
 H5 CSS JS
 
@@ -208,8 +212,14 @@ H5 CSS JS
 借款申请：ApplyLoanActivity
 MyIndexBean 加参数
 
+
+修改小贷数据类型精度 bug
+
 gaotianyi
 shengli945
 
-1087 马教练 6:00
 
+查看详情
+
+
+https://www.jianshu.com/p/2becc0eaedab

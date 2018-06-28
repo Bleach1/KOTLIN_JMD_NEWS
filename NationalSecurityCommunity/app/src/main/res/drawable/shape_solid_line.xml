@@ -1,9 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
 <shape xmlns:android="http://schemas.android.com/apk/res/android"
     android:shape="line">
+    <size
+        android:width="5dp"
+        android:height="2dp" />
     <stroke
         android:width="3px"
-        android:color="@color/colorAccent"
-        android:dashWidth="10px" />
-    <!--android:dashGap="10px"-->
+        android:color="@color/colorAccent" />
+    <!--android:dashGap="10px"  android:dashWidth="10px"-->
 </shape>
