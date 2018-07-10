@@ -49,6 +49,7 @@
             android:name=".service.TestService"
             android:permission="android.permission.BIND_JOB_SERVICE"
             tools:ignore="InnerclassSeparator" />
+        <service android:name=".service.InitializeService" />
 
         <activity android:name=".arouter.SchemeFilterActivity">
             <!-- Schame -->

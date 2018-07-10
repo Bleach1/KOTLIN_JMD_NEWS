@@ -2,14 +2,14 @@ package com.national.security.community.utils;
 
 import android.content.Context;
 import android.content.SharedPreferences;
+import android.os.Build;
 
 import com.national.security.community.App;
 import com.national.security.community.Config;
 
 public class SharedPreferencesUtil {
 
-
-    private static final SharedPreferences preferences = App.instance.getSharedPreferences(Config.SHAREDPREFERENCES_NAME, Context.MODE_PRIVATE);
+    private static final SharedPreferences preferences = App.instance.getSharedPreferences(Config.SHARED_PREFERENCES_NAME, Context.MODE_PRIVATE);
 
     //保存
     public static void save(String key, String value) {

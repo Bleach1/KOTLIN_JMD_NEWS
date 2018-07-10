@@ -6,6 +6,7 @@ import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
 
+import java.util.Objects;
 import java.util.concurrent.TimeUnit;
 
 import androidx.work.Constraints;
@@ -20,19 +21,13 @@ import androidx.work.Worker;
  * @time: 2018/5/16
  */
 public class CustomWorker extends Worker {
-    @NonNull
-    @Override
-    public WorkerResult doWork() {
-        return WorkerResult.SUCCESS;
-    }
-
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void test() {
         //2. https://developer.android.google.cn/topic/libraries/architecture/workmanager
         //https://blog.csdn.net/guiying712/article/details/80386338
         OneTimeWorkRequest workRequest = new OneTimeWorkRequest.Builder(CustomWorker.class).build();
-        WorkManager.getInstance().enqueue(workRequest);
+        Objects.requireNonNull(WorkManager.getInstance()).enqueue(workRequest);
        /* WorkManager.getInstance().getStatusById(workRequest.getId())
                 .observe(lifecycleOwner, workStatus -> {
                     // Do something with the status
@@ -56,7 +51,7 @@ public class CustomWorker extends Worker {
                         .build();
 
 
-        WorkManager.getInstance().cancelWorkById(compressionWork.getId());
+        Objects.requireNonNull(WorkManager.getInstance()).cancelWorkById(compressionWork.getId());
 
     }
 
@@ -69,14 +64,20 @@ public class CustomWorker extends Worker {
                 12,
                 TimeUnit.HOURS);
         PeriodicWorkRequest photoWork = photoWorkBuilder.build();
-        WorkManager.getInstance().enqueue(photoWork);
+        Objects.requireNonNull(WorkManager.getInstance()).enqueue(photoWork);
     }
 
-    public void taskOrder(){
+    public void taskOrder() {
        /* WorkManager.getInstance()
                 .beginWith(workA)
                 .then(workB)
                 .then(workC)
                 .enqueue();*/
+    }
+
+    @NonNull
+    @Override
+    public Result doWork() {
+        return Result.SUCCESS;
     }
 }

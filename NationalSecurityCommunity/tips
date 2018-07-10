@@ -104,8 +104,11 @@ Child属性：
                            默认值为auto，表示继承父元素的alignItems 属性，如果没有父元素，则等同于stretch。
   layout_flexBasisPercent：定义了在分配多余空间之前，子元素占据的主轴空间的百分比。它的默认值为auto，即子元素的本来大小。
 
-
-
+设置百分比
+layout_constraintWidth_percent
+layout_constraintHeight_percent
+圆形约束
+constraintCircle
 
 
 

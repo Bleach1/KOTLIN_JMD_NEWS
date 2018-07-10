@@ -1,5 +1,8 @@
 Var 变量   Val 常量
 
+Elvis操作符,?:左边的返回值不为空则返回，否则返回？：右边的值
+var len = a.length?: -1
+
 lateinit(不支持基础数据类型,基础数据类型like this private var mNumber: Int by Delegates.notNull()) 
 延迟初始化(ex:在Activty中初始化Context) 
 
@@ -119,5 +122,19 @@ infix fun Int.shl(x: Int): Int {}
 拿name举例，添加了var, 我们可以这样做, var name = user.name, 
 如果没有添加的话，User类是没有name这个成员变量的，仅仅相当于声明了一个带有name的构造函数而已，
 而这个name是没有任何用处的
+
+初始化代码 init{}
+同一个类中可以有多个init
+init与成员变量按顺序执行
+类中没有主构造函数 init依然优先于二级构造函数
+
+方法、属性重写需要加上open
+
+访问父类属性或者方法 使用super关键字
+在内部类中super@
+
+嵌套类无法访问外部类成员
+内部类使用inner 持有外部类引用
+
 
 

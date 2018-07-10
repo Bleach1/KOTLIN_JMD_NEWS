@@ -1,12 +1,17 @@
 package com.national.security.community.base;
 
+import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
+import android.view.Gravity;
 import android.view.MotionEvent;
+import android.view.ViewGroup;
 import android.view.WindowManager;
+import android.widget.FrameLayout;
+import android.widget.TextView;
 
 import com.national.security.community.App;
 import com.national.security.community.injection.component.ActivityComponent;
@@ -78,6 +83,26 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
                 onNetworkDisConnected();
             }
         };
+    }
+
+    private boolean isAdd;
+
+    @Override
+    protected void onStart() {
+        if (!isAdd) {
+            ViewGroup rootView = findViewById(android.R.id.content);
+            TextView textView = new TextView(this);
+            FrameLayout.LayoutParams params = new FrameLayout.LayoutParams(FrameLayout.LayoutParams.WRAP_CONTENT, FrameLayout.LayoutParams.WRAP_CONTENT);
+            params.gravity = Gravity.CENTER;
+            textView.setLayoutParams(params);
+            textView.setText("水印");
+            textView.setTextSize(24);
+            textView.setTextColor(Color.parseColor("#fc6068"));
+            rootView.addView(textView);
+            isAdd = !isAdd;
+        }
+
+        super.onStart();
     }
 
     /**

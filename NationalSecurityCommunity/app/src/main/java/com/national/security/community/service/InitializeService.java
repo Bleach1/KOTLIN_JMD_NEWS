@@ -29,8 +29,8 @@ import io.realm.annotations.RealmModule;
  * @time: 2017/12/7
  */
 public class InitializeService extends IntentService {
-    private static final String ACTION_INIT = "initApplication";
 
+    private static final String ACTION_INIT = "initApplication";
     public InitializeService() {
         super("InitializeService");
     }
@@ -100,7 +100,7 @@ public class InitializeService extends IntentService {
      * @ return
      */
     private byte[] getKey() {
-        return "whyMeAndNanGuo".getBytes();
+        return "whyMeAndNanGuowhyMeAndNanGuowhyMeAndNanGuowhyMeAndNanGuowhyMeAnd".getBytes();
     }
 
     @RealmModule(classes = {User.class})

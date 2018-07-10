@@ -11,7 +11,7 @@ import java.io.File;
  */
 public interface Config {
 
-    String SHAREDPREFERENCES_NAME = "name";
+    String SHARED_PREFERENCES_NAME = "name";
     String TAG = "ljn";
     String PATH_DATA = App.getInstance().getCacheDir().getAbsolutePath() + File.separator + "data";
 

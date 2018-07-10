@@ -6,11 +6,12 @@ import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Build;
+import android.os.Bundle;
+import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
-import android.widget.TextView;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -21,6 +22,7 @@ import com.luck.picture.lib.entity.LocalMedia;
 import com.national.security.community.App;
 import com.national.security.community.Config;
 import com.national.security.community.R;
+import com.national.security.community.architecture_components.LifeListener;
 import com.national.security.community.base.BaseActivity;
 import com.national.security.community.event.MessageEvent;
 import com.national.security.community.ui.CustomDialog;
@@ -69,6 +71,18 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @BindView(R.id.bottomBar)
     BottomBar bottomBar;
 
+    /**
+     * 测试 Lifecycle
+     *
+     * @param savedInstanceState
+     */
+    @RequiresApi(api = Build.VERSION_CODES.KITKAT)
+    @Override
+    protected void onCreate(@Nullable Bundle savedInstanceState) {
+        super.onCreate(savedInstanceState);
+        getLifecycle().addObserver(new LifeListener());
+    }
+
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)
     // @OnClick(R.id.sample_text)
     // void onClick() {
@@ -87,6 +101,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         openAlbumIntent.setDataAndType(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, "file*//*");
         startActivityForResult(openAlbumIntent, 0);*/
     // }
+
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
