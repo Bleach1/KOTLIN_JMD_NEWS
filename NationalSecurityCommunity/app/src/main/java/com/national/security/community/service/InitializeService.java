@@ -31,6 +31,7 @@ import io.realm.annotations.RealmModule;
 public class InitializeService extends IntentService {
 
     private static final String ACTION_INIT = "initApplication";
+
     public InitializeService() {
         super("InitializeService");
     }
@@ -52,7 +53,6 @@ public class InitializeService extends IntentService {
     }
 
     private void initApplication() {
-
         AutoEx.apply(this);
         // public static void apply(Context mApp, int maxSize, String tag, boolean isDebug)
         RealmConfiguration myConfig = new RealmConfiguration.Builder()
@@ -111,7 +111,7 @@ public class InitializeService extends IntentService {
     private class MyMigration implements RealmMigration {
         @Override
         public void migrate(@NonNull DynamicRealm realm, long oldVersion, long newVersion) {
-
+//https://github.com/realm/realm-java/blob/master/examples/migrationExample/src/main/java/io/realm/examples/realmmigrationexample/model/Migration.java
         }
     }
 }

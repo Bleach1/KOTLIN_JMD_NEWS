@@ -12,6 +12,7 @@ import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
+import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -24,6 +25,7 @@ import com.national.security.community.Config;
 import com.national.security.community.R;
 import com.national.security.community.architecture_components.LifeListener;
 import com.national.security.community.base.BaseActivity;
+import com.national.security.community.base.BaseBean;
 import com.national.security.community.event.MessageEvent;
 import com.national.security.community.ui.CustomDialog;
 import com.national.security.community.ui.home.HomeFragment;
@@ -141,7 +143,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
         Log.i(Config.TAG, "initEventAndData: " + UniqueIDUtil.getUniqueID());
         CustomDialog customDialog = new CustomDialog();
         customDialog.show(getSupportFragmentManager(), "");
-
         if (findFragment(HomeFragment.class) == null) {
             mFragments[0] = HomeFragment.newInstance();
             mFragments[1] = MsgFragment.newInstance();
@@ -196,7 +197,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
             }
         });
-
     }
 
    /* private int whichDay(@EnumUtil.Num int day) {

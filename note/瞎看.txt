@@ -31,7 +31,6 @@ WatchDog机制:
    4、AMS进程管理相关的操作。
 
 
-
 并发
 
 原子性：一个操作或者一系列骚操作，要么全部执行要么全部不执行。数据库中的“事物”就是个典型的原子操作。
@@ -56,6 +55,8 @@ java控制并发的方式：
 
                   5.concurrent并发包
         并发类基本是通过lock(CAS/AQS)实现，并发容器基本是通过synchronize和lock(CAS/AQS)实现的
+
+AtomicInteger(高并发使用 CAS算法)解决 i++线程不安全问题
 
 
 区块链(BlockChain)
@@ -234,3 +235,8 @@ app.json:
                       代表方案：GrowingIO、美团的替换UI控件方案。
                       优点：开发效率高，无需手动埋点，编译时插入代码，性能高，支持数据可回溯。
                       缺点：埋点灵活性低。          
+
+
+
+低版本SDK实现高版本api
+自己实现或@TargetApi annotation

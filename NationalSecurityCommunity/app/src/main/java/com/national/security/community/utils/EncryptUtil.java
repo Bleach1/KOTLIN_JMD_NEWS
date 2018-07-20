@@ -12,6 +12,7 @@ import java.security.interfaces.RSAPublicKey;
 
 public class EncryptUtil {
 
+
     public static String md5(String plaintext) {
 
         char hexDigits[] = {'0', '1', '2', '3', '4', '5', '6', '7', '8', '9',
@@ -64,6 +65,5 @@ public class EncryptUtil {
     private static String getPublicKeyStr(PublicKey publicKey) {
         return Base64.encodeToString(publicKey.getEncoded(), Base64.DEFAULT);
     }
-
 
 }

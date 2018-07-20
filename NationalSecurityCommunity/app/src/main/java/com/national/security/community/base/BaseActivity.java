@@ -3,6 +3,7 @@ package com.national.security.community.base;
 import android.graphics.Color;
 import android.os.Build;
 import android.os.Bundle;
+import android.os.PersistableBundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -55,7 +56,6 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        // AndroidInjection.inject(this);
         mDelegate.onCreate(savedInstanceState);
         //禁止截屏
         getWindow().addFlags(WindowManager.LayoutParams.FLAG_SECURE);
@@ -101,8 +101,17 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
             rootView.addView(textView);
             isAdd = !isAdd;
         }
-
         super.onStart();
+    }
+
+    @Override
+    public void onSaveInstanceState(Bundle outState, PersistableBundle outPersistentState) {
+        super.onSaveInstanceState(outState, outPersistentState);
+    }
+
+    @Override
+    protected void onRestoreInstanceState(Bundle savedInstanceState) {
+        super.onRestoreInstanceState(savedInstanceState);
     }
 
     /**
@@ -118,12 +127,6 @@ public abstract class BaseActivity<T extends IPresenter> extends RxAppCompatActi
     protected abstract void onNetworkDisConnected();
 
     protected NetChangeObserver mNetChangeObserver = null;
-
-    @Override
-    protected void onResume() {
-        super.onResume();
-    }
-
 
     protected ActivityComponent getActivityComponent() {
         return DaggerActivityComponent.builder()
