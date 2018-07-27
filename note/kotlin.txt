@@ -137,4 +137,27 @@ init与成员变量按顺序执行
 内部类使用inner 持有外部类引用
 
 
+协程是通过函数的暂停和恢复实现异步，它不会阻塞线程。它是通过编译技术实现的，可以被程序员完全控制。其内部的切换也不需要像线程一样抢占CPU，专业说法是上下文切换。Java端没有相似实现。
+其实际上的异步最终还是依赖线程的，如果你要同时执行多个任何的话，在协程里面依然会开启多个线程。
 
+@JvmField
+指示Kotlin编译器不为该属性生成getter、setter，并将其作为字段公开。如果用来修饰val变量，
+就和const关键字的功能一样了
+
+@JvmOverloads
+指示Kotlin编译器为包含默认参数值的函数生成重载。
+
+@JvmStatic
+指定从该元素中生成静态方法需要。注意：此注解只能用于被object关键字修饰的类的方法，
+或者companion object中的方法
+
+@JvmSynthetic
+用来注解方法和字段，使得被标记的元素只能在kotlin代码中使用，在java代码中无法使用。
+
+@JvmSuppressWildcards
+用来注解类和方法，使得被标记元素的泛型参数不会被编译成通配符?
+
+ex:
+   @JvmSuppressWildcards
+   @GET("/index.html")
+   fun getQueryMap(@QueryMap paramsMap: Map<String, Any>): Observable<ResponseBody>

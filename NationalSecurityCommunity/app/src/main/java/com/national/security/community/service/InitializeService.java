@@ -4,6 +4,8 @@ import android.app.IntentService;
 import android.content.Context;
 import android.content.Intent;
 import android.support.annotation.NonNull;
+import android.support.text.emoji.EmojiCompat;
+import android.support.text.emoji.bundled.BundledEmojiCompatConfig;
 import android.util.Log;
 
 import com.bolex.autoEx.AutoEx;
@@ -53,6 +55,10 @@ public class InitializeService extends IntentService {
     }
 
     private void initApplication() {
+
+        BundledEmojiCompatConfig config = new BundledEmojiCompatConfig(this);
+        EmojiCompat.init(config);
+
         AutoEx.apply(this);
         // public static void apply(Context mApp, int maxSize, String tag, boolean isDebug)
         RealmConfiguration myConfig = new RealmConfiguration.Builder()

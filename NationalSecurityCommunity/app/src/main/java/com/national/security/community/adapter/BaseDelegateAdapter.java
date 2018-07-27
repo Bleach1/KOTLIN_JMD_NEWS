@@ -17,10 +17,10 @@ import com.chad.library.adapter.base.BaseViewHolder;
 public class BaseDelegateAdapter extends DelegateAdapter.Adapter<BaseViewHolder> {
 
     private LayoutHelper mLayoutHelper;
-    private int mCount = -1;
-    private int mLayoutId = -1;
+    private int mCount;
+    private int mLayoutId;
     private Context mContext;
-    private int mViewTypeItem = -1;
+    private int mViewTypeItem;
 
     public BaseDelegateAdapter(Context context, LayoutHelper layoutHelper, int layoutId, int count, int viewTypeItem) {
         this.mContext = context;

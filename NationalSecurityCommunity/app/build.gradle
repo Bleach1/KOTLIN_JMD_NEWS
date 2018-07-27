@@ -12,7 +12,7 @@ android {
         versionCode rootProject.ext.android.versionCode
         versionName rootProject.ext.android.versionName
         testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
-       externalNativeBuild {
+        externalNativeBuild {
             cmake {
                 cppFlags ""
             }
@@ -130,9 +130,9 @@ android {
         // 设置为 true 则检查所有的问题，包括默认不检查问题
         checkAllWarnings true
         // 不检查指定的问题（根据问题 id 指定）
-        disable 'TypographyFractions','TypographyQuotes','MissingTranslation'
+        disable 'TypographyFractions', 'TypographyQuotes', 'MissingTranslation'
         // 检查指定的问题（根据 id 指定）
-        enable 'RtlHardcoded','RtlCompat', 'RtlEnabled'
+        enable 'RtlHardcoded', 'RtlCompat', 'RtlEnabled'
         // 在报告中是否返回对应的 Lint 说明
         explainIssues true
         // 写入报告的路径，默认为构建目录下的 lint-results.html
@@ -220,7 +220,9 @@ dependencies {
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
     implementation 'com.android.support:support-annotations:27.1.1'
-    //implementation 'com.android.support:percent:27.0.2'
+    //emoji
+    implementation "com.android.support:support-emoji-bundled:27.1.1"
+    implementation "com.android.support:support-emoji-appcompat:27.1.1"
     //di
     implementation 'com.google.dagger:dagger:2.15'
     implementation 'com.google.dagger:dagger-android:2.15'
@@ -268,7 +270,7 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.6.1'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.6.1'
     //圆角 高斯模糊等
-    implementation 'jp.wasabeef:glide-transformations:3.0.1'
+    implementation 'jp.wasabeef:glide-transformations:3.1.1'
     implementation 'org.greenrobot:eventbus:3.1.1'
     // BugLy
     implementation 'com.tencent.bugly:crashreport:2.6.6.1'
@@ -315,6 +317,7 @@ dependencies {
     implementation 'com.github.mmin18:realtimeblurview:1.1.0'
 
     implementation('com.alibaba.android:vlayout:1.2.8@aar') {
+        //排除所有的传递性依赖
         transitive = true
     }
 
@@ -325,6 +328,7 @@ dependencies {
     // 定义protobuf依赖，使用精简版
     implementation "com.google.protobuf:protobuf-lite:3.0.0"
     implementation('com.squareup.retrofit2:converter-protobuf:2.2.0') {
+        //排除依赖
         exclude group: 'com.google.protobuf', module: 'protobuf-java'
     }
     implementation 'com.google.android:flexbox:0.3.2'

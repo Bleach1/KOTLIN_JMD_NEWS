@@ -40,11 +40,13 @@
         android:fullBackupContent="@xml/backup_descriptor"
         android:icon="@mipmap/ic_launcher"
         android:label="@string/app_name"
+        android:resizeableActivity="true"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         tools:ignore="AllowBackup,GoogleAppIndexingWarning"
-        tools:replace="name,icon,label,theme">
+        tools:replace="name,icon,label,theme"
+        tools:targetApi="o">
         <service
             android:name=".service.TestService"
             android:permission="android.permission.BIND_JOB_SERVICE"
@@ -52,7 +54,6 @@
         <service android:name=".service.InitializeService" />
 
         <activity android:name=".arouter.SchemeFilterActivity">
-            <!-- Schame -->
             <intent-filter>
                 <data
                     android:host="m.aliyun.com"
@@ -109,6 +110,9 @@
         <meta-data
             android:name="android.max_aspect"
             android:value="2.1" />
+        <meta-data
+            android:name="android.notch_support"
+            android:value="true" />
         <!--  7.0适配-->
         <provider
             android:name="android.support.v4.content.FileProvider"
