@@ -9,9 +9,11 @@ import android.support.annotation.Nullable;
 import android.widget.ImageView;
 
 import com.bumptech.glide.Glide;
+import com.bumptech.glide.RequestBuilder;
 import com.bumptech.glide.load.DataSource;
 import com.bumptech.glide.load.engine.DiskCacheStrategy;
 import com.bumptech.glide.load.engine.GlideException;
+import com.bumptech.glide.load.resource.bitmap.BitmapTransitionOptions;
 import com.bumptech.glide.request.FutureTarget;
 import com.bumptech.glide.request.RequestListener;
 import com.bumptech.glide.request.RequestOptions;
@@ -25,6 +27,12 @@ import java.util.concurrent.ExecutionException;
 
 import jp.wasabeef.glide.transformations.BlurTransformation;
 
+/**
+ * @description: https://muyangmin.github.io/glide-docs-cn/
+ * @author: ljn
+ * @time: 2018/7/30
+ */
+@SuppressWarnings("unchecked")
 public class ImageLoaderUtil {
 
     @SuppressLint("CheckResult")
@@ -33,7 +41,6 @@ public class ImageLoaderUtil {
         RequestOptions gifOptions = new RequestOptions();
         gifOptions.diskCacheStrategy(DiskCacheStrategy.RESOURCE);
         Glide.with(context).asGif().load(url).apply(gifOptions).into(imageView);
-
 
 
         SimpleTarget<Drawable> simpleTarget = new SimpleTarget<Drawable>() {
@@ -49,11 +56,21 @@ public class ImageLoaderUtil {
                 .skipMemoryCache(true)//禁用内存缓存
                 .override(100, 200)//指定大小   Target.SIZE_ORIGINAL原始尺寸
                 .error(R.mipmap.ic_launcher)//异常占位图
-                .placeholder(R.mipmap.ic_launcher);//占位图
+                .placeholder(R.mipmap.ic_launcher)//占位图
+                .fallback(R.mipmap.ic_launcher);//在请求的url为null
+
+
+        RequestBuilder requestBuilder = Glide.with(context).asBitmap();
+        requestBuilder.apply(options);
+        requestBuilder.transition(new BitmapTransitionOptions());
 
         Glide.with(context)
                 .asBitmap()//静态图片  asGif()
                 .load(url)
+                .thumbnail(0.25f)
+                // .thumbnail(requestBuilder)
+                .error(requestBuilder.load(""))//error时开始新的请求
+                .transition(new BitmapTransitionOptions())//动画
                 .listener(new RequestListener<Bitmap>() {//加载监听
                     @Override
                     public boolean onLoadFailed(@Nullable GlideException e, Object model, Target<Bitmap> target, boolean isFirstResource) {
@@ -88,4 +105,16 @@ public class ImageLoaderUtil {
             e.printStackTrace();
         }
     }
+
+    /**
+     * 取消加载
+     *
+     * @param imageView
+     * @param context
+     */
+    private void cancelLaodImg(ImageView imageView, Context context) {
+        Glide.with(context).clear(imageView);
+    }
+
+
 }

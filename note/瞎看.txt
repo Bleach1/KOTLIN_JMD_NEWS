@@ -108,9 +108,6 @@ android中设计模式：
 ·观察者模式    ex:ContentObserver
 ·抽象工厂模式  ex:BaseActivity
 
-Polaris
-Planet
-
 1.应用卸载反馈（Native 轮询 /data/data/包名目录下）
 2.Home按键监听(广播监听)
 3.应用不能卸载(DevicePolicManager)
@@ -241,3 +238,33 @@ app.json:
 低版本SDK实现高版本api
 自己实现或@TargetApi annotation
 
+1.整型，字符型，浮点型的数据在混合运算中相互转换，转换时遵循以下原则：
+  容量小的类型可自动转换为容量大的数据类型；
+  byte,short,char → int → long → float → double
+  byte，short，char之间不会相互转换，他们在计算时首先会转换为int类型。
+
+RxJava操作符
+fromArray：遍历数组
+timer：定时延迟
+interval：隔指定时间发送时间(轮询)
+Map:将被观察者发送的事件转换为任意的类型事件(Bean类型之间转换)
+FlatMap:将被观察者发送的事件序列进行拆分、单独转换,再合并成一个新的事件序列，最后再进行发送(嵌套请求)
+ConcatMap:类似FlatMap  事件序列同原始发送数据序列
+combineLatest：合并事件 & 联合判断
+
+当 .repeat() 接收到 .onCompleted() 事件后触发重订阅。
+当 .retry() 接收到 .onError() 事件后触发重订阅
+
+zip可用于多网络请求等等
+
+python爬虫
+http://blog.csdn.net/sunnyxiaohu/article/details/50787430
+
+protocol：第一部分就是协议，例如百度使用的就是https协议
+hostname[:port]：第二部分就是主机名(还有端口号为可选参数)，一般网站默认的端口号为80，例如百度的主机名就是www.baidu.com，这个就是服务器的地址;      
+path：第三部分就是主机资源的具体地址，如目录和文件名等
+
+创建爬虫项目:scrapy startproject projectname
+创建爬虫    :scrapy genspider xxxx xxx.com 
+是否有爬虫  :scrapy list
+执行爬虫    :scrapy crawl 爬虫name

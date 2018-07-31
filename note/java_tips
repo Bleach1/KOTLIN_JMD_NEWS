@@ -1,4 +1,0 @@
-1.整型，字符型，浮点型的数据在混合运算中相互转换，转换时遵循以下原则：
-  容量小的类型可自动转换为容量大的数据类型；
-  byte,short,char → int → long → float → double
-  byte，short，char之间不会相互转换，他们在计算时首先会转换为int类型。

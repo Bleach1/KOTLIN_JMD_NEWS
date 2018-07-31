@@ -161,3 +161,8 @@ ex:
    @JvmSuppressWildcards
    @GET("/index.html")
    fun getQueryMap(@QueryMap paramsMap: Map<String, Any>): Observable<ResponseBody>
+
+
+   变量名前面添加Override表示重写其set/get方法
+
+  kotlin的 if有返回值 java 没有
