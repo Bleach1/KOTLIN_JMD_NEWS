@@ -268,3 +268,23 @@ path：第三部分就是主机资源的具体地址，如目录和文件名等
 创建爬虫    :scrapy genspider xxxx xxx.com 
 是否有爬虫  :scrapy list
 执行爬虫    :scrapy crawl 爬虫name
+
+
+EventBus黏性事件：就是在发送事件之后再订阅该事件也能收到该事件(Sticky Broadcast) 需要手动移除
+
+
+java Switch语句   ab处理相同这样写
+
+switch(xxx){
+  case a:
+  case b:
+logixxxxxxx
+  break;
+}
+
+
+
+flutter:
+        Text--https://blog.csdn.net/poorkick/article/details/80426578
+        Container--http://www.onlyloveyd.cn/article/18
+        FloatingActionButton--https://blog.csdn.net/poorkick/article/details/81059149

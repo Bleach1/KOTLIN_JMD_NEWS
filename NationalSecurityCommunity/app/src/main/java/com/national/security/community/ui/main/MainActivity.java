@@ -12,7 +12,6 @@ import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
-import android.widget.PopupWindow;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -25,12 +24,12 @@ import com.national.security.community.Config;
 import com.national.security.community.R;
 import com.national.security.community.architecture_components.LifeListener;
 import com.national.security.community.base.BaseActivity;
-import com.national.security.community.base.BaseBean;
 import com.national.security.community.event.MessageEvent;
 import com.national.security.community.ui.CustomDialog;
 import com.national.security.community.ui.home.HomeFragment;
 import com.national.security.community.ui.mine.MineFragment;
 import com.national.security.community.ui.msg.MsgFragment;
+import com.national.security.community.utils.JNIUtil;
 import com.national.security.community.utils.NinePatchPic;
 import com.national.security.community.utils.UniqueIDUtil;
 import com.national.security.community.utils.network.NetWorkUtil;
@@ -39,8 +38,9 @@ import com.national.security.community.widgets.BottomBarTab;
 
 import org.greenrobot.eventbus.EventBus;
 
-import java.io.File;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.concurrent.LinkedBlockingQueue;
 import java.util.concurrent.ThreadPoolExecutor;
 import java.util.concurrent.TimeUnit;
@@ -141,6 +141,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @DebugLog
     @Override
     protected void initEventAndData() {
+        Log.i(Config.TAG, "initEventAndData2: " + JNIUtil.show());
         Log.i(Config.TAG, "initEventAndData: " + UniqueIDUtil.getUniqueID());
         CustomDialog customDialog = new CustomDialog();
         customDialog.show(getSupportFragmentManager(), "");
@@ -198,6 +199,25 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
 
             }
         });
+
+
+        /*Map遍历建议*/
+        Map<String, String> map = new HashMap<>();
+        map.put("1", "3");
+        map.put("2", "2");
+        map.put("3", "1");
+//key
+        for (String key : map.keySet()) {
+            Log.i(Config.TAG, "initEventAndData: " + key);
+        }
+//values
+        for (String value : map.values()) {
+            Log.i(Config.TAG, "initEventAndData: " + value);
+        }
+//all
+        for (Map.Entry<String, String> entry : map.entrySet()) {
+            Log.i(Config.TAG, "initEventAndData: " + "key" + entry.getKey() + "value" + entry.getValue());
+        }
     }
 
    /* private int whichDay(@EnumUtil.Num int day) {

@@ -6,6 +6,8 @@ public class JNIUtil {
         System.loadLibrary("native-lib");
     }
 
+    public static native int bspatch(String oldApk, String newApk, String patch);
+
     //java  调用C
     public native static String show();
     //C调用java  反射

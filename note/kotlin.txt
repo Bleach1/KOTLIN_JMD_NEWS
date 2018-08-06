@@ -163,6 +163,16 @@ ex:
    fun getQueryMap(@QueryMap paramsMap: Map<String, Any>): Observable<ResponseBody>
 
 
-   变量名前面添加Override表示重写其set/get方法
+  变量名前面添加Override表示重写其set/get方法
 
   kotlin的 if有返回值 java 没有
+
+  获取函数引用::  val xx=::add
+                   xx(10,20)
+                   xx.invoke(20,20)//处理函数变量为null时调用
+  函数体只有一行代码 用函数表达式  fun add(a:Int,b:Int)=a+b
+  匿名函数 val add:(Int,Int)->Int={a,b->a+b}
+
+  尾递归：函数在调用自己之后没有执行其他任何操作
+
+  
