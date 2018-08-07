@@ -288,3 +288,4 @@ flutter:
         Text--https://blog.csdn.net/poorkick/article/details/80426578
         Container--http://www.onlyloveyd.cn/article/18
         FloatingActionButton--https://blog.csdn.net/poorkick/article/details/81059149
+        Image--https://blog.csdn.net/poorkick/article/details/80458707
