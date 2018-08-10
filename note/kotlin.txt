@@ -31,8 +31,8 @@ fun hello(vararg names: String){ }
 
 
 泛型：
-        java:? extends T意味着集合中允许添加的类型不仅仅是T还包括T的子类(协变-读取)
-             ? super T (逆变-写入)
+        java:? extends T意味着集合中允许添加的类型不仅仅是T还包括T的子类(协变-读取)--out
+             ? super T (逆变-写入)--in
       kotlin: out-协变
               in-逆变
 
@@ -42,6 +42,10 @@ fun hello(vararg names: String){ }
 读写	只读	     可写
 位置	返回值	     参数
 角色	生产者	     消费者
+
+
+A<String> <<==>>B<Int>  (泛型擦除--java中获取泛型类型反射)
+
 
 apply:在写需要设置大量回调与属性的UI代码上相当好用
 
@@ -174,5 +178,10 @@ ex:
   匿名函数 val add:(Int,Int)->Int={a,b->a+b}
 
   尾递归：函数在调用自己之后没有执行其他任何操作
+  
 
+接口中方法可以实现
+interface xxx{
+	fun a(){}
+}
   
