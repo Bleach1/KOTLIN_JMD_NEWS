@@ -16,7 +16,7 @@ import androidx.work.WorkManager;
 import androidx.work.Worker;
 
 /**
- * @description: 1.
+ * @description: 1.https://mp.weixin.qq.com/s/UKgPtJyMF8CJ8ffUuwCCvg
  * @author: ljn
  * @time: 2018/5/16
  */

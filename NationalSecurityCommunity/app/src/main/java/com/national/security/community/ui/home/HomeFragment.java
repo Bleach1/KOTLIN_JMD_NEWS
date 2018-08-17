@@ -146,6 +146,7 @@ public class HomeFragment extends BaseFragment {
         List<DelegateAdapter.Adapter> adapters = new LinkedList<>();
         //banner
         adapters.add(new BaseDelegateAdapter(getActivity(), new LinearLayoutHelper(), R.layout.banner_ljn, 1, 1) {
+            @NonNull
             @Override
             public BaseViewHolder onCreateViewHolder(@NonNull ViewGroup parent, int viewType) {
                 if (viewType == 1) {

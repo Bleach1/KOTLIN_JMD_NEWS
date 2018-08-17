@@ -6,8 +6,6 @@ var len = a.length?: -1
 lateinit(不支持基础数据类型,基础数据类型like this private var mNumber: Int by Delegates.notNull()) 
 延迟初始化(ex:在Activty中初始化Context) 
 
-by Lazy
-
 字符串拼接：val firstName = "Amit"
             val lastName = "Shekhar"
             val message = "My name is: $firstName $lastName"
@@ -26,8 +24,6 @@ internal 声明，在同一模块中的任何地方可见
 
 变长参数
 fun hello(vararg names: String){ } 
-
-
 
 
 泛型：
@@ -113,6 +109,7 @@ println("$s.length is ${s.length}") // 输出“abc.length is 3”
 infix fun Int.shl(x: Int): Int {}
 1 shl 2
 
+
 列表：List/MutableList；
 集：Set/MutableSet；
 映射：Map/MutableMap；
@@ -184,4 +181,9 @@ ex:
 interface xxx{
 	fun a(){}
 }
+
+闭包：普通函数不保存状态 用完销毁 闭包可以保留
+
+
+
   

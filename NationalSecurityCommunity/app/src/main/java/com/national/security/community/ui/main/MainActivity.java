@@ -35,6 +35,7 @@ import com.national.security.community.utils.UniqueIDUtil;
 import com.national.security.community.utils.network.NetWorkUtil;
 import com.national.security.community.widgets.BottomBar;
 import com.national.security.community.widgets.BottomBarTab;
+import com.natonal.security.community.proto.LoginInfo;
 
 import org.greenrobot.eventbus.EventBus;
 
