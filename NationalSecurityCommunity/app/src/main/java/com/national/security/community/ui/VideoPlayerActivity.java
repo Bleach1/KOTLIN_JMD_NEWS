@@ -1,6 +1,7 @@
 package com.national.security.community.ui;
 
 import android.content.pm.ActivityInfo;
+import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
@@ -47,7 +48,6 @@ public class VideoPlayerActivity extends BaseActivity {
 
     @Override
     protected void initEventAndData() {
-
         player.setUp(SOURCE, true, "First Blood");
         //封面
         ImageView imageView = new ImageView(this);

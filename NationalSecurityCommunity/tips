@@ -28,6 +28,8 @@ layout_constraintLeft_toLeftOf 指自身左边缘与目标控件左边缘对齐
 layout_constraintBaseline_toBaselineOf设置两个控件之间的文字相对于baseline对齐
 
 
+
+
 当A控件 约束 在B控件的左边，B控件GONE了，此时A会额外拥有一个margin的能力，来“补充”B消失的导致的“位移”。
    android:layout_marginRight="10dp"
    app:layout_goneMarginRight="110dp"
@@ -109,6 +111,10 @@ layout_constraintWidth_percent
 layout_constraintHeight_percent
 圆形约束
 constraintCircle
+
+
+<include>标签的parent ViewGroup与包含的layout根容器ViewGroup是相同的类型
+merge inflate时attachToRoot为true
 
 
 
