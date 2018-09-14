@@ -2,6 +2,7 @@ Var 变量   Val 常量
 
 Elvis操作符,?:左边的返回值不为空则返回，否则返回？：右边的值
 var len = a.length?: -1
+var ss=null//ss为一个Nothing对象
 
 lateinit(不支持基础数据类型,基础数据类型like this private var mNumber: Int by Delegates.notNull()) 
 延迟初始化(ex:在Activty中初始化Context) 
@@ -116,7 +117,10 @@ infix fun Int.shl(x: Int): Int {}
 集合：Collection/MutableCollection；
 迭代器：Iterable/MutableIterable；
 
-
+fun ex(vararg args:String){
+	
+}
+ex(array)------ex(*array)
 如果函数接收的参数是可变参数，传入数组默认不会展开，需要在前面添加*号
 * array
 

@@ -12,6 +12,7 @@ import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
+import android.widget.EditText;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -55,10 +56,10 @@ import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 /**
- * @ description:  https://github.com/alibaba/ARouter
+ * @description:  https://github.com/alibaba/ARouter
  * https://www.cnblogs.com/wjtaigwh/p/6689684.html 购物车动画
- * @ author:  ljn
- * @ time:  2018/2/5
+ * @author:  ljn
+ * @time:  2018/2/5
  */
 @Route(path = "/main/MainActivity")
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {
@@ -121,6 +122,8 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
                     // 3.media.getCompressPath();为压缩后path，需判断media.isCompressed();是否为true
                     // 如果裁剪并压缩了，以取压缩路径为准，因为是先裁剪后压缩的
                     Log.i(Config.TAG, "onActivityResult: " + selectList.size());
+                    break;
+                default:
                     break;
             }
         }

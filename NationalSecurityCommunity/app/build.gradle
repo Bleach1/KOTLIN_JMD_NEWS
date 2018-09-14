@@ -346,7 +346,7 @@ dependencies {
 
     //Stack Overflow
     implementation 'com.github.BolexLiu:AutoEx:v1.0.6'
-    implementation 'android.arch.work:work-runtime:1.0.0-alpha07'
+    implementation 'android.arch.work:work-runtime:1.0.0-alpha08'
     implementation 'com.blankj:utilcode:1.16.4'
     implementation 'com.shuyu:GSYVideoPlayer:5.0.2'
     implementation 'org.aspectj:aspectjrt:1.8.9'
