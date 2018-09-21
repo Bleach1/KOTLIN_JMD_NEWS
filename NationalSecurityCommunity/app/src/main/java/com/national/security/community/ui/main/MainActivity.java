@@ -12,7 +12,6 @@ import android.support.annotation.RequiresApi;
 import android.util.Log;
 import android.view.KeyEvent;
 import android.view.WindowManager;
-import android.widget.EditText;
 import android.widget.Toast;
 
 import com.alibaba.android.arouter.facade.annotation.Route;
@@ -36,7 +35,6 @@ import com.national.security.community.utils.UniqueIDUtil;
 import com.national.security.community.utils.network.NetWorkUtil;
 import com.national.security.community.widgets.BottomBar;
 import com.national.security.community.widgets.BottomBarTab;
-import com.natonal.security.community.proto.LoginInfo;
 
 import org.greenrobot.eventbus.EventBus;
 
@@ -56,10 +54,10 @@ import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
 
 /**
- * @description:  https://github.com/alibaba/ARouter
+ * @description: https://github.com/alibaba/ARouter
  * https://www.cnblogs.com/wjtaigwh/p/6689684.html 购物车动画
- * @author:  ljn
- * @time:  2018/2/5
+ * @author: ljn
+ * @time: 2018/2/5
  */
 @Route(path = "/main/MainActivity")
 public class MainActivity extends BaseActivity<MainPresenter> implements MainContract.View {

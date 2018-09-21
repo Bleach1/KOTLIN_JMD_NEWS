@@ -3,6 +3,7 @@ package com.national.security.community.utils;
 import com.google.gson.Gson;
 import com.google.gson.reflect.TypeToken;
 import com.google.gson.stream.JsonReader;
+import com.national.security.community.data.model.BannerBean;
 
 import java.io.ByteArrayInputStream;
 import java.io.IOException;
@@ -32,5 +33,11 @@ public class GsonUtil<T> {
         reader.endArray();
         reader.close();
         return messages;
+    }
+
+
+    public List<BannerBean> getList(String json) {
+        return new Gson().fromJson(json, new TypeToken<List<BannerBean>>() {
+        }.getType());
     }
 }

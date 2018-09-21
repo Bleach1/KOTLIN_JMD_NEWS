@@ -1,7 +1,6 @@
 package com.national.security.community.ui;
 
 import android.content.pm.ActivityInfo;
-import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.ImageView;
 
