@@ -9,15 +9,18 @@ buildscript {
         maven { url "https://oss.sonatype.org/content/repositories/snapshots" }
         maven { url "http://maven.aliyun.com/nexus/content/repositories/central" }
         maven { url 'https://maven.google.com' }
+        maven { url uri('./repo') }
     }
     dependencies {
         classpath 'com.leon.channel:plugin:1.1.7'
         classpath 'com.google.protobuf:protobuf-gradle-plugin:0.8.2'
-        classpath "io.realm:realm-gradle-plugin:5.1.0"
+        classpath "io.realm:realm-gradle-plugin:5.7.0"
         classpath 'com.android.tools.build:gradle:3.1.4'
         classpath 'com.qihoo360.replugin:replugin-host-gradle:2.2.1'
-        //方法执行时间测算
+        //方法执行时间测算 适合少数方法
         classpath 'com.jakewharton.hugo:hugo-plugin:1.2.1'
+        //计算方法耗时
+        classpath 'me.ele:mirror-plugin:1.0.0'
         // NOTE: Do not place your application dependencies here; they belong
         // in the individual module build.gradle files
         classpath 'org.aspectj:aspectjtools:1.8.13'
@@ -33,6 +36,7 @@ allprojects {
         mavenCentral()
         maven { url "http://maven.aliyun.com/nexus/content/repositories/central" }
         maven { url "https://jitpack.io" }
+        maven { url uri('./repo') }
     }
 }
 

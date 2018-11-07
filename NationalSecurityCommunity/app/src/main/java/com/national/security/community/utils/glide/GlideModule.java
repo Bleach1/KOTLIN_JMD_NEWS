@@ -15,6 +15,11 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.io.InputStream;
 
+/**
+ * @description: GlideModule
+ * @author: ljn
+ * @time: 2018/10/29
+ */
 @com.bumptech.glide.annotation.GlideModule
 public class GlideModule extends AppGlideModule {
     /**
@@ -38,6 +43,6 @@ public class GlideModule extends AppGlideModule {
     @Override
     public void registerComponents(@NonNull Context context, @NonNull Glide glide, @NonNull Registry registry) {
         super.registerComponents(context, glide, registry);
-        registry.replace(GlideUrl.class, InputStream.class,new OkHttpUrlLoader.Factory());
+        registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory());
     }
 }

@@ -57,7 +57,11 @@ public class HomeFragment extends BaseFragment {
     @BindView(R.id.toolbar)
     Toolbar toolbar;
 
-    private List<String> datas = new ArrayList<>();
+    private List<String> datas = new ArrayList<String>() {{
+        for (int i = 0; i < 4; i++) {
+            add("http://img0.imgtn.bdimg.com/it/u=3565185884,2248353566&fm=27&gp=0.jpg");
+        }
+    }};
     private Banner banner;
 
     @Override
@@ -117,10 +121,6 @@ public class HomeFragment extends BaseFragment {
 
     @Override
     protected void initEventAndData() {
-
-        for (int i = 0; i < 4; i++) {
-            datas.add("http://img0.imgtn.bdimg.com/it/u=3565185884,2248353566&fm=27&gp=0.jpg");
-        }
         setSystemBarAlpha(0);
         //noinspection ConstantConditions
         RecyclerView.RecycledViewPool viewPool = new RecyclerView.RecycledViewPool();

@@ -26,7 +26,7 @@ https://blog.csdn.net/qq_21793463/article/details/80003303
 layout_constraint[自身控件位置]_[目标控件位置]="[目标控件ID]"
 layout_constraintLeft_toLeftOf 指自身左边缘与目标控件左边缘对齐
 layout_constraintBaseline_toBaselineOf设置两个控件之间的文字相对于baseline对齐
-
+https://juejin.im/post/5bac92f2f265da0aba70c1bf
 
 
 

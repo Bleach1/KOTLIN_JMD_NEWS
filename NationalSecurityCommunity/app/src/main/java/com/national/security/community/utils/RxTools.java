@@ -37,6 +37,7 @@ public class RxTools {
     /**
      * 优化搜索功能
      */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @SuppressLint("CheckResult")
     public static void search(TextView view) {
         RxTextView.textChanges(view)
@@ -69,6 +70,7 @@ public class RxTools {
     /**
      * 连续点击
      */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @SuppressLint("CheckResult")
     public static void multipleClicks(View view) {
         RxView.clicks(view)
@@ -80,6 +82,7 @@ public class RxTools {
     /**
      * 长按事件
      */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @SuppressLint("CheckResult")
     public static void longClick(View view) {
         RxView.longClicks(view)
@@ -91,6 +94,7 @@ public class RxTools {
      * View的选中状态
      */
 
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @SuppressLint("CheckResult")
     public static void isChecked(CheckBox checkBox) {
         RxCompoundButton.checkedChanges(checkBox)
@@ -106,8 +110,10 @@ public class RxTools {
     public static void getCode(Button button) {
 
         final int count = 60;
-        Observable.interval(0, 1, TimeUnit.SECONDS)//设置0延迟，每隔一秒发送一条数据
-                .take(count + 1)//设置循环次数
+        //设置0延迟，每隔一秒发送一条数据
+        Observable.interval(0, 1, TimeUnit.SECONDS)
+                //设置循环次数
+                .take(count + 1)
                 .map(aLong -> count - aLong)
                 .doOnSubscribe(disposable -> {
                     button.setEnabled(false);
@@ -174,6 +180,7 @@ public class RxTools {
     /**
      * 组合校验 使用两个  三个 Function3 ...
      */
+    @SuppressWarnings("ResultOfMethodCallIgnored")
     @SuppressLint("CheckResult")
     public static void jointCheck(EditText editText, EditText editText2, Button button) {
         Observable<CharSequence> name = RxTextView.textChanges(editText).skip(1);

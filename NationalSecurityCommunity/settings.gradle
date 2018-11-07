@@ -1,1 +1,1 @@
-include ':app', ':javaproject'
+include ':app', ':javaproject', ':plugin'

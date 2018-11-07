@@ -4,6 +4,7 @@ import android.support.annotation.IntDef;
 
 import java.lang.annotation.Retention;
 import java.lang.annotation.RetentionPolicy;
+import java.lang.reflect.ParameterizedType;
 
 public class EnumUtil {
     // @KEEP 被这个注解修饰的函数或者类，在代码混淆进行压缩时会被保持住。

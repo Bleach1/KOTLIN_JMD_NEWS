@@ -3,8 +3,8 @@ apply plugin: 'realm-android'
 apply plugin: 'com.jakewharton.hugo'
 apply plugin: 'com.google.protobuf'
 apply plugin: 'channel'
+apply plugin: 'me.ele.mirror.plugin'
 android {
-
     defaultConfig {
         applicationId "com.national.security.community"
         compileSdkVersion rootProject.ext.android.compileSdkVersion
@@ -40,9 +40,10 @@ android {
         }
 //SVG兼容使用
         // vectorDrawables.useSupportLibrary = true
-
+        packagingOptions {
+            exclude 'META-INF/proguard/androidx-annotations.pro'
+        }
     }
-
     signingConfigs {
         debug {
             keyAlias 'key1'
@@ -60,10 +61,10 @@ android {
             archivesBaseName = "国安社区"
         }
     }
-
     buildTypes {
         release {
-
+            //java.lang.NoClassDefFoundError
+            //multiDexKeepFile file 'multidex-config.txt'
             buildConfigField("Boolean", "enableLog", "false")
             buildConfigField("String", "HOST_URL", "\" http://47.93.29.96/weijinrong/app/\"")
             minifyEnabled true
@@ -89,6 +90,7 @@ android {
         }
 
         debug {
+            //multiDexKeepFile file 'multidex-config.txt'
             minifyEnabled false
             buildConfigField("Boolean", "enableLog", "true")
             buildConfigField("String", "HOST_URL", "\" http://47.93.29.96/weijinrong/app/\"")
@@ -104,12 +106,9 @@ android {
         sourceCompatibility JavaVersion.VERSION_1_8
         targetCompatibility JavaVersion.VERSION_1_8
     }
-
     dexOptions {
         javaMaxHeapSize "4g"
     }
-
-
     sourceSets {
         main {
             jniLibs.srcDirs = ['libs']
@@ -170,7 +169,6 @@ android {
         ignore 'TypographyQuotes'
 
     }
-
     flavorDimensions 'tier'
     productFlavors {//多渠道打包
         xiaomi {
@@ -201,11 +199,10 @@ android {
         //快速模式：生成渠道包时不进行校验（速度可以提升10倍以上）
         isFastMode = true
     }
-
-
     realm {
         syncEnabled = true
     }
+    buildToolsVersion '28.0.2'
 }
 
 static def releaseTime() {
@@ -215,16 +212,16 @@ static def releaseTime() {
 apply plugin: 'replugin-host-gradle'
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
-    implementation 'com.android.support:design:27.1.1'
+    implementation 'com.android.support:design:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
     androidTestImplementation 'com.android.support.test:runner:1.0.2'
     androidTestImplementation 'com.android.support.test.espresso:espresso-core:3.0.2'
-    implementation 'com.android.support:support-annotations:27.1.1'
+    implementation 'com.android.support:support-annotations:28.0.0'
 
     //emoji
-    implementation 'com.android.support:support-emoji-bundled:27.1.1'
-    implementation 'com.android.support:support-emoji-appcompat:27.1.1'
+    implementation 'com.android.support:support-emoji-bundled:28.0.0'
+    implementation 'com.android.support:support-emoji-appcompat:28.0.0'
 
     //di
     implementation 'com.google.dagger:dagger:2.15'
@@ -237,11 +234,11 @@ dependencies {
     compileOnly 'org.glassfish:javax.annotation:10.0-b28'
 
     //rx 2.x
-    implementation 'io.reactivex.rxjava2:rxjava:2.1.11'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.14'
     implementation 'io.reactivex.rxjava2:rxandroid:2.0.2'
 
     //network
-    implementation 'com.google.code.gson:gson:2.8.2'
+    implementation 'com.google.code.gson:gson:2.8.5'
     implementation 'com.squareup.retrofit2:retrofit:2.3.0'
     implementation 'com.squareup.retrofit2:converter-gson:2.3.0'
     implementation 'com.squareup.retrofit2:adapter-rxjava2:2.3.0'
@@ -267,13 +264,13 @@ dependencies {
     implementation 'com.github.VictorAlbertos.Jolyglot:gson:0.0.3'
 
     //adapter 下拉刷新
-    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.34'
+    implementation 'com.github.CymChad:BaseRecyclerViewAdapterHelper:2.9.40'
     implementation 'com.scwang.smartrefresh:SmartRefreshLayout:1.0.5.1'
     implementation 'com.scwang.smartrefresh:SmartRefreshHeader:1.0.5.1'
     implementation 'top.zibin:Luban:1.1.3'
 
     //Glide
-    implementation 'com.github.bumptech.glide:glide:4.7.1'
+    implementation 'com.github.bumptech.glide:glide:4.8.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
 
     //圆角 高斯模糊等
@@ -303,8 +300,8 @@ dependencies {
     implementation 'android.arch.persistence.room:rxjava2:1.1.1'
 
     //ARouter
-    implementation 'com.alibaba:arouter-api:1.2.2'
-    annotationProcessor 'com.alibaba:arouter-compiler:1.1.3'
+    implementation 'com.alibaba:arouter-api:1.3.1'
+    annotationProcessor 'com.alibaba:arouter-compiler:1.1.4'
 
     //SVG
     implementation 'com.eftimoff:android-pathview:1.0.8@aar'
@@ -346,10 +343,12 @@ dependencies {
 
     //Stack Overflow
     implementation 'com.github.BolexLiu:AutoEx:v1.0.6'
-    implementation 'android.arch.work:work-runtime:1.0.0-alpha08'
+    implementation 'android.arch.work:work-runtime:1.0.0-alpha09'
     implementation 'com.blankj:utilcode:1.16.4'
     implementation 'com.shuyu:GSYVideoPlayer:5.0.2'
     implementation 'org.aspectj:aspectjrt:1.8.9'
+    //适配 https://github.com/JessYanCoding/AndroidAutoSize
+    implementation 'me.jessyan:autosize:1.0.1'
 }
 
 protobuf {
