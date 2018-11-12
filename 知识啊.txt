@@ -1,0 +1,208 @@
+
+vivio:四小 嘎子
+Google:americanlaji@gmail.com
+
+公积金：1132 5429 0615
+公积金账号：GJJ 0175 54069
+
+calc
+mspaint
+services.msc
+
+
+开发者选项布局边界打开    Native？
+
+插件化原理：
+           通过DexClassLoader加载。
+           代理模式添加生命周期。
+           Hook思想跳过清单验证
+
+
+DexClassLoader可加载jar/apk/dex，且支持从SD卡加载；
+PathClassLoader只能加载已经安装在Android系统内APK文件（ /data/app 目录下）
+
+
+动态加载方案：
+             合并dexElements数组(插件之间甚至插件与宿主之间使用的类库有冲突，就会崩溃)
+             替换LoadedApk中的mClassLoader(除了Hook过程复杂外，每一个版本的apk解析都有差别，
+             使用的PackageParser的兼容性就比较差，根据不同版本来分别Hook)
+
+
+https://github.com/yipianfengye/AndroidSource(源码解析)
+
+
+解析类	Parser 为后缀标识
+handleXX(), processXX()	对数据进行处理的方法
+
+SharedPreferences	PREF_
+Bundle	BUNDLE_
+Fragment Arguments	ARGUMENT_
+Intent Extra	EXTRA_
+Intent Action	ACTION_
+
+stetho(调试)
+Android-ObservableScrollView
+Calligraphy（字体库）
+
+
+ljn_bleachone@163.com  
+appID(小程序) :wx31460e5491b7de33
+
+http://services.gradle.org/distributions/(gradle地址)
+
+算法：n（很大）个无序数中找最大的10个数；
+
+注解；
+TabLayout中如何让当前标签永远位于屏幕中间；
+手写代码：遍历文件目录；
+电梯运行的算法分析；
+视频播放器的手势控制如何处理；
+手写实现单链表的get操作；
+生产者、消费者模式；
+TextView调用setText方法的内部执行流程；
+
+compile    implementation
+provided   compileOnly
+debugCompile debugImplementation
+
+key=b5b2a0fad04141ac9ea4cd8c25c9a717 
+
+
+使用minWidth、minHeight、lines等属性
+
+jcenterLjn
+ljn8573619cao
+
+做个俗人 浪荡一生 干净自由
+做个俗人 别无他求 安慰自由
+做个俗人 不碰爱情 不染烟酒
+做个俗人 没心没肺 没感情
+做个俗人 活的像野狗流浪也自由
+做个俗人 谈笑风生不动情
+做个俗人 贪财好色 
+做个俗人 知世俗而不俗一世风流
+
+小贷账号：
+gaotianyi            gjkddd
+shengli945           ljn110cao
+
+13312591713   hl123796976
+
+国安侠：13149893071   111111
+13000 000 000
+qq111111
+
+测试环境：：
+中台系统（国安中台、E店中台）
+https://gemini.guoanshequ.wang/gemini/login/welcome
+账号：admin 密码：17qq38
+商家系统
+https://seller.guoanshequ.wang/
+
+15042432325 yangbinghe529
+
+https://blog.csdn.net/lyc088456/article/details/81200266
+https://www.cnblogs.com/jayshsoft/p/7503171.html(fiddler配置证书)
+
+18742458983
+z123456
+
+12333
+12329
+
+makecert.exe -r -ss my -n "CN=DO_NOT_TRUST_FiddlerRoot, O=DO_NOT_TRUST, OU=Created by http://www.fiddler2.com" -sky signature -eku 1.3.6.1.5.5.7.3.1 -h 1 -cy authority -a sha1 -m 120 -b 09/11/2018
+
+正则
+https://github.com/CyC2018/CS-Notes/blob/master/notes/%E6%AD%A3%E5%88%99%E8%A1%A8%E8%BE%BE%E5%BC%8F.md
+3DES加密
+https://www.cnblogs.com/shindo/p/6021976.html
+
+https://github.com/wcmbeta/GFWdata（VPN）
+
+
+行号：302222021269
+开户行地址：中信银行大连分行软件园支行
+卡号：6217 6804 0176 4704
+姓名：刘佳楠
+
+
+开户行地址：招商银行大连分行东港支行
+行号：308222027026
+卡号：6214 8341 1934 4191
+姓名：刘佳楠
+
+https://github.com/trending
+
+https://github.com/scwang90/MultiWaveHeader/blob/master/README_CN.md(wave)
+https://github.com/HotBitmapGG/CreditSesameRingView(仪表盘)
+
+https://github.com/JackTuoTuo/VerificationCodeView/blob/master/README.md
+https://github.com/liuguangli/VerificationCodeInput
+
+setStrokeCap(Paint.Cap cap)Round
+
+https://blog.csdn.net/wljian1/article/details/81111186(JNI)
+
+https://juejin.im/post/5b873ab451882542ba1dd3ff(混淆)
+178
+
+国安社区:1861 7818 292 
+
+15042432325 
+yangbinghe529
+
+E店：
+    18613864806
+    111111
+    15042432325 yangbinghe529
+
+链接：https://pan.baidu.com/s/1G_DIR-jfMTznTWPwadTTog 密码： 密码：snxh
+
+     C:\Users\Administrator\AppData\Local\Android\Sdk\platform-tools
+     adb connect 127.0.0.1:62001(夜神)
+     adb connect 127.0.0.1:7555(MUMU)
+     adb connect (你的IP地址)：5555(Native)
+
+     国安社区测试账号：18842636136
+     钱包支付密码：123456
+
+我有一个特点 不擅长倒下
+我已经抛下所有 你绝不可阻挡我
+我命由我不由天
+睡眠才是人类真正的活动形态，清醒的时候只是在收集做梦素材。
+
+Work on your free throws
+
+https://github.com/JessYanCoding/AndroidAutoSize(适配方案)
+http://dandanlove.com/2018/10/16/multidex1/(MultiDex)
+
+xx是漂移，而你只是打滑而已
+ 
+字符串的长度为4的整数倍。
+字符串的符号取值只能在A-Z, a-z, 0-9, +, /, =共计65个字符中，且=如果出现就必须在结尾出现
+
+希腊神话：Aphrodite and Eros
+罗马神话：维纳斯和丘比特
+
+https://blog.csdn.net/colinandroid/article/details/74190563
+https://blog.csdn.net/u014165119/article/details/46834265
+https://github.com/ogaclejapan/SmartTabLayout
+https://github.com/flutter/flutter/wiki/Add-Flutter-to-existing-apps
+https://mp.weixin.qq.com/s/B7yvicK4vi50JKeEO0NG0Q
+https://github.com/2dxgujun/AndroidTagGroup(tag)
+https://github.com/jeasonlzy/HeaderViewPager
+https://github.com/lingochamp/FileDownloader
+
+七友： 谁人曾照顾过我的感受
+天后： 我明明都懂却拼死效忠
+趁早： 我可以笑着扮演你配角
+淘汰： 我却得到你安慰的淘汰
+洋葱： 盘底洋葱永远是调味品
+说谎： 我没有说谎是爱情说谎
+传奇： 我一直在你身边未走远
+温柔： 不打扰是我最后的温柔
+
+是这样吗    这是      什么
+そうですか? これは？ 何ですか
+https://www.cnblogs.com/ludashi/p/5223241.html
+
