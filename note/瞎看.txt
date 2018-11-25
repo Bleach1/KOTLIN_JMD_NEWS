@@ -1,36 +1,3 @@
-(1)ActivityManagerService:主要负责系统中四大组件的启动、切换、调度及应用程序的管理和调度等工作。
-
-AMS extend ActivityManagerNative(AMN) implement Watchdog.Monitor,BatteryStatsImpl.BatteryCallback
-AMN extend Binder implement IActivityManager   AMN将作为Binder通信的服务端为用户提供支持。
-
-在ActivityManagerNative类中定义了内部类ActivityManagerProxy implement IActivityManager 作为客户端使用的服务端代理
-
-其它进程将使用ActivityManager来使用AMS的服务。ActivityManager通过AMN提供的getDefault接口得到ActivityManagerProxy，然后再以Binder通信的方式调用AMS的接口
-
-WatchDog机制:
-1.WatchDog监控SystemServer中的线程。发现问题会杀死SystemServer进程。
-
-2.SystemServer的父进程Zygote接收到SystemServer的死亡信号后，会杀死自己。Zygote进程死亡的信号传递到Init进程后，Init进程会杀死Zygote进程所有的子进程并重启Zygote。这样整个手机相当于重启一遍。
-
-3.监听：需要由系统服务向watchdog注册。Watchdog提供两种监视方式，一种是通过monitor()回调监视服务关键区是否出现死锁或阻塞，一种是通过发送消息监视服务主线程是否阻塞
-
-4.watchdog运行时每30秒会回调monitor()方法来锁一次这个关键区，如果60秒都无法得到锁，就说明服务已经发生了死锁，必须重启设备。
-
-(2)createSystemContext
-   在启动AMS之前，调用了createSystemContext函数
-   1.ActivityThread.systemMain() 除了进行是否开启硬件渲染的判断外，主要作用是： 
-     创建出ActivityThread对象，然后调用该对象的attach函数。
-     ActivityThread的attach函数最重要的工作就是创建了Instrumentation、Application和Context
-(3)AMS初始化
-   创建完Android运行环境后，SystemServer调用startBootstrapServices，其中就创建并启动了AMS
-(4)将SystemServer纳入AMS的管理体系
-   AMS的setSystemProcess主要有四个主要的功能： 
-   1、注册一些服务； 
-   2、获取package名为“android”的应用的ApplicationInfo； 
-   3、调用ActivityThread的installSystemApplicationInfo； 
-   4、AMS进程管理相关的操作。
-
-
 并发
 
 原子性：一个操作或者一系列骚操作，要么全部执行要么全部不执行。数据库中的“事物”就是个典型的原子操作。
@@ -78,53 +45,8 @@ POS:权益证明是区块链网络中的使用的另一种共识算法，在基�
 
 简单来说，共识算法就是保证少数服从多数          
 
-
-apk加密技术：
-1.代码混淆
-2.自我校验--在程序中加一些对自己应用的完整性校验，可以借助签名、或计算自己应用dex的md5值等等来完成
-3.dex文件变形
-目前广为使用：
-1.Dex保护
-         (1)隐藏dex文件
-         (2)对dex文件进行变形
-         (3)对dex结构进行变形
-2.SO保护
-        (1)修改Elf头、节表
-        (2)选择开源加壳工具
-        (3)进程防调试、增加调试难度
-        
-
 MongoDB是文档型的非关系型数据库，其优势在于查询功能比较强大，能存储海量数据
 Memcached相似redis:它们都是内存型数据库，数据保存在内存中，通过tcp直接存取，优势是速度快，并发高，缺点是数据类型有限，查询功能不强，一般用作缓存
-
-
-android中设计模式：
-
-·构造这模式    ex:AlertDialog.Builder
-·适配器模式    ex:Listview与Adapter
-·命令模式      ex:Handler.post
-·享元模式      ex:Message.obtain
-·单例模式      ex:InputMethodManager.getInstance
-·观察者模式    ex:ContentObserver
-·抽象工厂模式  ex:BaseActivity
-
-1.应用卸载反馈（Native 轮询 /data/data/包名目录下）
-2.Home按键监听(广播监听)
-3.应用不能卸载(DevicePolicManager)
-4.无网络权限上传数据(借助手机浏览器)
-
-
-长连接：
-1.进程保活
-2.心跳机制
-3.断线重连
-4.检测存活
-
-Fragment空白页：
-1.viewpager.setOffscreenPageLimit(num);num为你的tab数
-2.在onCreateView里面，判断Fragment是否已经添加了contentView（第一次加载时，可以将view保存下来，再  次加载时，判断保存下来的view是否为null），如果保存的view为null，返回新的view 否则，先将保存的view从父view中移除，然后将该view返回出去   
-3.重写public void destroyItem(ViewGroup container, int position, Object object)去掉super.destroyItem(container, position, object);
-
 
 Databinding：
 
@@ -157,16 +79,6 @@ Null Coalescing 运算符:
                                    ||
            android:text="@{user.displayName != null ? user.displayName : user.lastName}"
 
-
-进程通讯：
-1.Aidl(Binder)
-2.Messager
-3.Content provider
-4.Socket
-5.文件共享
-6.Intent(Bundle)
-
-
 视频：
 Codec:对视频文件进行编码和解码
 
@@ -174,13 +86,6 @@ Codec:对视频文件进行编码和解码
 Container format file:
 
 App架构基本原则：SOC原则(Separation of concerns 分离关注点)->模块化，低耦合
-
-属性动画原理：
-       
-             Android 屏幕刷新的关键Choreographer 
-             1.通过Choreographer向底层注册下一个屏幕刷新信号监听
-             2.将需要运行的动画添加到列表中
-             3.如果动画是一个延迟开始的动画，那么加入Delay队列里
 
 Maven：implementation 'com.tsy:pay:1.0.0'  //groupid:projectid:version
 https://blog.csdn.net/qq_23179075/article/details/71123452(将开源库发布到Jcenter上)
@@ -199,64 +104,6 @@ app.json:
 
 
 
-加密：
-     对称加密
-             DES:速度较,快加密大量数据
-            3DES:对一块数据用三个不同的密钥进行三次加密，强度更高
-             AES:速度快,安全级别高
-   非对称加密
-             RSA:是一个支持变长密钥的公共密钥算法，需要加密的文件块的长度也是可变的
-                 “公钥加密，私钥解密；私钥加密，公钥解密”
-             DSA:数字签名算法
-             ECC:椭圆曲线密码编码学  强
-    散列算法
-            单向散列函数
-                        MD5、SHA 
-                     
-
-
- 1.传统代码埋点
-               实现方案：Coding阶段手动埋点。
-               代表解决方案：友盟、百度统计。
-               优点：灵活、准确，可以定制化。
-               缺点：业务埋点量非常大，开发成本高，不易维护，如果要修改、新增埋点，需要重新发版。                    
- 2.动态埋点
-           实现方案：利用AccessibilityDelegate对每个view实例设置代理，监听控件点击事件。
-           代表方案：Github上开源的Mixpanel
-           优点：无需手动埋点，通过可视化圈选，动态下发配置监听指定控件。                              
-           缺点：不支持数据可回溯，采集不到Fragment页面数据，只支持API 14及以上，
-           同时该监听方式对app性能影响严重，每个控件都需要动态绑定，在界面变更时，
-           需要重新刷新ViewTree，效率低下。
- 3.编译时字节码插桩埋点
-                      实现方案：利用Gradle插件，在编译阶段在代码中插入埋点代码，进行数据采集。
-                      代表方案：GrowingIO、美团的替换UI控件方案。
-                      优点：开发效率高，无需手动埋点，编译时插入代码，性能高，支持数据可回溯。
-                      缺点：埋点灵活性低。          
-
-
-
-低版本SDK实现高版本api
-自己实现或@TargetApi annotation
-
-1.整型，字符型，浮点型的数据在混合运算中相互转换，转换时遵循以下原则：
-  容量小的类型可自动转换为容量大的数据类型；
-  byte,short,char → int → long → float → double
-  byte，short，char之间不会相互转换，他们在计算时首先会转换为int类型。
-
-RxJava操作符
-fromArray：遍历数组
-timer：定时延迟
-interval：隔指定时间发送时间(轮询)
-Map:将被观察者发送的事件转换为任意的类型事件(Bean类型之间转换)
-FlatMap:将被观察者发送的事件序列进行拆分、单独转换,再合并成一个新的事件序列，最后再进行发送(嵌套请求)
-ConcatMap:类似FlatMap  事件序列同原始发送数据序列
-combineLatest：合并事件 & 联合判断
-
-当 .repeat() 接收到 .onCompleted() 事件后触发重订阅。
-当 .retry() 接收到 .onError() 事件后触发重订阅
-
-zip可用于多网络请求等等
-
 python爬虫
 http://blog.csdn.net/sunnyxiaohu/article/details/50787430
 
@@ -269,21 +116,6 @@ path：第三部分就是主机资源的具体地址，如目录和文件名等
 是否有爬虫  :scrapy list
 执行爬虫    :scrapy crawl 爬虫name
 
-
-EventBus黏性事件：就是在发送事件之后再订阅该事件也能收到该事件(Sticky Broadcast) 需要手动移除
-
-
-java Switch语句   ab处理相同这样写
-
-switch(xxx){
-  case a:
-  case b:
-logixxxxxxx
-  break;
-}
-
-
-
 flutter:
         Text--https://blog.csdn.net/poorkick/article/details/80426578
         Container--http://www.onlyloveyd.cn/article/18
@@ -292,16 +124,3 @@ flutter:
         TabBar--http://www.onlyloveyd.cn/article/34
         Row、Column--https://juejin.im/post/5b623d8c5188257f0b583c77
         UI---https://juejin.im/post/5bd54b7be51d456c430e35f6
-
-
-
-
-
-
-
-SP  commit apply区别：
-apply没有返回值而commit返回boolean表明修改是否提交成功
-apply是将修改数据原子提交到内存，而后异步真正提交到硬件磁盘；而commit是同步的提交到硬件磁盘，因此，在多个并发的提交commit的时候，他们会等待正在处理的commit保存到磁盘后在操作，从而降低了效率。而apply只是原子的提交到内存，后面有调用apply的函数的将会直接覆盖前面的内存数据，这样从一定程度上提高了很多效率。
-apply方法不会提示任何失败的提示
-
-https  对称 非对称 Hash 证书 TLS安全层
