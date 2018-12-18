@@ -11,6 +11,7 @@ import android.util.Log;
 import com.bolex.autoEx.AutoEx;
 import com.facebook.stetho.Stetho;
 import com.github.moduth.blockcanary.BlockCanary;
+import com.liulishuo.filedownloader.FileDownloader;
 import com.national.security.community.App;
 import com.national.security.community.Config;
 import com.national.security.community.data.db.User;
@@ -58,7 +59,7 @@ public class InitializeService extends IntentService {
 
         BundledEmojiCompatConfig config = new BundledEmojiCompatConfig(this);
         EmojiCompat.init(config);
-
+        FileDownloader.setup(this);
         AutoEx.apply(this);
         // public static void apply(Context mApp, int maxSize, String tag, boolean isDebug)
         RealmConfiguration myConfig = new RealmConfiguration.Builder()

@@ -2,6 +2,7 @@ package com.national.security.community.utils;
 
 import android.arch.lifecycle.Lifecycle;
 import android.arch.lifecycle.LifecycleOwner;
+import android.content.Context;
 import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.annotation.RequiresApi;
@@ -14,6 +15,7 @@ import androidx.work.OneTimeWorkRequest;
 import androidx.work.PeriodicWorkRequest;
 import androidx.work.WorkManager;
 import androidx.work.Worker;
+import androidx.work.WorkerParameters;
 
 /**
  * @description: 1.https://mp.weixin.qq.com/s/UKgPtJyMF8CJ8ffUuwCCvg
@@ -21,6 +23,10 @@ import androidx.work.Worker;
  * @time: 2018/5/16
  */
 public class CustomWorker extends Worker {
+
+    public CustomWorker(@NonNull Context context, @NonNull WorkerParameters workerParams) {
+        super(context, workerParams);
+    }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
     public void test() {

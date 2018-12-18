@@ -17,10 +17,13 @@ public interface Config {
 
     String PATH_CACHE = PATH_DATA + "/NetCache";
 
-    String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath() + File.separator
+    String PATH_SDCARD = Environment.getExternalStorageDirectory().getAbsolutePath()
+            + File.separator
             + "guoAn" + File.separator + "sheQu";
 
     String SAVE_PHOTO_PATH = PATH_DATA + "/img_path";
     String DB_NAME = "myRealm.realm";
 
+    String VIDEO_FILE = Environment.getExternalStorageDirectory().getAbsolutePath()
+            + File.separator + "Video_Ljn";
 }

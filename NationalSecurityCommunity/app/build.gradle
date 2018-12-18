@@ -4,6 +4,7 @@ apply plugin: 'com.jakewharton.hugo'
 apply plugin: 'com.google.protobuf'
 apply plugin: 'channel'
 apply plugin: 'me.ele.mirror.plugin'
+apply plugin: 'io.objectbox'
 android {
     defaultConfig {
         applicationId "com.national.security.community"
@@ -46,18 +47,18 @@ android {
     }
     signingConfigs {
         debug {
-            keyAlias 'key1'
-            keyPassword 'gasq110'
-            storeFile file('key/gasq.jks')
-            storePassword 'gasq110'
+            keyAlias KEYALIAS
+            keyPassword KEYPASSWORD
+            storeFile file(STOREFILE)
+            storePassword STOREPASSWORD
             archivesBaseName = "国安社区"
         }
 
         release {
-            keyAlias 'key1'
-            keyPassword 'gasq110'
-            storeFile file('key/gasq.jks')
-            storePassword 'gasq110'
+            keyAlias KEYALIAS
+            keyPassword KEYPASSWORD
+            storeFile file(STOREFILE)
+            storePassword STOREPASSWORD
             archivesBaseName = "国安社区"
         }
     }
@@ -107,7 +108,18 @@ android {
         targetCompatibility JavaVersion.VERSION_1_8
     }
     dexOptions {
-        javaMaxHeapSize "4g"
+        javaMaxHeapSize "1g"
+        //使用增量模式构建
+        incremental true
+
+//是否支持大工程模式
+        jumboMode = true
+
+//预编译
+        preDexLibraries = true
+
+//线程数
+        threadCount = 8
     }
     sourceSets {
         main {
@@ -202,7 +214,7 @@ android {
     realm {
         syncEnabled = true
     }
-    buildToolsVersion '28.0.2'
+    buildToolsVersion '28.0.3'
 }
 
 static def releaseTime() {
@@ -212,6 +224,7 @@ static def releaseTime() {
 apply plugin: 'replugin-host-gradle'
 dependencies {
     implementation fileTree(include: ['*.jar'], dir: 'libs')
+    //noinspection GradleCompatible
     implementation 'com.android.support:design:28.0.0'
     implementation 'com.android.support.constraint:constraint-layout:1.1.3'
     testImplementation 'junit:junit:4.12'
@@ -254,7 +267,7 @@ dependencies {
     implementation 'me.yokeyword:eventbus-activity-scope:1.1.0'
 
     //rxpermissions
-    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.4@aar'
+    implementation 'com.tbruyelle.rxpermissions2:rxpermissions:0.9.5@aar'
 
     //rxCache
     implementation('com.github.VictorAlbertos.RxCache:runtime:1.8.0-2.x') {
@@ -271,7 +284,7 @@ dependencies {
 
     //Glide
     implementation 'com.github.bumptech.glide:glide:4.8.0'
-    annotationProcessor 'com.github.bumptech.glide:compiler:4.7.1'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.8.0'
 
     //圆角 高斯模糊等
     implementation 'jp.wasabeef:glide-transformations:3.1.1'
@@ -343,12 +356,15 @@ dependencies {
 
     //Stack Overflow
     implementation 'com.github.BolexLiu:AutoEx:v1.0.6'
-    implementation 'android.arch.work:work-runtime:1.0.0-alpha09'
-    implementation 'com.blankj:utilcode:1.16.4'
+    implementation 'android.arch.work:work-runtime:1.0.0-alpha11'
+    implementation 'com.blankj:utilcode:1.21.2'
     implementation 'com.shuyu:GSYVideoPlayer:5.0.2'
     implementation 'org.aspectj:aspectjrt:1.8.9'
     //适配 https://github.com/JessYanCoding/AndroidAutoSize
     implementation 'me.jessyan:autosize:1.0.1'
+    //download
+    implementation 'com.liulishuo.filedownloader:library:1.7.5'
+    implementation 'mylife.is.it.jcenterdemo:LJNUtils:1.0.0'
 }
 
 protobuf {

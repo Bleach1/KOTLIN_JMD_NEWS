@@ -124,3 +124,13 @@ flutter:
         TabBar--http://www.onlyloveyd.cn/article/34
         Row、Column--https://juejin.im/post/5b623d8c5188257f0b583c77
         UI---https://juejin.im/post/5bd54b7be51d456c430e35f6
+
+Dart:
+     var--Dart中var变量一旦赋值，类型便会确定，则不能再改变其类型
+
+     dynamic
+            ---会在赋值时自动进行类型推断，不同在于，赋值后可以改变其类型
+     Object
+     final
+          ---一个 final 变量只能被设置一次，两者区别在于：const 变量是一个编译时常量，final变量在第一次使用时被初始化
+     const
