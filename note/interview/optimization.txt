@@ -1,0 +1,28 @@
+UI优化：
+      将数据渲染到屏幕上的是系统Native层的SurfaceFlinger服务
+      60fps,1秒刷新60次--16ms刷新一次
+卡顿：
+    Layout过于复杂，嵌套严重
+    同一时间动画执行次数过多
+    View过度绘制--无用背景等
+    在UI做耗时操作
+    频繁GC(同一帧中频繁创建内存)
+Profile GPU Rendering:
+                      蓝色代表测量绘制时间--onDraw()处理复杂
+ sync&Upload：减少屏幕上的图片数量或者缩小图片的大小
+ Input Handing:用户输入事件的地方执行了复杂操作
+ Misc Time/Vsync Delay:主线程执行太多任务
+
+ HierarchyViewer
+
+内存优化：
+        内存泄漏--没有用的对象到GC Roots是可达的(被对象引用)导致GC无法回收
+        内存溢出--当程序运行时所需的内存大于程序允许的最高内存，这时会出现内存溢出；
+        1.非静态内部类的静态实例--持有外部引用无法回收
+        2.Handler
+
+LeakCanary：
+           RefWatcher监听了所有Activity的onActivityDestroyed事件，当Activity被Destroy时，
+           调用ActivityRefWatcher.this.onActivityDestroyed(activity); 函数。
+           正常情况下，当一个这个函数应该activity被Destroy时，
+           那这个activity对象应该变成 null才是正确的。如果没有变成 null，那么就意味着发生了内存泄漏。

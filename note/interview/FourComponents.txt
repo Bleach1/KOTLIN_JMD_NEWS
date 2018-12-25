@@ -1,0 +1,157 @@
+Activity
+  启动Activity：onCreate()—>onStart()—>onResume()，Activity进入运行状态。
+  Activity退居后台：当前Activity跳转到新的Activity界面或按Home键回到主屏： onPause()—>onStop()，进入停滞状态。
+  Activity返回前台：onRestart()—>onStart()—>onResume()，再次回到运行状态。
+  Activity退居后台，且系统内存不足，系统会杀死这个后台状态的Activity，若再次回到这个Activity,则会走onCreate()–>onStart()—>onResume()
+  锁定屏与解锁屏幕:只会调用onPause()，而不会调用onStop方法，开屏后则调用onResume()
+
+onSaveInstanceState：
+  按下Home将程序切换到后台、关闭屏幕
+  Activity A启动一个新的Activity B，会回调A中onSaveInstanceState()方法
+  屏幕横竖屏方向切换、长按Home或者菜单键进入程序列表页面
+
+1.运行Activity
+  onCreate
+  onStart
+  onResume
+2.切换成横屏
+  onSaveInstanceState
+  onPause
+  onStop
+  onDestroy
+  onCreate
+  onStart
+  onRestoreInstanceState
+  onResume
+3.切换成竖屏
+  onSaveInstanceState
+  onPause
+  onStop
+  onDestroy
+  onCreate
+  onStart
+  onRestoreInstanceState
+  onResume
+  onSaveInstanceState
+  onPause
+  onStop
+  onDestroy
+  onCreate
+  onStart
+  onRestoreInstanceState
+  onResume
+4.修改AndroidManifest.xml，把该Activity添加 android:configChanges="orientation"，切换横屏
+  onSaveInstanceState
+  onPause
+  onStop
+  onDestroy
+  onCreate
+  onStart
+  onRestoreInstanceState
+  onResume
+5.切换竖屏
+  onSaveInstanceState
+  onPause
+  onStop
+  onDestroy
+  onCreate
+  onStart
+  onRestoreInstanceState
+  onResume
+  onConfigurationChanged
+6.改成 android:configChanges="orientation|keyboardHidden"，切换横屏
+  onConfigurationChanged
+7.切换竖屏
+  onConfigurationChanged
+  onConfigurationChanged
+总结：
+    1.不设置Activity的android:configChanges时，切屏会重新调用各个生命周期，切横屏时会执行一次，切竖屏时会执行两次
+    2.设置Activity的android:configChanges="orientation"时，切屏还是会重新调用各个生命周期，切横、竖屏时只会执行一次
+    3.设置Activity的android:configChanges="orientation|keyboardHidden"时，切屏不会重新调用各个生命周期，只会执行onConfigurationChanged方法
+
+当前Activity产生事件弹出Toast和AlertDialog的时候ActivityActivity的生命周期不会有改变
+运行时按下HOME键(跟被完全覆盖是一样的)：onSaveInstanceState --> onPause --> onStop  onRestart -->onStart--->onResume
+Activity未被完全覆盖只是失去焦点：onPause--->onResume
+
+singleInstance:(闹铃界面)
+singleTop（栈顶复用）：（详情页）
+                     如果有新的Activity已经存在任务栈的栈顶，那么此Activity就不会被重新创建新实例，
+                     而是复用已存在任务栈栈顶的Activity。这里重点是位于栈顶，才会被复用，
+                     如果新的Activity的实例已存在但没有位于栈顶，那么新的Activity仍然会被重建
+singleTask（栈内复用）：(主界面)
+                      是检测整个栈中是否存在当前需要启动的Activity，如果存在就直接将该Activity置于栈顶，
+                      并将该Activity以上的Activity都从任务栈中移出销毁，同时也会回调onNewIntent方法
+
+简述Activity启动全部过程：http://www.cnblogs.com/gne-hwz/p/6758308.html
+
+ActivityA和ActivityB,我们要点击ActivityA的启动ActivityB按钮，来启动ActivityB，然后点击返回键。
+ActivityA:onCreate
+          onStart
+          onResume
+          onPause
+ActivityB:onCreate
+          onStart
+          onResume
+ActivityA:onStop
+---------------------------------------------------------------------------------------------------------------
+ActivityB:onPause
+ActivityA:onStart
+          onResume
+ActivityB:onStop
+          onDestroy
+
+onStart与onResume区别：onStart看见界面onResume可以交互
+Activity与Service通信的方式：1.EventBus(BroadcastReceiver)
+                            2.Binder
+                            3.AIDL
+                            4.接口
+Service:
+        service 多次绑定，创建：
+        service通过startService()方法开始，通过Context.stopService()方法停止；
+        也可以通过Service.stopSelf()方法或者Service.stopSelfResult()方法来停止自己。
+        只要调用一次stopService()方法便可以停止服务，无论之前它被调用了多少次的启动服务方法。
+在client（客户端）调用Service【同一个Service】情况下：
+  如果Service不存在，Service执行顺序是onCreate→onBind，接着client创建ServiceConnection实例并执行onServiceConnected这个方法。
+  如果Service已处于运行状态【说明在此之前已经在其他地方启动过该Service】，由于之前执行过的onBind回调获取IBinder实例，
+  该IBinder实例在所有的client（客户端）之间是共享的，所以第二次执行onBind回调，直接使用上次已经获取的IBinder实例，
+  并将其传入到与之对应的onServiceConnected方法中，标志着连接已经建立了起来，这时就有两个或者多个client（客户端）和Service绑定了。
+  startService:生命周期和调用者不同.启动后若调用者未调用stopService而直接退出,Service仍会运行
+               onCreate->onStartCommand->onDestroy
+  bindService:生命周期与调用者绑定,调用者一旦退出,Service就会调用unBind->onDestroy
+              onCreate->onBind->onUnbind->onDestroy
+ onBind()将返回给 客户端一个IBind接口实例，IBind允许客户端回调服务的方法，比如得到Service的实例、运行状态或其他操作。
+ 这个时候把调用者 （Context，例如Activity）会和Service绑定在一起，Context退出了，Srevice就会调用 onUnbind->onDestroy相应退出。
+  IntentService:Service的子类，是一个异步的，会自动停止的服务，很好解决了传统的Service中处理完耗时操作忘记停止并销毁Service
+  的问题生成一个默认的且与线程相互独立的工作线程执行所有发送到onStartCommand()方法的Intent,可以在onHandleIntent()中处理.
+  串行队列,每次只运行一个任务,不存在线程安全问题,所有任务执行完后自动停止服务,不需要自己手动调用stopSelf()来停止.
+为何不用bindService方式创建IntentService：
+  IntentService的工作原理是，在IntentService的onCreate()里会创建一个HandlerThread，
+  并利用其内部的Looper实例化一个ServiceHandler对象；
+  而这个ServiceHandler用于处理消息的handleMessage()方法会去调用IntentService的onHandleIntent()，
+  这也是为什么可在该方法中处理后台任务的逻辑；当有Intent任务请求时会把Intent封装到Message，
+  然后ServiceHandler会把消息发送出，而发送消息是在onStartCommand()完成的，
+  只能通过startService()才可走该生命周期方法，因此不能通过bindService创建IntentService。
+Service保活：
+            Service设置成START_STICKY
+            提升service优先级
+            提升service进程优先级
+            onDestroy方法里重启service
+            监听系统广播判断Service状态
+            在JNI层,用C代码fork一个进程出来
+            root之后放到system/app变成系统级应用
+            放一个像素在前台
+BroadcastReceiver:
+  如果与android系统进行相关的通知，还是要选择本地广播；在BroadcastReceiver的 onReceive方法中，
+  可以获得Context 、intent参数，这两个参数可以调用许多的sdk中的方法，而EventBus获得这两个参数相对比较困难；
+  因此广播相对于其他的方式而言，广播是重量级的，消耗资源较多的方式
+  EventBus原理：EventBus基于观察者模式的Android事件分发总线
+                获得所有订阅了这个事件的Subscription列表,然后分发事件,通过不同的threadMode在不同的线程里invoke()订阅者的方法。
+  理解：一个个事件(event)发送到总线上，然后EventBus根据已注册的订阅者(subscribers)来匹配相应的事件，进而把事件传递给订阅者
+  EventBus黏性事件：就是在发送事件之后再订阅该事件也能收到该事件(Sticky Broadcast) 需要手动移除
+
+  静态注册(常驻)：AndroidManifest.xml
+  动态注册(非常驻)：java代码
+  本地广播
+ContentProvider:跨进程通信底层采用binder机制
+                uri: 唯一标识 ContentProvider & 其中的数据
+                外部进程通过 ContentResolver类 从而与ContentProvider类进行交互

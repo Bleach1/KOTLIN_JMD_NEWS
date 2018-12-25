@@ -1,0 +1,339 @@
+SQLite数据库升级：
+                1.将表A重命名，改了A_temp
+                2.创建新表A
+                3.将表A_temp的数据插入到表A
+
+统计启动时间：
+    本地统计：adb shell am start -w packagename/activity
+    线上统计：
+            Application 构造函数
+            Application.attachBaseContext()·
+            Application.onCreate()
+            Activity 构造函数
+            Activity.setTheme()
+            Activity.onCreate()
+            Activity.onStart
+            Activity.onResume
+            Activity.onAttachedToWindow
+            Activity.onWindowFocusChanged
+    起始时间：冷启动启动时间一般可以在 Application.attachBaseContext() 开始的位置记录起始时间点
+             热启动启动时间点可以在 Activity.onRestart() 中记录起始时间点。
+    结束时间：在 Activity.onWindowFocusChanged 记录应用启动的结束时间点
+
+String 为什么要设计成不可变的：
+                            1.字符串常量池的需要
+                            2.允许String对象缓存HashCode -> 字符串不变性保证了hashcode的唯一性
+                            3.安全性
+
+LRUCache原理：LinkedHashMap  最近最少使用
+
+序列化 作用：将对象字节序列保存到硬盘上、数据传输
+Parcelable(内存--IBinder--效率高)
+Serializable(本地)
+
+Android系统启动：
+               init进程启动：
+               1.创建和挂载启动所需要的文件目录
+               2.初始化和启动属性服务
+               3.解析init.rc文件并启动Zygote进程
+               Zygote进程启动：
+               1.创建AppRuntime并调用其start方法，启动Zygote进程
+               2.创建java虚拟机并注册JNI方法
+               3.通过JNI调用ZygoteInit的main函数进入Zygote的java框架层
+               4.通过registerZygoteSocket方法创建服务端Socket，并通过runSelectLoop方法等待AMS的请求来创建新的应用程序进程
+               5.启动SystemServer进程
+               SystemServer进程启动：
+               1.启动Binder线程池，与其他进程通信
+               2.创建SystemServiceManager，用于对系统服务的创建、启动、生命周期管理
+               3.启动各种系统服务
+
+Launcher启动：
+            用户在 Launcher 程序里点击应用图标时，会通知 ActivityManagerService 启动应用的入口 Activity，
+            ActivityManagerService 发现这个应用还未启动，则会通知 Zygote 进程孵化出应用进程，
+            然后在这个应用进程里执行 ActivityThread的main方法。应用进程接下来通知 ActivityManagerService 应用进程已启动，
+            ActivityManagerService 保存应用进程的一个代理对象，这样 ActivityManagerService 可以通过这个代理对象控制应用进程，
+            然后 ActivityManagerService通知应用进程创建入口Activity的实例，并执行它的生命周期函数。
+
+
+ActivityManagerService:主要负责系统中四大组件的启动、切换、调度及应用程序的管理和调度等工作。
+AMS extend ActivityManagerNative(AMN) implement Watchdog.Monitor,BatteryStatsImpl.BatteryCallback
+AMN extend Binder implement IActivityManager   AMN将作为Binder通信的服务端为用户提供支持。
+在ActivityManagerNative类中定义了内部类ActivityManagerProxy implement IActivityManager 作为客户端使用的服务端代理
+其它进程将使用ActivityManager来使用AMS的服务。ActivityManager通过AMN提供的getDefault接口得到ActivityManagerProxy，
+然后再以Binder通信的方式调用AMS的接口
+ActivityRecord记录Activity所有信息
+WatchDog机制:
+1.WatchDog监控SystemServer中的线程。发现问题会杀死SystemServer进程。
+2.SystemServer的父进程Zygote接收到SystemServer的死亡信号后，会杀死自己。
+  Zygote进程死亡的信号传递到Init进程后，Init进程会杀死Zygote进程所有的子进程并重启Zygote。这样整个手机相当于重启一遍。
+3.监听：需要由系统服务向watchdog注册。Watchdog提供两种监视方式，
+ 草一种是通过monitor()回调监视服务关键区是否出现死锁或阻塞，一种是通过发送消息监视服务主线程是否阻塞
+4.watchdog运行时每30秒会回调monitor()方法来锁一次这个关键区，如果60秒都无法得到锁，就说明服务已经发生了死锁，必须重启设备。
+(2)createSystemContext
+   在启动AMS之前，调用了createSystemContext函数
+   1.ActivityThread.systemMain() 除了进行是否开启硬件渲染的判断外，主要作用是：
+     创建出ActivityThread对象，然后调用该对象的attach函数。
+     ActivityThread的attach函数最重要的工作就是创建了Instrumentation、Application和Context
+(3)AMS初始化
+   创建完Android运行环境后，SystemServer调用startBootstrapServices，其中就创建并启动了AMS
+(4)将SystemServer纳入AMS的管理体系
+   AMS的setSystemProcess主要有四个主要的功能：
+   1、注册一些服务；
+   2、获取package名为“android”的应用的ApplicationInfo；
+   3、调用ActivityThread的installSystemApplicationInfo；
+   4、AMS进程管理相关的操作。
+
+Activity启动过程：
+                1.Launcher请求AMS
+                2.AMS到ApplicationThread的调用过程
+                3.ActivityThread启动Activity
+                (Zygote、Launcher、AMS所在进程(SystemServer)、应用程序进程)
+
+Service启动过程：
+               1.ContextImpl到AMS的调用过程
+               2.ActivityThread启动Service
+BroadcastReceiver:静态广播由PackageManagerService注册
+ContentProvider: query方法到AMS的调用过程，AMS启动ContentProvider
+
+
+热修复：
+      1.代码修复
+        (1)底层替换方案
+           直接在Native层修改原有类
+        (2)类加载方案
+           基于Dex分包(Google方案、Dex自动拆包和动态加载方案)
+        (3)InstantRun方案
+      2.资源修复(AssetManager)
+        参考InstantRun原理(基于更改部分)
+        Hot Swap(不需要重启App、Activity适合修改部分代码)
+        Warm Swap(App不不重启，Activity重启--资源文件)
+        Cold Swap(App重启--添加新的类等)
+        (1)新创建AssetManager，反射调用addAssetPath方法加载外部资源
+        (2)将AssetManager类型的mAssets字段的引用全部替换为新创建的AssetManager
+      3.动态链接库修复
+        将so补丁插入到NativeLibraryElement数组的前部，让so补丁的路径优先被返回和加载
+        调用System的load方法来接管so的加载入口
+
+Hook:
+     java(主要通过反射代理实现修改java代码)--hook当前应用进程
+     Native(NDK开发环境中、修改Native代码)
+     hook框架--xPosed全局hook需要root
+
+WindowManager
+https://blog.csdn.net/yhaolpz/article/details/68936932
+https://blog.csdn.net/chi_wy/article/details/80264626
+PopupWindow和Dialog区别：
+PopupWindow没有新建Window，而是将view加到DecorView；
+Dialog是新建了一个window，相当于走了一遍Activity中创建window的流程
+Activity中的Window何时被装进WindowManager--onResume
+Dialog为什么不能使用Application的Context
+Dialog窗口类型是TYPE_APPLICATION，与Activity一样
+TYPE_APPLICATION要求Token不能为null，Application没有AppWindowToken
+
+WebView:
+        WebView不支持 input type='file'：重写WebChromeClient  openFileChooser
+        javascript+方法名  @javascriptinterface  addjavascriptinterface(this,"android")
+
+
+ANR:
+    KeyDispatchTimeout –按键或触摸事件在特定时间内无响应(5s)
+    BroadcastTimeout –BroadcastReceiver在特定时间内无法处理完成(10s)
+    ServiceTimeout –Service在特定的时间内无法处理完成(20s)
+    在activity的关键生命周期方法里例如像onCreate和onResume不要进行耗时操作
+    解决：看日志，traces.txt
+
+Why Glide:
+          支持Gif,WebP,视频缩略图，加载速度快，体积小，易用 Google
+          支持Activity,Fragment
+          Glide内存和磁盘缓存
+          加载的图片质量低（可设置）
+          磁盘缓存策略Picasso缓存的是全尺寸的，而Glide缓存的是跟ImageView尺寸相同的
+
+屏幕适配：.9图、百分比布局、 AutoLayout、(layout、dimens按分辨率命名)、RelativeLayout、ConstrainLayout、手机屏幕密度
+
+Android两个应用在同一个任务栈:栈一般以包名命名，两个应用的签名和UDID要相同
+
+Why 65535:
+          因为在Dalvik指令集里，调用方法的invoke-kind指令中，method reference index只给了16bits，最多能调用65535个方法，
+          所以在生成dex文件的过程中，当方法数超过65535就会报错
+
+泛型：
+     1.<? extends T>是T的某一种子类的意思，不可能通过 add（）来加入元素。因为<? extends T>是T的某种子类，
+       能放入子类的容器不一定放入超类，也就是没可能放入T。
+     2.<? super T>以T类为下限的某种类，简单地说就是T类的超类。能放入某一类的容器一定可以放入其子类。
+       extends 可用于的返回类型限定，不能用于参数类型限定。
+       super 可用于参数类型限定，不能用于返回类型限定。
+
+代理模式作用：为其他对象提供一种代理以控制对这个对象的访问。
+             而代理对象可以在客户端和目标对象之间起到中介的作用。
+
+在多进程中，Application会启动几次(一个进程一次)
+
+在子线程中更新UI：
+               在onCreate中是可以进行子线程UI更新操作的，而在OnResume中是不可以的，
+               因为在onResume中ViewRootImpl已经创建初始化完成了，所以能够进行checkThread检查
+
+为什么不能在子线程更新UI：
+                       1.如果不同的线程控制同一块UI，因为时间的延时性，网络的延迟性，很有可能界面图像会乱套，会花掉。
+                         而且出了问题也非常不容易排查问题出在了哪里。
+                         从硬件上考虑，每个手机只有一个显示芯片，根本上不可能同时处理多个绘制请求)，减少更新线程数，
+                         其实是提高了更新效率。
+                       2.如果可以并发的更新UI，事实上是 “is not thread safe”的，也就是线程不安全。
+                         我们都知道，线程安全问题其实就是，不同的线程对同一块资源的调用。
+                         在更新UI的同时，会涉及context资源的调用，所以产生了线程安全问题。
+
+元素共享动画原理：页面过渡动画是基于Transition动画来实现的
+动画绘制原理：
+            实现原理是每次绘制视图时View所在的ViewGroup中的drawChild函数获取该View的Animation的Transformation值
+            然后调用canvas.concat(transformToApply.getMatrix())，通过矩阵运算完成动画帧，如果动画没有完成，
+            继续调用invalidate()函数，启动下次绘制来驱动动画
+
+属性动画：
+        估值器  ：TypeEvaluator（可以自定义）--振幅
+        多个动画： AnimatorSet
+        一般    ：ObjectAnimator
+        简单    ：ViewPropertyAnimator
+        差值器  ：Interpolator--加速度
+属性动画原理：
+
+             Android 屏幕刷新的关键Choreographer
+             1.通过Choreographer向底层注册下一个屏幕刷新信号监听
+             2.将需要运行的动画添加到列表中
+             3.如果动画是一个延迟开始的动画，那么加入Delay队列里
+
+Handler:
+       Looper主要作用：
+       1、与当前线程绑定，保证一个线程只会有一个Looper实例，同时一个Looper实例也只有一个MessageQueue。
+       2、loop()方法，不断从MessageQueue中去取消息，交给消息的target属性的dispatchMessage去处理。
+       sendMessageAtTime
+       looper.loop是线程一直在跑
+       新创建线程防止阻塞
+
+       子线程创建
+       looper.pre
+       xxxxx
+       looper.loop
+       https://blog.csdn.net/qian520ao/article/details/78262289
+
+
+组件化：
+      通信机制--组件总线、路由+接口下沉(静态方法)
+
+插件化：
+      Activity插件化--反射、接口、Hook
+      Hook IActivity Instrumentation
+      Service--代理分发
+
+
+Binder:
+        内核空间(所有进程共享空间)
+就是在编译时候，根据注解生成对应需要的文件，这样子在app运行的时候就不会导致性能损耗
+
+
+Rxjava:
+      Observable发送一个Complete、Error事件后可以继续发送其他事件，Observe接收到Complete、Error事件后不再接受事件
+      实质上，在RxJava的 subscribe 过程中，Observer总是会先被转换成Subscriber再使用
+      Subscriber抽象类对 Observer 接口进行了扩展，新增了两个方法：
+      1. onStart()：在还未响应事件前调用，用于做一些初始化工作
+      2. unsubscribe()：用于取消订阅。在该方法被调用后，观察者将不再接收 & 响应事件
+      调用该方法前，先使用 isUnsubscribed() 判断状态，确定被观察者Observable是否还持有观察者Subscriber的引用，如果引用不能及时释放，就会出现内存泄露
+      Disposable.dispose() 切断观察者 与 被观察者 之间的连接
+      Observable.empty()---仅发送Complete事件，直接通知完成
+      Observable.error(new RuntimeException())--仅发送Error事件，直接通知异常
+延迟创建：
+      <-- 1. 第1次对i赋值 ->>
+        Integer i = 10;
+
+        // 2. 通过defer 定义被观察者对象
+        // 注：此时被观察者对象还没创建
+        Observable<Integer> observable = Observable.defer(new Callable<ObservableSource<? extends Integer>>() {
+            @Override
+            public ObservableSource<? extends Integer> call() throws Exception {
+                return Observable.just(i);
+            }
+        });
+
+        <-- 2. 第2次对i赋值 ->>
+        i = 15;
+
+        <-- 3. 观察者开始订阅 ->>
+        // 注：此时，才会调用defer（）创建被观察者对象（Observable）
+        observable.subscribe(new Observer<Integer>() {
+
+            @Override
+            public void onSubscribe(Disposable d) {
+                Log.d(TAG, "开始采用subscribe连接");
+            }
+
+            @Override
+            public void onNext(Integer value) {
+                Log.d(TAG, "接收到的整数是"+ value  );
+            }
+
+            @Override
+            public void onError(Throwable e) {
+                Log.d(TAG, "对Error事件作出响应");
+            }
+
+            @Override
+            public void onComplete() {
+                Log.d(TAG, "对Complete事件作出响应");
+            }
+        });
+
+输出结果15
+
+timer()、Delay()---启动页面
+interval()--延迟几秒开始持续发送事件--无限轮询
+intervalRange--有限轮询
+
+map()--将被观察者发送的事件转换为任意的类型事件
+FlatMap()--将被观察者发送的事件序列进行 拆分 & 单独转换，再合并成一个新的事件序列，最后再进行发送--Observable
+ConcatMap()相比FlatMap有序
+Buffer()--定期从 被观察者（Obervable）需要发送的事件中 获取一定数量的事件 & 放到缓存区中，最终发送
+
+concat、merge合并数据源操作符时，若其中一个Observable发出onError事件，则会终止其他Observable发送事件，解决需要使用concatDelayEror,mergeDelayError
+
+zip()同一页面多个请求完成 在显示页面--startWith（） / startWithArray（）在一个被观察者发送事件前，追加发送一些数据 / 一个新的被观察者
+
+doOnNext在onNext前调用
+
+retry错误重试--可以判断错误类型 重试
+
+若Observable.subscribeOn（）多次指定被观察者 生产事件的线程，则只有第一次指定有效，其余的指定线程无效
+若Observable.observeOn（）多次指定观察者 接收 & 响应事件的线程，则每次指定均有效，即每指定一次，就会进行一次线程的切换
+
+filter--过滤
+ofType--过滤特定数据类型的数据
+distinct（） / distinctUntilChanged（）--过滤事件序列中重复的事件 / 连续重复的事件
+all（）--判断发送的每项数据是否都满足 设置的函数条件
+takeUntil（）--执行到某个条件时，停止发送事件
+contains（）--判断发送的数据中是否包含指定数据
+
+背压--被观察者 发送事件速度太快，而观察者 来不及接收所有事件，从而导致观察者无法及时响应 / 处理所有发送过来事件的问题，最终导致缓存区溢出、事件丢失 & OOM
+
+subscribeOn()改变调用它之前代码的线程
+observeOn()改变调用它之后代码的线程
+多次调用subscribeOn()只有第一个起作用 
+多次调用observeOn()可以切换到不同线程 
+默认情况下， doOnSubscribe() 运行在 subscribe() 发生的线程；
+而假设在 doOnSubscribe() 之后有 subscribeOn() 的话，它将运行在离它近期的 subscribeOn() 所指定的线程。
+https://www.cnblogs.com/blfbuaa/p/7383739.html
+
+OKhttp--底层给予okio非阻塞
+
+Dagger2:  比如有个类A，他的构造函数需要传入B,C；然后代码里有10个地方实例化了A，那如果功能更改，A的构造函数改成了只有B
+
+Provide 如果是单例模式 对应的Compnent 也要是单例模式
+inject(Activity act) 不能放父类
+即使使用了单利模式，在不同的Activity 对象还是不一样的
+依赖component， component之间的Scoped 不能相同
+子类component 依赖父类的component ，子类component的Scoped 要小于父类的Scoped，Singleton的级别是Application
+多个Moudle 之间不能提供相同的对象实例
+Moudle 中使用了自定义的Scoped 那么对应的Compnent 使用同样的Scoped
+
+Butterknife：
+             public protected修饰控件--可以直接activity.变量 不用反射提高性能
+
+ 定义变量基本类型
+ bean中数据类型包装类

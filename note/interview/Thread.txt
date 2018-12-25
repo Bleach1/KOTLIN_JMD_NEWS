@@ -1,0 +1,92 @@
+进程：进程是具有一定独立功能的程序关于某个数据集合上的一次运行活动,进程是系统进行资源分配和调度的一个独立单位
+线程：线程是进程的一个实体,是CPU调度和分派的基本单位
+
+HandlerThread：
+HandlerThread本质上是一个Thread对象，只不过其内部帮我们创建了该线程的Looper和MessageQueue；
+通过HandlerThread我们不但可以实现UI线程与子线程的通信同样也可以实现子线程与子线程之间的通信；
+HandlerThread在不需要使用的时候需要手动的回收掉；
+
+线程间 操作 List：Collections.synchronizedList
+
+产生死锁的原因：
+             （1） 因为系统资源不足。
+             （2） 进程运行推进的顺序不合适。
+             （3） 资源分配不当等。
+产生死锁的四个必要条件：
+                    （1） 互斥条件：一个资源每次只能被一个进程使用。
+                    （2） 请求与保持条件：一个进程因请求资源而阻塞时，对已获得的资源保持不放。
+                    （3） 不剥夺条件:进程已获得的资源，在末使用完之前，不能强行剥夺。
+                    （4） 循环等待条件:若干进程之间形成一种头尾相接的循环等待资源关系。
+synchronized与Lock的区别：http://blog.csdn.net/gongpulin/article/details/51212241
+开启线程的三种方式,run()和start()方法区别 ：
+                                         run()方法:在本线程内调用该Runnable对象的run()方法，可以重复多次调用；
+                                         start()方法:启动一个线程，调用该Runnable对象的run()方法，不能多次启动一个线程；
+线程如何关闭，以及如何防止线程的内存泄漏 ：http://www.cnblogs.com/greta/p/5624839.html
+static synchronized 方法的多线程访问和作用，同一个类里面两个synchronized方法，两个线程同时访问的问题
+http://blog.csdn.net/cs408/article/details/48930803
+所有的变量都存储在主内存中，每条线程还有自己的虚拟内存。线程的虚拟内存中保存了该线程使用到的变量到主内存副本拷贝。
+线程对变量的所有操作（读取、赋值）都必须在自己的虚拟内存中进行，而不能直接读写主内存中的变量。
+不同线程之间无法直接访问对方虚拟内存中的变量，线程间变量值的传递均需要在主内存来完成。
+http://www.cnblogs.com/chihirotan/p/6486436.html
+
+
+线程池
+1.为什么使用线程池
+  合理的使用线程池对线程进行统一分配、调优和监控，有以下好处：
+  1--降低资源消耗；
+  2--提高响应速度；
+  3--提高线程的可管理性。
+2.线程池核心内容
+  (1)核心方法： public ThreadPoolExecutor( int corePoolSize,
+                                       int maximumPoolSize,
+                                       long keepAliveTime,
+                                       TimeUnit unit,
+                                       BlockingQueue<Runnable> workQueue) {}
+  1--corePoolSize
+     线程池中的核心线程数，当提交一个任务时，线程池创建一个新线程执行任务，直到当前线程数等于corePoolSize；如果当前线程数为corePoolSize，
+     继续提交的任务被保存到阻塞队列中，等待被执行；如果执行了线程池的prestartAllCoreThreads()方法，线程池会提前创建并启动所有核心线程。
+  2--maximumPoolSize
+     线程池中允许的最大线程数。如果当前阻塞队列满了，且继续提交任务，则创建新的线程执行任务，前提是当前线程数小于maximumPoolSize；
+  3--keepAliveTime
+     线程空闲时的存活时间，即当线程没有任务执行时，继续存活的时间；默认情况下，该参数只在线程数大于corePoolSize时才有用；
+  4--unit
+     keepAliveTime的单位；
+  5--workQueue
+     用来保存等待被执行的任务的阻塞队列，且任务必须实现Runable接口：
+     1) ArrayBlockingQueue    ： 基于数组结构的有界阻塞队列，按FIFO排序任务；
+     2) LinkedBlockingQueue   ： 基于链表结构的阻塞队列，按FIFO排序任务，吞吐量通常要高于ArrayBlockingQuene；
+     3) SynchronousQueue      ： 一个不存储元素的阻塞队列，每个插入操作必须等到另一个线程调用移除操作，否则插入操作一直处于阻塞状态，吞吐量通常要高于LinkedBlockingQuene；
+     4) priorityBlockingQueue ： 具有优先级的无界阻塞队列；
+  (2)线程池的饱和策略
+     1--AbortPolicy         ： 直接抛出异常，默认策略；
+     2--CallerRunsPolicy    ： 用调用者所在的线程来执行任务；
+     3--DiscardOldestPolicy ： 丢弃阻塞队列中靠最前的任务，并执行当前任务；
+     4--DiscardPolicy       ： 直接丢弃任务；
+     当然也可以根据应用场景实现RejectedExecutionHandler接口，自定义饱和策略，如记录日志或持久化存储不能处理的任务
+  (3)线程池种类
+     1--newFixedThreadPool
+        public static ExecutorService newFixedThreadPool(int nThreads) {
+                return new ThreadPoolExecutor(nThreads, nThreads,0L, TimeUnit.MILLISECONDS,new LinkedBlockingQueue<Runnable>());}
+        初始化一个指定线程数的线程池，其中corePoolSize == maximumPoolSize，使用LinkedBlockingQuene作为阻塞队列，不过当线程池没有可执行任务时，也不会释放线程。
+     2--newCachedThreadPool
+        public static ExecutorService newCachedThreadPool() {
+                return new ThreadPoolExecutor(0, Integer.MAX_VALUE,60L, TimeUnit.SECONDS,new SynchronousQueue<Runnable>());}
+        1) 初始化一个可以缓存线程的线程池，默认缓存60s，线程池的线程数可达到Integer.MAX_VALUE，内部使用SynchronousQueue作为阻塞队列；
+        2) 和newFixedThreadPool创建的线程池不同，newCachedThreadPool在没有任务执行时，当线程的空闲时间超过keepAliveTime，会自动释放线程资源，
+           当提交新任务时，如果没有空闲线程，则创建新线程执行任务，会导致一定的系统开销(注意控制并发的任务数，否则创建大量的线程可能导致严重的性能问题)；
+     3--newSingleThreadExecutor
+        public static ExecutorService newSingleThreadExecutor() {
+                return new FinalizableDelegatedExecutorService
+                    (new ThreadPoolExecutor(1, 1, 0L, TimeUnit.MILLISECONDS,new LinkedBlockingQueue<Runnable>()));}
+        初始化的线程池中只有一个线程，如果该线程异常结束，会重新创建一个新的线程继续执行任务，唯一的线程可以保证所提交任务的顺序执行，
+        内部使用LinkedBlockingQueue作为阻塞队列。
+     4--newScheduledThreadPool
+        public static ScheduledExecutorService newScheduledThreadPool(int corePoolSize) {
+                return new ScheduledThreadPoolExecutor(corePoolSize);}
+        初始化的线程池可以在指定的时间内周期性的执行所提交的任务，在实际的业务场景中可以使用该线程池定期的同步数据
+  (4)任务提交方式
+     1--Executor.execute()
+        必须实现Runnable接口，该方式提交的任务不能获取返回值，因此无法判断任务是否执行成功
+     2--ExecutorService.submit()
+        通过ExecutorService.submit()方法提交的任务，可以获取任务执行完的返回值。
+  (5)线程池处理任务原理

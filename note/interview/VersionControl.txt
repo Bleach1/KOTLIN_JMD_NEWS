@@ -1,0 +1,22 @@
+svn冲突：
+       如果采用自己更改的代码则手动删除他人的代码和多余的符号，然后提交。
+       如果采用他人的代码则删除自己的代码和多余的符号，然后提交。
+       revert回滚
+       合并：保留'我的修改',舍弃'别人的修改'鼠标右键点击Mine框的相应行，点击'Use this text block'
+             舍弃'我的修改',保留'别人的修改'。鼠标右键点击Theirs框的相应行，点击'Use this text block'。
+             同时保留'我的修改'和'别人的修改'，并将'我的修改'放在前面。鼠标右键点击Mine框的相应行，
+             点击'Use text block from mine before theirs'。
+             同时保留'我的修改'和'别人的修改'，并将'别人的修改'放在前面。鼠标右键点击Mine框的相应行，
+             点击'Use text block from theirs before mine'。合并完成，Ctrl+S存盘，退出。
+             然后，在资源管理器中，选择冲突文件，鼠标右键菜单选择'Resolved',标记冲突已解决。
+             系统会自动删除因冲突而新建的文件。此时，就可以继续进行commit操作了。
+Git冲突：编辑冲突 合并 提交
+        本地仓库提交到github
+        git init
+        git remote add origin https://gitee.com/name/project.git  //设置远程项目地址
+        git remote set-url origin https://gitee.com/name/project.git  //修改远程项目地址
+        git pull origin master --allow-unrelated-histories 后将冲突的文件add,commit后即可进行正常提交
+        :q退出vim
+        配置账号密码
+        git config --global credential.helper store
+        git push origin your-branch

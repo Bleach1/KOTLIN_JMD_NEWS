@@ -1,0 +1,48 @@
+楼梯有n阶台阶，上楼可以一步上1阶，也可以一步上2阶，编程序计算共有多少种不同的走法？
+   if (n == 1) {
+       return 1;
+   } else if (n == 2) {
+       return 2;
+   } else {
+       return f(n - 1) + f(n - 2);
+   }
+
+整数取 个 十  百  千
+ units = i%10;
+ tens = (i/10)%10;
+ hundreds = (i/100)%10;
+ thousands =(1/1000)%10;
+
+快速排序：
+        首先把数组的第一个数拿出来做为一个key，在前后分别设置一个i,j做为标识，然后拿这个key对这个数组从后面往前遍历，
+        及j--，直到找到第一个小于这个key的那个数，然后交换这两个值，交换完成后，
+        我们拿着这个key要从i往后遍历了，及i++;一直循环到i=j结束
+
+二分查找时间复杂度(循环次数)：Log n
+
+判断链表是否有环：
+               设置两个指针p1, p2，每次p1向前走一步，p2向前走两步，直到p2碰到NULL或两个指针相等时结束循环。
+               如果两个指针相等，则说明该链表存在环。
+复杂json解析：
+            {
+                "total": 2,
+                "list": [
+                    {
+                        "type": "address",
+                        "attributes": {
+                            "street": "Nan Road",
+                            "city": "ShaHai",
+                            "country": "China"
+                        }
+                    },
+                    {
+                        "type": "name",
+                        "attributes": {
+                            "first-name": "Su",
+                            "last-name": "Tu"
+                        }
+                    }
+                ]
+            }
+ 通过自定义JsonDeserializer的方式来实现解析这种 jsonObject 类型不同的情况。GsonBuilder
+ map映射 根据不同type获取对应实体类
