@@ -287,14 +287,6 @@ HashMap:
         Java8在同样的前提下并不会引起死循环，原因是扩容转移后前后链表顺序不变，保持之前节点的引用关系。
         通过源码看到put/get方法都没有加同步锁，多线程情况最容易出现的就是：无法保证上一秒put的值，下一秒get的时候还是原值
         将ConcurrentHashMap容器的数据分段存储，每一段数据分配一个Segment（锁），当线程占用其中一个Segment时，其他线程可正常访问其他段数据。
-内存泄漏：
-         1.全局静态的集合--内存一直增大
-         2.单例Context--当这个 Context 所对应的 Activity 退出时，由于该 Context 的引用被单例对象所持有，其生命周期等于整个应用程序的生命周期，所以当前 Activity 退出时它的内存并不会被回收，这就造成泄漏了
-         3.非静态内部类创建静态实例--因为非静态内部类默认会持有外部类的引用，而该非静态内部类又创建了一个静态的实例，该实例的生命周期和应用的一样长，
-                                   这就导致了该静态实例一直会持有该Activity的引用，导致Activity的内存资源不能正常回收
-         4.匿名内部类--runnable持有当前Activity在传入一个异步线程，此线程和Activity的生命周期不一致时内存泄漏
-         5.Handler--Handler 发送的 Message 尚未被处理，则该 Message 及发送它的 Handler 对象将被线程 MessageQueue 一直持有。
-                    生命周期和 Activity 是不一致的,无法释放
 
 View绘制：https://www.cnblogs.com/jycboy/p/6219915.html
            

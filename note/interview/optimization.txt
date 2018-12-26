@@ -18,8 +18,12 @@ Profile GPU Rendering:
 内存优化：
         内存泄漏--没有用的对象到GC Roots是可达的(被对象引用)导致GC无法回收
         内存溢出--当程序运行时所需的内存大于程序允许的最高内存，这时会出现内存溢出；
-        1.非静态内部类的静态实例--持有外部引用无法回收
-        2.Handler
+      
+         1.全局静态的集合--内存一直增大
+         2.单例Context--当这个 Context 所对应的 Activity 退出时，由于该 Context 的引用被单例对象所持有，其生命周期等于整个应用程序的生命周期，所以当前 Activity 退出时它的内存并不会被回收，这就造成泄漏了
+         3.非静态内部类创建静态实例--因为非静态内部类默认会持有外部类的引用，而该非静态内部类又创建了一个静态的实例，该实例的生命周期和应用的一样长，这就导致了该静态实例一直会持有该Activity的引用，导致Activity的内存资源不能正常回收
+         4.匿名内部类--runnable持有当前Activity在传入一个异步线程，此线程和Activity的生命周期不一致时内存泄漏
+         5.Handler--Handler 发送的 Message 尚未被处理，则该 Message 及发送它的 Handler 对象将被线程 MessageQueue 一直持有。生命周期和 Activity 是不一致的,无法释放
 
 LeakCanary：
            RefWatcher监听了所有Activity的onActivityDestroyed事件，当Activity被Destroy时，
