@@ -6,8 +6,6 @@ import android.os.Build;
 import android.support.annotation.RequiresApi;
 import android.util.Log;
 
-import com.blankj.utilcode.util.DeviceUtils;
-import com.blankj.utilcode.util.PhoneUtils;
 import com.national.security.community.Config;
 import com.national.security.community.base.BasePresenter;
 import com.national.security.community.data.model.HomeBean;
@@ -86,7 +84,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                         // 用户已经同意该权限
                         Log.d(Config.TAG, permission.name + " is granted.");
                         Log.i("ljn", "onCreate: \n"
-                                + "设备系统版本号:" + DeviceUtils.getSDKVersionName() + "\n"
+                               /* + "设备系统版本号:" + DeviceUtils.getSDKVersionName() + "\n"
                                 + "设备系统版本码:" + DeviceUtils.getSDKVersionCode() + "\n"
                                 + "设备 AndroidID:" + DeviceUtils.getAndroidID() + "\n"
                                 + "设备 MAC 地址:" + DeviceUtils.getMacAddress() + "\n"
@@ -95,7 +93,7 @@ public class MainPresenter extends BasePresenter<MainContract.View> implements M
                                 + "设备码:" + PhoneUtils.getDeviceId() + "\n"
                                 + "IMEI 码:" + PhoneUtils.getIMEI() + "\n"
                                 + "移动终端类型:" + PhoneUtils.getPhoneType() + "\n"
-                                + "IMSI 码:" + PhoneUtils.getIMSI() + "\n"
+                                + "IMSI 码:" + PhoneUtils.getIMSI() + "\n"*/
                         );
                         mView.granted();
                     } else if (permission.shouldShowRequestPermissionRationale) {

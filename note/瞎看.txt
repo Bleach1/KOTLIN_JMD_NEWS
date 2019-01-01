@@ -102,8 +102,6 @@ app.json:
          pages: 小程序所有页面路径
          window:小程序所有页面的顶部背景颜色，文字颜色定义
 
-
-
 python爬虫
 http://blog.csdn.net/sunnyxiaohu/article/details/50787430
 
@@ -115,15 +113,6 @@ path：第三部分就是主机资源的具体地址，如目录和文件名等
 创建爬虫    :scrapy genspider xxxx xxx.com 
 是否有爬虫  :scrapy list
 执行爬虫    :scrapy crawl 爬虫name
-
-flutter:
-        Text--https://blog.csdn.net/poorkick/article/details/80426578
-        Container--http://www.onlyloveyd.cn/article/18
-        FloatingActionButton--https://blog.csdn.net/poorkick/article/details/81059149
-        Image--https://blog.csdn.net/poorkick/article/details/80458707
-        TabBar--http://www.onlyloveyd.cn/article/34
-        Row、Column--https://juejin.im/post/5b623d8c5188257f0b583c77
-        UI---https://juejin.im/post/5bd54b7be51d456c430e35f6
 
 Dart:
      var--Dart中var变量一旦赋值，类型便会确定，则不能再改变其类型

@@ -56,7 +56,6 @@ public class InitializeService extends IntentService {
     }
 
     private void initApplication() {
-
         BundledEmojiCompatConfig config = new BundledEmojiCompatConfig(this);
         EmojiCompat.init(config);
         FileDownloader.setup(this);

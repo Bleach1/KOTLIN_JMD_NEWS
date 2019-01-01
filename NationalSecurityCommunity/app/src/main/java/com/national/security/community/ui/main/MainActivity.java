@@ -52,7 +52,7 @@ import hugo.weaving.DebugLog;
 import me.yokeyword.fragmentation.ISupportFragment;
 import me.yokeyword.fragmentation.anim.DefaultHorizontalAnimator;
 import me.yokeyword.fragmentation.anim.FragmentAnimator;
-import mylife.is.it.startbucks.Utils;
+
 
 /**
  * @description: https://github.com/alibaba/ARouter
@@ -85,7 +85,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         getLifecycle().addObserver(new LifeListener());
-        Utils.INSTANCES.printMsg("LJN");
     }
 
     @RequiresApi(api = Build.VERSION_CODES.JELLY_BEAN)

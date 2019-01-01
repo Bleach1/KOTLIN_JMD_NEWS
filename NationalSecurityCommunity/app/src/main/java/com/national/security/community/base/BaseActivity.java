@@ -14,7 +14,6 @@ import android.view.WindowManager;
 import android.widget.FrameLayout;
 import android.widget.TextView;
 
-import com.blankj.utilcode.util.ScreenUtils;
 import com.national.security.community.App;
 import com.national.security.community.injection.component.ActivityComponent;
 import com.national.security.community.injection.component.DaggerActivityComponent;
