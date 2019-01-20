@@ -4,22 +4,22 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/tv"
+    <Button
+        android:id="@+id/btCenter"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="A"
+        android:text="Center Button"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintLeft_toLeftOf="parent"
         app:layout_constraintRight_toRightOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <TextView
-        android:id="@+id/tv2"
+    <Button
+        android:id="@+id/btAlign"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="B"
-        app:layout_constraintLeft_toLeftOf="parent"
-        app:layout_constraintRight_toRightOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv" />
+        android:text="Aligned Button"
+        app:layout_constraintCircle="@id/btCenter"
+        app:layout_constraintCircleAngle="45"
+        app:layout_constraintCircleRadius="120dp" />
 </android.support.constraint.ConstraintLayout>
