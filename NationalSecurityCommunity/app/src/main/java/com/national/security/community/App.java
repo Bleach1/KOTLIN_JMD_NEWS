@@ -12,12 +12,17 @@ import com.national.security.community.injection.component.AppComponent;
 import com.national.security.community.injection.component.DaggerAppComponent;
 import com.national.security.community.injection.module.AppModule;
 import com.national.security.community.injection.module.HttpModule;
+import com.national.security.community.matrix.DynamicConfigImplDemo;
+import com.national.security.community.matrix.TestPluginListener;
 import com.national.security.community.service.InitializeService;
 import com.national.security.community.utils.DynamicTimeFormat;
 import com.national.security.community.utils.network.NetStateReceiver;
 import com.qihoo360.replugin.RePlugin;
 import com.scwang.smartrefresh.layout.SmartRefreshLayout;
 import com.scwang.smartrefresh.layout.header.ClassicsHeader;
+import com.tencent.matrix.Matrix;
+import com.tencent.matrix.iocanary.IOCanaryPlugin;
+import com.tencent.matrix.iocanary.config.IOConfig;
 
 import java.util.LinkedList;
 
@@ -76,6 +81,16 @@ public class App extends Application {
         RePlugin.App.onCreate();
         InitializeService.start(this);
         NetStateReceiver.registerNetworkStateReceiver(this);
+
+        Matrix.Builder builder = new Matrix.Builder(this);
+        builder.patchListener(new TestPluginListener(this));
+        DynamicConfigImplDemo dynamicConfig = new DynamicConfigImplDemo();
+        IOCanaryPlugin ioCanaryPlugin = new IOCanaryPlugin(new IOConfig.Builder()
+                .dynamicConfig(dynamicConfig)
+                .build());
+        builder.plugin(ioCanaryPlugin);
+        Matrix.init(builder.build());
+        ioCanaryPlugin.start();
     }
 
     public static synchronized App getInstance() {
