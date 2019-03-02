@@ -7,20 +7,23 @@
     android:layout_height="match_parent">
 
     <TextView
+        android:background="#f0f2f4"
         android:id="@+id/textView"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="yourname"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="162dp"
-        tools:layout_editor_absoluteY="168dp" />
+        android:layout_height="100dp"
+        android:layout_marginEnd="22dp"
+        android:gravity="center"
+        android:text="相对于baseline对齐"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintRight_toRightOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        tools:ignore="MissingConstraints" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:text="Button"
-        app:layout_constraintBaseline_toBaselineOf="@+id/textView"
-        tools:ignore="MissingConstraints"
-        tools:layout_editor_absoluteX="25dp" />
+        android:layout_height="50dp"
+        android:gravity="center"
+        android:text="两个控件之间的文字"
+        app:layout_constraintBaseline_toBaselineOf="@+id/textView" />
 </android.support.constraint.ConstraintLayout>

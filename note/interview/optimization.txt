@@ -1,6 +1,9 @@
 UI优化：
       将数据渲染到屏幕上的是系统Native层的SurfaceFlinger服务
       60fps,1秒刷新60次--16ms刷新一次
+      <include>标签的parent ViewGroup与包含的layout根容器ViewGroup是相同的类型
+merge inflate时attachToRoot为true
+
 卡顿：
     Layout过于复杂，嵌套严重
     同一时间动画执行次数过多
