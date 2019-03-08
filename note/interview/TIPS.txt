@@ -303,3 +303,115 @@ Kotlin:
        DSL
        不用findviewById
        集合操作符
+       
+       
+       
+       有些人并不态清楚Receiver也是有生命周期的，而且很短，当它的onReceive方法执行完成后，它的生命周期就结束了。这时BroadcastReceiver已经不处于active状态，被系统杀掉的概率极高，也就是说如果你在onReceive去开线程进行异步操作或者打开Dialog都有可能在没达到你要的结果时进程就被系统杀掉。因为这个进程可能只有这个Receiver这个组件在运行，当Receiver也执行完后就是一个empty进程，是最容易被系统杀掉的。替代的方案是用Notificaiton或者Service（这种情况当然不能用bindService）。
+
+
+判断Activity是否正在运行
+if (activity == null || activity.isDestroyed() || activity.isFinishing()) {
+            return;
+        }
+        出自AsyncTask
+
+
+  保存view的状态
+  onSaveStateInstance
+  自定义View控件的状态被保存需要满足两个条件：
+  View有唯一的ID；
+  View的初始化时要调用setSaveEnabled(true) ；
+
+  就会知道在Application（或者Service）需要给Intent设置Intent.FLAG_ACTIVITY_NEW_TASK才能正常启动Activity
+
+  ContentProvider和调用者在同一个进程，ContentProvider的方法（query/insert/update/delete等）和调用者在同一线程中；
+  ContentProvider和调用者在不同的进程，ContentProvider的方法会运行在它自身所在进程的一个Binder线程中
+
+  Launcher这个应用的Home界面--SingleTask
+
+  TaskStackBuilder通知栏跳转Activity
+
+
+
+Xfermode--刮刮卡
+
+不要再增强型for循环中删除集合
+增强型for循环--while iterator
+fail-fast进制
+在增强for循环中，集合遍历是通过iterator进行的，但是元素的add/remove却是直接使用的集合类自己的方法。这就导致iterator在遍历的时候，会发现有一个元素在自己不知不觉的情况下就被删除/添加了，就会抛出一个异常，用来提示用户，可能发生了并发修改。
+
+String 
+ String s = “a”; s = “b” 但是，这并不是对s的修改，而是重新指向了新的字符串， 从这里我们也能知道，String其实就是用char[]实现的。
+ String的“+”是java中唯一的一个重载运算符
+ 当一个String实例str调用intern()方法时，Java查找常量池中是否有相同Unicode的字符串常量，如果有，则返回其的引用，如果没有，则在常量池中增加一个Unicode等于str的字符串并返回它的引用
+
+ String为什么不可变
+ 安全性
+ 字符串池--如果字符串可变的话，当两个引用指向指向同一个字符串时，对其中一个做修改就会影响另外一个
+ 缓存Hashcode--因为String类不可变，所以一旦对象被创建，该hash值也无法改变
+
+ 在Java体系中，共用三种常量池。分别是字符串常量池、Class常量池和运行时常量池。
+
+
+https://www.cnblogs.com/zgz345/p/6640826.html
+
+当在 catch 代码块中发生异常时，此时的表现取决于 finally 代码块中是否存在 return 语句。如果存在，则 finally 代码块的代码执行完毕直接返回，否则会在 finally 代码块执行完毕后，将 catch 代码中新产生的异常，向外抛出去。
+而在极端情况下，finally 代码块发生了异常，则此时会中断 finally 代码块的执行，直接将异常向外抛出。
+
+apk打包过程--https://www.cnblogs.com/sjm19910902/p/6416022.html
+Glide绑定生命周期
+
+
+Bluetooth Mesh--网状网络 与 点对点
+                网状网络中的每个装置都能与其他任一装置通讯
+                Mesh网络中的所有节点至少都会有一把网络金钥，也正因为拥有此一金钥，装置才可算是该网络的成员，并称为一个节点---NetKey
+/*configurations.all {
+    resolutionStrategy.eachDependency {
+        DependencyResolveDetails details ->
+            def requested = details.requested
+            if (requested.group == 'com.android.support') {
+                if (!requested.name.startsWith("multidex")) {
+                    details.useVersion '26.1.0'
+                }
+            }
+    }
+}*/
+
+
+enqueueMessage(MessageQueue queue,Message msg, long uptimeMillis)
+
+
+ for (;;) {//相当于while(true)的作用
+        Message msg = queue.next(); // 消息
+        if (msg == null) {
+            return;
+        }
+        //略...
+        final long slowDispatchThresholdMs = me.mSlowDispatchThresholdMs;
+        //略...
+        final long start = (slowDispatchThresholdMs == 0) ? 0 : SystemClock.uptimeMillis();
+        final long end;
+        try {
+            //在这里调用了msg.target即该handler的dispatchMessage方法
+            msg.target.dispatchMessage(msg);
+            end = (slowDispatchThresholdMs == 0) ? 0 : SystemClock.uptimeMillis();
+        } finally {
+            if (traceTag != 0) {
+                Trace.traceEnd(traceTag);
+            }
+        }
+         //略...
+        msg.recycleUnchecked();
+
+        binder线程也是采用死循环的方法，通过循环方式不同与Binder驱动进行读写操作，当然并非简单地死循环，无消息时会休眠。但这里可能又引发了另一个问题，既然是死循环又如何去处理其他事务呢？通过创建新线程的方式。
+真正会卡死主线程的操作是在回调方法onCreate/onStart/onResume等操作时间过长，会导致掉帧，甚至发生ANR，looper.loop本身不会导致应用卡死。
+
+https://blog.csdn.net/cshao888/article/details/78386593
+
+dispatchTouchEvent的作用在于分发事件，源头出发不走，后面都白忙活 
+只要发走了，后面哪里断掉，就会触发上一级的 onTouchEvent
+
+onTouchEvent的作用在于消费事件，消费之后不会再往下传递
+
+http://www.hangge.com/blog/cache/detail_1697.html
+
