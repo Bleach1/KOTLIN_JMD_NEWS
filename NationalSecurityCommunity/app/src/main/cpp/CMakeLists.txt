@@ -17,7 +17,7 @@ add_library( # Sets the name of the library.
              SHARED
 
              # Provides a relative path to your source file(s).
-             src/main/cpp/native-lib.cpp )
+             native-lib.cpp )
 
 # 查找cpp目录下的所有源文件
 # 并将名称保存到 DIR_LIB_SRCS 变量

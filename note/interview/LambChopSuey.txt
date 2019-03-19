@@ -136,11 +136,12 @@ WebView:
 
 
 ANR:
-    KeyDispatchTimeout –按键或触摸事件在特定时间内无响应(5s)
-    BroadcastTimeout –BroadcastReceiver在特定时间内无法处理完成(10s)
-    ServiceTimeout –Service在特定的时间内无法处理完成(20s)
-    在activity的关键生命周期方法里例如像onCreate和onResume不要进行耗时操作
-    解决：看日志，traces.txt
+    主线程阻塞、挂起、死循环
+    应用进程的其他线程的CPU占用率高，使得主线程无法抢占到CPU时间片
+    当前应用进程进行进程间通信请求其他进程，其他进程的操作长时间没有反馈
+    其他进程的CPU占用率高，使得当前应用进程无法抢占到CPU时间片
+    https://blog.csdn.net/chenzhiqin20/article/details/17383269
+    分析trace tid=1主线程 包名
 
 Why Glide:
           支持Gif,WebP,视频缩略图，加载速度快，体积小，易用 Google
@@ -202,6 +203,9 @@ Why 65535:
              3.如果动画是一个延迟开始的动画，那么加入Delay队列里
 
 Handler:
+
+        MessageQueue:单链表
+
        Looper主要作用：
        1、与当前线程绑定，保证一个线程只会有一个Looper实例，同时一个Looper实例也只有一个MessageQueue。
        2、loop()方法，不断从MessageQueue中去取消息，交给消息的target属性的dispatchMessage去处理。
@@ -214,6 +218,38 @@ Handler:
        xxxxx
        looper.loop
        https://blog.csdn.net/qian520ao/article/details/78262289
+
+
+
+enqueueMessage(MessageQueue queue,Message msg, long uptimeMillis)
+
+
+ for (;;) {//相当于while(true)的作用
+        Message msg = queue.next(); // 消息
+        if (msg == null) {
+            return;
+        }
+        //略...
+        final long slowDispatchThresholdMs = me.mSlowDispatchThresholdMs;
+        //略...
+        final long start = (slowDispatchThresholdMs == 0) ? 0 : SystemClock.uptimeMillis();
+        final long end;
+        try {
+            //在这里调用了msg.target即该handler的dispatchMessage方法
+            msg.target.dispatchMessage(msg);
+            end = (slowDispatchThresholdMs == 0) ? 0 : SystemClock.uptimeMillis();
+        } finally {
+            if (traceTag != 0) {
+                Trace.traceEnd(traceTag);
+            }
+        }
+         //略...
+        msg.recycleUnchecked();
+
+        binder线程也是采用死循环的方法，通过循环方式不同与Binder驱动进行读写操作，当然并非简单地死循环，无消息时会休眠。但这里可能又引发了另一个问题，既然是死循环又如何去处理其他事务呢？通过创建新线程的方式。
+真正会卡死主线程的操作是在回调方法onCreate/onStart/onResume等操作时间过长，会导致掉帧，甚至发生ANR，looper.loop本身不会导致应用卡死。
+https://blog.csdn.net/cshao888/article/details/78386593（Lopper.loop为什么不会卡死）
+
 
 
 组件化：

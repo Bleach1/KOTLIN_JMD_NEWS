@@ -144,7 +144,7 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @DebugLog
     @Override
     protected void initEventAndData() {
-        Log.i(Config.TAG, "initEventAndData2: " + JNIUtil.show());
+       // Log.i(Config.TAG, "initEventAndData2: " + JNIUtil.show());
         Log.i(Config.TAG, "initEventAndData: " + UniqueIDUtil.getUniqueID());
         CustomDialog customDialog = new CustomDialog();
         customDialog.show(getSupportFragmentManager(), "");

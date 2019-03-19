@@ -84,6 +84,6 @@ public class CustomWorker extends Worker {
     @NonNull
     @Override
     public Result doWork() {
-        return Result.SUCCESS;
+        return Result.success();
     }
 }
