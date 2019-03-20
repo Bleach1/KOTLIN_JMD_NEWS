@@ -365,3 +365,26 @@ https://github.com/LRH1993/android_interview
 1.  补间动画：只产生了一个动画效果，其真实的坐标并没有发生改变（只是改变了View的显示效果而已，并不会真正的改变View的属性）。View做在做动画的时候，它并没有真正的移动它的位置，而是根据动画时间的插值，计算出一个Matrix，然后不停的invalidate，在onDraw中的Canvas上使用这个计算出来的Matrix去draw这个View的内容，并有onLayout中还是原来的位置，所以点击事件只能点击到原来的位置才能触发
 
 2. ObjectAnimator：一般直接用与View，要求作用的View提供该属性（如View的scaleX属性）的getter、setter方法（如setScaleX()方法），可以直接改变view的属性所以View的位置也跟随属性的改变而改变，点击事件的触发位置为动画结束的位置。
+
+
+请问s1==s3是true还是false，s1==s4是false还是true?s1==s5呢？
+   String s1 = "abc";
+   String s2 = "a";
+   String s3 = s2 + "bc";
+   String s4 = "a" + "bc";
+   String s5 = s3.intern();
+s1==s3返回false,s1==s4返回true,s1==s5返回true.
+
+“abc"这个字符串常量值会直接方法字符串常量池中,s1是对其的引用.由于s2是个变量,编译器在编译期间无法确定该变量后续会不会改,因此无法直接将s3的值在编译器计算出来,因此s3是堆中"abc"的引用.因此s1!=s3.对于s4而言,其赋值号右边是常量表达式,因此可以在编译阶段直接被优化为"abc”,由于"abc"已经在字符串常量池中存在,因此s4是对其的引用,此时也就意味s1和s4引用了常量池中的同一个"abc".所以s1==s4.String中的intern()会首先从字符串常量池中检索是否已经存在字面值为"abc"的对象,如果不存在则先将其添加到字符串常量池中,否则直接返回已存在字符串常量的引用.此处由于"abc"已经存在字符串常量池中了,因此s5和s1引用的是同一个字符串常量.
+
+以下代码中,s5==s2返回值是什么?
+String s1="ab";
+String s2="a"+"b";
+String s3="a";
+String s4="b";
+String s5=s3+s4;
+
+返回false.在编译过程中,编译器会将s2直接优化为"ab",将其放置在常量池当中;而s5则是被创建在堆区,相当于s5=new String(“ab”);
+
+https://blog.csdn.net/dnnis/article/details/52287882(View)
+https://www.jianshu.com/p/4ee3fd07da14(Binder)
