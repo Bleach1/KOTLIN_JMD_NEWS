@@ -69,7 +69,7 @@ onSaveInstanceState：
     2.设置Activity的android:configChanges="orientation"时，切屏还是会重新调用各个生命周期，切横、竖屏时只会执行一次
     3.设置Activity的android:configChanges="orientation|keyboardHidden"时，切屏不会重新调用各个生命周期，只会执行onConfigurationChanged方法
 
-当前Activity产生事件弹出Toast和AlertDialog的时候ActivityActivity的生命周期不会有改变
+当前Activity产生事件弹出Toast和AlertDialog的时候Activity的生命周期不会有改变
 运行时按下HOME键(跟被完全覆盖是一样的)：onSaveInstanceState --> onPause --> onStop  onRestart -->onStart--->onResume
 Activity未被完全覆盖只是失去焦点：onPause--->onResume
 
@@ -101,6 +101,8 @@ ActivityB:onStop
           onDestroy
 
 onStart与onResume区别：onStart看见界面onResume可以交互
+onPause()：Activity失去焦点，但仍然可见。
+onStop()：Activity在后台，不可见（完全被另一个Activity挡住，或者程序后台运行）
 Activity与Service通信的方式：1.EventBus(BroadcastReceiver)
                             2.Binder
                             3.AIDL
