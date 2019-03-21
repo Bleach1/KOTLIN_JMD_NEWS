@@ -96,18 +96,11 @@ WatchDog机制:
    3、调用ActivityThread的installSystemApplicationInfo；
    4、AMS进程管理相关的操作。
 
-Activity启动过程：
-                1.Launcher请求AMS
-                2.AMS到ApplicationThread的调用过程
-                3.ActivityThread启动Activity
-                (Zygote、Launcher、AMS所在进程(SystemServer)、应用程序进程)
-
 Service启动过程：
                1.ContextImpl到AMS的调用过程
                2.ActivityThread启动Service
 BroadcastReceiver:静态广播由PackageManagerService注册
 ContentProvider: query方法到AMS的调用过程，AMS启动ContentProvider
-
 
 热修复：
       1.代码修复
@@ -132,7 +125,16 @@ Hook:
      Native(NDK开发环境中、修改Native代码)
      hook框架--xPosed全局hook需要root
 
-WindowManager
+
+
+
+
+Window、WindowManager、WMS(管理window)
+Window的实现类PhoneWindow
+WindowManager extend ViewManager(add,update,remove)实现类WindowManagerImpl
+ActivityThread--performLaunchActivity--启动Activity--attach()创建PhoneWindow
+WindowManagerGlobal--addView创建ViewRootImpl--setView
+
 https://blog.csdn.net/yhaolpz/article/details/68936932
 https://blog.csdn.net/chi_wy/article/details/80264626
 PopupWindow和Dialog区别：
