@@ -67,19 +67,14 @@ Launcher启动：
                                        ActivityThread--performLaunchActivity--启动Activity
                                        Instrumention --callActivityOnCreat
                                        Activity      --onCreat
-                                       
-            应用进程接下来通知 ActivityManagerService 应用进程已启动，
-            ActivityManagerService 保存应用进程的一个代理对象，这样 ActivityManagerService 可以通过这个代理对象控制应用进程，
-            然后 ActivityManagerService通知应用进程创建入口Activity的实例，并执行它的生命周期函数。
-
-
+                                              
 ActivityManagerService:主要负责系统中四大组件的启动、切换、调度及应用程序的管理和调度等工作。
 AMS extend ActivityManagerNative(AMN) implement Watchdog.Monitor,BatteryStatsImpl.BatteryCallback
 AMN extend Binder implement IActivityManager   AMN将作为Binder通信的服务端为用户提供支持。
-在ActivityManagerNative类中定义了内部类ActivityManagerProxy implement IActivityManager 作为客户端使用的服务端代理
+在 AMN类中定义了内部类ActivityManagerProxy implement IActivityManager 作为客户端使用的服务端代理
+
 其它进程将使用ActivityManager来使用AMS的服务。ActivityManager通过AMN提供的getDefault接口得到ActivityManagerProxy，
 然后再以Binder通信的方式调用AMS的接口
-ActivityRecord记录Activity所有信息
 WatchDog机制:
 1.WatchDog监控SystemServer中的线程。发现问题会杀死SystemServer进程。
 2.SystemServer的父进程Zygote接收到SystemServer的死亡信号后，会杀死自己。
