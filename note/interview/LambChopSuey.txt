@@ -127,7 +127,12 @@ Hook:
 
 
 
-
+ViewRootImpl 这个类被实例化,则就会调用requestLaoyout 方法checkThread
+ActivityThread--performResumeActivity
+Activity--performResume()
+Instrumentation--callActivityOnResume()
+而performResumeActivity 里面执行完回调activity.onResume()进而 Window addview操作
+Activity启动三大步结束
 
 Window、WindowManager、WMS(管理window)
 Window的实现类PhoneWindow
