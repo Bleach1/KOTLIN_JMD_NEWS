@@ -170,6 +170,48 @@ Why Glide:
           加载的图片质量低（可设置）
           磁盘缓存策略Picasso缓存的是全尺寸的，而Glide缓存的是跟ImageView尺寸相同的
 
+Glide源码分析：
+              缓存失败原因：
+              存在云服务器url + token
+              token会改变导致缓存的key改变 缓存失效
+              缓存图片根据key(url+tiken)
+
+              缓存机制：
+                       缓存两种资源(原始图片，转换后的图片)--默认缓存view大小的图片
+                       Glide二级缓存(内存 硬盘)
+                       内存缓存 --> 磁盘缓存 --> 网络
+                       内存缓存--缓存转换后的图片--防止应用 重复将图片数据 读取到内存当中
+                              --实现是基于：LruCache 算法（Least Recently Used） & 弱引用机制
+                                LruCache算法原理：将最近使用的对象用强引用的方式存储在LinkedHashMap中;       当缓存满时 ，将最近最少使用的对象从内存中移除
+
+                       硬盘缓存--可缓存原始图片 & 缓存转换过后的图片，用户自行设置--防止应用          重复从网络或其他地方重复下载和读取数据
+                       实现原理：DiskLruCache--将缓存存在本地
+
+              缓存流程：
+                       1.生成缓存的key(id, signature, width, height...)
+                       2.创建缓存对象--是在创建Glide时创建的--单例
+                       3.从内存缓存中获取缓存图片
+                         --loadFromCache()：从使用了LruCache算法机制的内存缓存获取缓存
+                         --loadFromActiveResources()：从使用了弱引用机制的内存缓存获取缓存  
+                       4.开启加载图片线程
+                         --若无法从内存缓存里获得缓存的图片，Glide就会开启加载图片的线程
+                         --但在该线程开启后，Glide并不会马上去网络加载图片，
+                         --而是采取采用Glide的第2级缓存：磁盘缓存去获取缓存图片             
+                       5.从 磁盘缓存 中获取缓存图片
+                       6.从网络获取 图片资源
+                       7.写入 磁盘缓存
+                         --Glide将图片写入 磁盘缓存的时机：获取图片资源后 、图片加载完成前
+                       8.写入 内存缓存
+                         --Glide 将图片写入 内存缓存的时机：图片加载完成后 、图片显示出来前  
+.with()--RequestManager:绑定生命周期
+               Application就是应用生命周期不做处理，
+               Activity--向当前的Activity添加一个隐藏的Fragment
+                       --因Fragment的生命周期与Activity 的是同步的，通过添加隐藏的Fragment 从而监听Activity的生命周期，从而实现Glide加载图片的生命周期与Activity的生命周期 进行同步。
+
+.load()--预先创建好对图片进行一系列操作（加载、编解码、转码）的对象
+.into--构建网络请求对象 并 执行 该网络请求
+
+
 屏幕适配：.9图、百分比布局、 AutoLayout、(layout、dimens按分辨率命名)、RelativeLayout、ConstrainLayout、手机屏幕密度
 
 Android两个应用在同一个任务栈:栈一般以包名命名，两个应用的签名和UDID要相同
