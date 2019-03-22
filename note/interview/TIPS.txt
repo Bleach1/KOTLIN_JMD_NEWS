@@ -212,6 +212,13 @@ Retrofit:
          在ParameterHandler中将各种参数值添加到Request当中去，
          最后我们通过OkHttpCall调用真正的OkHttp中的Call进行网络请求，并且处理部分部分逻辑，返回结果。
          Okio保证性能
+        @FormUrlEncoded @Filed表单
+        @Multipart @Part 文件
+        @Streaming以流的方式返回数据量较大
+        @Body传递自定义对象
+        @Path // 访问的API是：https://api.github.com/users/{user}/repos
+             // 在发起请求时， {user} 会被替换为方法的第一个参数 user（被@Path注解作用）
+         
 OkHttp:
        支持 SPDY ，共享同一个Socket来处理同一个服务器的所有请求
        如果SPDY不可用，则通过连接池来减少请求延时
