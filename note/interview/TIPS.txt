@@ -380,4 +380,4 @@ double        8
 应用层：HTTP FTP  WebSocket
 传输层：Socket TCP UDP
 网络层：IP
-
+https://www.jianshu.com/p/6cb48a19d8fc(子线程修改UI)
