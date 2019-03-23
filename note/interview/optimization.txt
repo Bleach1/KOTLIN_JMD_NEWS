@@ -41,7 +41,20 @@ Profile GPU Rendering:
 profile:dump Arrange by package 找到自己的类双击 查看实力情况 com......
 
 LeakCanary：
-           RefWatcher监听了所有Activity的onActivityDestroyed事件，当Activity被Destroy时，
+           向 application 里注册了一个 ActivitylifecycleCallbacks 的回调函数，可以用来监听 Application 整个生命周期所有 Activity 的 lifecycle 事件
+           监控引用的工具RefWatcher监听了所有Activity的onActivityDestroyed事件，当Activity被Destroy时，
            调用ActivityRefWatcher.this.onActivityDestroyed(activity); 函数。
            正常情况下，当一个activity被Destroy时，
            那这个activity对象应该变成 null才是正确的。如果没有变成 null，那么就意味着发生了内存泄漏。
+           当某个 Activity 被 destory 后，将它传给 RefWatcher 去做观测，确保其后续会被正常回收；
+           RefWatcher 首先把 Activity 使用 KeyedWeakReference 引用起来，并使用一个 ReferenceQueue 来记录该 KeyedWeakReference 指向的对象是否已被回收；
+           AndroidWatchExecutor 会在 5s 后，开始检查这个弱引用内的 Activity 是否被正常回收。判断条件是：若 Activity 被正常回收，那么引用它的 KeyedWeakReference 会被自动放入 ReferenceQueue 中。
+           判断方式是：先看 Activity 对应的 KeyedWeakReference 是否已经放入 ReferenceQueue 中；如果没有，则手动 GC：gcTrigger.runGc();；然后再一次判断 ReferenceQueue 是否已经含有对应的 KeyedWeakReference。若还未被回收，则认为可能发生内存泄漏。
+           利用 HeapAnalyzer 对 dump 的内存情况进行分析并进一步确认，若确定发生泄漏，则利用 DisplayLeakService 发送通知。
+
+     匿名内部类不能访问外部类方法中的局部变量，除非该变量被声明为final类型
+
+　　1. 这里所说的“匿名内部类”主要是指在其外部类的成员方法内定义的同时完成实例化的类，若其访问该成员方法中的局部变量，局部变量必须要被final修饰。原因是编译器实现上的困难：内部类对象的生命周期很有可能会超过局部变量的生命周期。
+　　2. 局部变量的生命周期：当该方法被调用时，该方法中的局部变量在栈中被创建，当方法调用结束时，退栈，这些局部变量全部死亡。而内部类对象生命周期与其它类对象一样：自创建一个匿名内部类对象，系统为该对象分配内存，直到没有引用变量指向分配给该对象的内存，它才有可能会死亡（被JVM垃圾回收）。所以完全可能出现的一种情况是：成员方法已调用结束，局部变量已死亡，但匿名内部类的对象仍然活着。
+　　3. 如果匿名内部类的对象访问了同一个方法中的局部变量，就要求只要匿名内部类对象还活着，那么栈中的那些它要所访问的局部变量就不能“死亡”。
+　　4. 解决方法：匿名内部类对象可以访问同一个方法中被定义为final类型的局部变量。定义为final后，编译器会把匿名内部类对象要访问的所有final类型局部变量，都拷贝一份作为该对象的成员变量。这样，即使栈中局部变量已经死亡，匿名内部类对象照样可以拿到该局部变量的值，因为它自己拷贝了一份，且与原局部变量的值始终保持一致（final类型不可变）。      

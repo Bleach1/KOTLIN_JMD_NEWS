@@ -24,9 +24,6 @@ String 为什么要设计成不可变的：
                             1.字符串常量池的需要
                             2.允许String对象缓存HashCode -> 字符串不变性保证了hashcode的唯一性
                             3.安全性
-
-LRUCache原理：LinkedHashMap  最近最少使用
-
 序列化 作用：将对象字节序列保存到硬盘上、数据传输
 Parcelable(内存--IBinder--效率高)
 Serializable(本地)
@@ -267,7 +264,6 @@ Why 65535:
 Handler:
 
         MessageQueue:单链表
-
        Looper主要作用：
        1、与当前线程绑定，保证一个线程只会有一个Looper实例，同时一个Looper实例也只有一个MessageQueue。
        2、loop()方法，不断从MessageQueue中去取消息，交给消息的target属性的dispatchMessage去处理。
@@ -280,9 +276,6 @@ Handler:
        xxxxx
        looper.loop
        https://blog.csdn.net/qian520ao/article/details/78262289
-
-
-
 enqueueMessage(MessageQueue queue,Message msg, long uptimeMillis)
 
 
@@ -321,13 +314,6 @@ https://blog.csdn.net/cshao888/article/details/78386593（Lopper.loop为什么�
       Activity插件化--反射、接口、Hook
       Hook IActivity Instrumentation
       Service--代理分发
-
-
-Binder:
-        内核空间(所有进程共享空间)
-就是在编译时候，根据注解生成对应需要的文件，这样子在app运行的时候就不会导致性能损耗
-
-
 Rxjava:
       Observable发送一个Complete、Error事件后可以继续发送其他事件，Observe接收到Complete、Error事件后不再接受事件
       实质上，在RxJava的 subscribe 过程中，Observer总是会先被转换成Subscriber再使用
