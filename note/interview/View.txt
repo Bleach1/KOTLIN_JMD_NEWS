@@ -1,5 +1,5 @@
 Fragment
-�������ڣ�
+生命周期：
         onAttach
         onCreate
         onCreateView
@@ -12,79 +12,83 @@ Fragment
         onDestroy
         onDetach
 
-�������յ��ύ���������֣�
-commit() �����߳����첽ִ�� commit() ��Ҫ������ Activity ����״̬֮ǰ���ã�����ᱨ����
-         ��Ϊ��� Activity �����쳣��Ҫ�ָ�״̬���ڱ���״̬֮��� commit() ���ᶪʧ����͵��õĳ��Բ��������Իᱨ����
+事务最终的提交方法有四种：
+commit() 在主线程中异步执行 commit() 需要在宿主 Activity 保存状态之前调用，否则会报错。
+         因为如果 Activity 出现异常需要恢复状态，在保存状态之后的 commit() 将会丢失，这和调用的初衷不符，所以会报错。
 commitAllowingStateLoss()
-Ҳ���첽ִ�У������Ĳ�֮ͬ�����ڣ������� Activity ����״̬֮����ã�Ҳ����˵������״̬��ʧ���ᱨ��
+也是异步执行，但它的不同之处在于，允许在 Activity 保存状态之后调用，也就是说它遇到状态丢失不会报错
 commitNow()
 commitNowAllowingStateLoss()
-1.getActivity()��ָ��
-  ��Fragment����������һ��Activity mActivity��ȫ�ֱ�������onAttach(Activity activity)�︳ֵ��
-  ʹ��mActivity����getActivity()
-2.Fragment�ص��쳣
-  ��Tag���ж�  savedInstanceState != null
-3.��ջ pop...
+1.getActivity()空指针
+  在Fragment基类里设置一个Activity mActivity的全局变量，在onAttach(Activity activity)里赋值，
+  使用mActivity代替getActivity()
+2.Fragment重叠异常
+  绑定Tag、判断  savedInstanceState != null
+3.出栈 pop...
 4.Fragmentation
-5.Fragment������
-  ��ʶ ��ͼ��ʼ����ϡ��������������� setUserVisibleHint
- Fragment�հ�ҳ��
-           1.viewpager.setOffscreenPageLimit(num);numΪ���tab��
-           2.��onCreateView���棬�ж�Fragment�Ƿ��Ѿ�������contentView
-           ����һ�μ���ʱ�����Խ�view�����������ٴμ���ʱ���жϱ���������view�Ƿ�Ϊnull����
-           ��������viewΪnull�������µ�view �����Ƚ������view�Ӹ�view���Ƴ���Ȼ�󽫸�view���س�ȥ
-           3.��дpublic void destroyItem(ViewGroup container, int position, Object object)
-             ȥ��super.destroyItem(container, position, object);
+5.Fragment懒加载
+  标识 视图初始化完毕、触发过加载数据 setUserVisibleHint
+ Fragment空白页：
+           1.viewpager.setOffscreenPageLimit(num);num为你的tab数
+           2.在onCreateView里面，判断Fragment是否已经添加了contentView
+           （第一次加载时，可以将view保存下来，再次加载时，判断保存下来的view是否为null），
+           如果保存的view为null，返回新的view 否则，先将保存的view从父view中移除，然后将该view返回出去
+           3.重写public void destroyItem(ViewGroup container, int position, Object object)
+             去掉super.destroyItem(container, position, object);
+FragmentPagerAdapter的每个Fragment会持久的保存在FragmentManager中，只要用户可以返回到页面中，它都不会被销毁。因此适用于那些数据相对静态的页，Fragment数量也比较少的那种；
+FragmentStatePagerAdapter只保留当前页面，当页面不可见时，该Fragment就会被消除，释放其资源。因此适用于那些数据动态性较大、占用内存较多，多Fragment的情况；
 
-�Զ���Viewִ��invalidate()����,Ϊʲô��ʱ�򲻻�ص�onDraw()
-   �Զ���һ��viewʱ����дonDraw������view.invalidate(),�ᴥ��onDraw��computeScroll()��
-   ǰ���Ǹ�view�������ڵ�ǰ����.view.postInvalidate(); //���ڷ�UI�߳��ϵ��õ�
-   �Զ���һ��ViewGroup����дonDraw��onDraw���ܲ��ᱻ���ã�ԭ������Ҫ������һ������(��ɫ��ͼ)��
-   ��ʾ���group�ж�����Ҫ�����ˣ��Żᴥ��draw��֮����onDraw��
-   ��ˣ�һ��ֱ����дdispatchDraw������viewGroup.�Զ���һ��ViewGroup,dispatchDraw�����drawChild.
+add不会重新初始化fragment，replace每次都会
+
+自定义View执行invalidate()方法,为什么有时候不会回调onDraw()
+   自定义一个view时，重写onDraw。调用view.invalidate(),会触发onDraw和computeScroll()。
+   前提是该view被附加在当前窗口.view.postInvalidate(); //是在非UI线程上调用的
+   自定义一个ViewGroup，重写onDraw。onDraw可能不会被调用，原因是需要先设置一个背景(颜色或图)。
+   表示这个group有东西需要绘制了，才会触发draw，之后是onDraw。
+   因此，一般直接重写dispatchDraw来绘制viewGroup.自定义一个ViewGroup,dispatchDraw会调用drawChild.
 
 onTouchListener > onTouchEvent > onLongClickListener > onClickListener
 
-1. ���� View �����Ƿ�ע�����¼���ֻҪ View �ǿɵ���ľͻ������¼���
-2. �¼��Ƿ������ɷ���ֵ������true ��ʾ���ѣ�false ��ʾ�����ѣ����Ƿ�ʹ�����¼��޹ء�
+1. 不论 View 自身是否注册点击事件，只要 View 是可点击的就会消费事件。
+2. 事件是否被消费由返回值决定，true 表示消费，false 表示不消费，与是否使用了事件无关。
 
-���������¼�
-Region �������⡣
-Matrix ������ӳ�䡣
+特殊区域事件
+Region 的区域检测。
+Matrix 的坐标映射。
 
-�ϲ� View ��һ�� RecyclerView�����յ���һ�� ACTION_DOWN �¼���������������ǵ���¼����������ȴ��ݸ���Ӧ ItemView��
-ѯ�� ItemView �Ƿ���Ҫ����¼���Ȼ���������ִ��ݹ�����һ�� ACTION_MOVE �¼������ƶ��ķ���� RecyclerView �Ŀɻ�������һ�£�
-���� RecyclerView �ж�����¼��ǹ����¼�������Ҫ�ջ��¼�����Ȩ����ʱ���Ӧ�� ItemView ���յ�һ�� ACTION_CANCEL ��
-���Ҳ������յ������¼���
+上层 View 是一个 RecyclerView，它收到了一个 ACTION_DOWN 事件，由于这个可能是点击事件，所以它先传递给对应 ItemView，
+询问 ItemView 是否需要这个事件，然而接下来又传递过来了一个 ACTION_MOVE 事件，且移动的方向和 RecyclerView 的可滑动方向一致，
+所以 RecyclerView 判断这个事件是滚动事件，于是要收回事件处理权，这时候对应的 ItemView 会收到一个 ACTION_CANCEL ，
+并且不会再收到后续事件。
 
-�����View�Ŀ��߽����޸��ˣ���Ҫ����super.onMeasure(widthMeasureSpec,heightMeasureSpec);
-Ҫ����setMeasuredDimension(widthsize,heightsize); �������
+如果对View的宽高进行修改了，不要调用super.onMeasure(widthMeasureSpec,heightMeasureSpec);
+要调用setMeasuredDimension(widthsize,heightsize); 这个函数
 
-82.�¼��ַ��е� onTouch �� onTouchEvent ��ʲô�����ָ����ʹ�ã�
+82.事件分发中的 onTouch 和 onTouchEvent 有什么区别，又该如何使用？
 
-���������������� View �� dispatchTouchEvent �е��õģ�onTouch ������ onTouchEventִ�С�
-����� onTouch ������ͨ������ true ���¼����ѵ���onTouchEvent ��������ִ�С�
-������Ҫע����ǣ�onTouch �ܹ��õ�ִ����Ҫ����ǰ��������
-��һ mOnTouchListener ��ֵ����Ϊ�գ��ڶ���ǰ����Ŀؼ������� enable �ġ�
-����������һ���ؼ��Ƿ� enable �ģ�
-��ô����ע�� onTouch �¼�����Զ�ò���ִ�С�������һ��ؼ������������Ҫ�������� touch �¼���
-�ͱ���ͨ���ڸÿؼ�����д onTouchEvent ������ʵ�֡�
+这两个方法都是在 View 的 dispatchTouchEvent 中调用的，onTouch 优先于 onTouchEvent执行。
+如果在 onTouch 方法中通过返回 true 将事件消费掉，onTouchEvent 将不会再执行。
+另外需要注意的是，onTouch 能够得到执行需要两个前提条件，
+第一 mOnTouchListener 的值不能为空，第二当前点击的控件必须是 enable 的。
+因此如果你有一个控件是非 enable 的，
+那么给它注册 onTouch 事件将永远得不到执行。对于这一类控件，如果我们想要监听它的 touch 事件，
+就必须通过在该控件中重写 onTouchEvent 方法来实现。
 
-����ˢ�£�
+下拉刷新：
 
-1. ��ListView������header��footer������ListView�Ļ����¼�����̬����header/footer�ĸ߶ȣ�
-   �������ַ�ʽֻ������ListView��RecyclerView��
-2. �ڶ��ַ�ʽ���Ǽ̳�ViewGroup�������࣬�����¼���ͨ��scroll��Layout�ķ�ʽ�ƶ�child��
+1. 在ListView中添加header和footer，监听ListView的滑动事件，动态设置header/footer的高度，
+   但是这种方式只适用于ListView，RecyclerView。
+2. 第二种方式则是继承ViewGroup或其子类，监听事件，通过scroll或Layout的方式移动child。
 
-scrollTo()��scrollBy()������
- scrollBy�ڲ�������scrollTo�����ǻ��ڵ�ǰλ�õ���Ի�������scrollTo�Ǿ��Ի���
- ���������ͬ���������ε���scrollTo()����������View��ʼλ���ǲ���ֻ�����һ��View������Ч�������Ƕ�Ρ�
-view������ͻ��
- �ⲿ���ط���ָ����¼����Ⱦ��������������ش����������������Ҫ���¼������أ�����Ͳ����ء�
- ���巽������Ҫ��д��������onInterceptTouchEvent���������ڲ�������Ӧ�����ء�
- �ڲ����ط���ָ�������������κ��¼����������е��¼������ݸ��������������������Ҫ���¼���ֱ�����ģ�����ͽ��ɸ��������д�����
- ���巽������Ҫ���requestDisallowInterceptTouchEvent������
+scrollTo()和scrollBy()的区别？
+ scrollBy内部调用了scrollTo，它是基于当前位置的相对滑动；而scrollTo是绝对滑动
+ 如果利用相同输入参数多次调用scrollTo()方法，由于View初始位置是不变只会出现一次View滚动的效果而不是多次。
+view滑动冲突：
+ 外部拦截法：指点击事件都先经过父容器的拦截处理，如果父容器需要此事件就拦截，否则就不拦截。
+ 具体方法：需要重写父容器的onInterceptTouchEvent方法，在内部做出相应的拦截。
+ 内部拦截法：指父容器不拦截任何事件，而将所有的事件都传递给子容器，如果子容器需要此事件就直接消耗，否则就交由父容器进行处理。
+ 具体方法：需要配合requestDisallowInterceptTouchEvent方法。
 
- RecyclerView����״̬���洦��
- 1.����������--position--
- 2.�ж�����data�Ƿ�һ��
+ RecyclerView中做状态保存处理
+ 1.保存变更数据--position--
+ 2.判断两次data是否一致
