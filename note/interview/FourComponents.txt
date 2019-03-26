@@ -99,7 +99,7 @@ ActivityA:onStart
           onResume
 ActivityB:onStop
           onDestroy
-
+如果B是透明主题又或则是个DialogActivity，则不会回调A的onStop；
 onStart与onResume区别：onStart看见界面onResume可以交互
 onPause()：Activity失去焦点，但仍然可见。
 onStop()：Activity在后台，不可见（完全被另一个Activity挡住，或者程序后台运行）
