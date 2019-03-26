@@ -2,6 +2,7 @@ SQLite数据库升级：
                 1.将表A重命名，改了A_temp
                 2.创建新表A
                 3.将表A_temp的数据插入到表A
+SQLite数据库只允许增加字段而不允许修改和删除表字段，只能创建新表保留原有字段，删除原表
 
 统计启动时间：
     本地统计：adb shell am start -w packagename/activity
