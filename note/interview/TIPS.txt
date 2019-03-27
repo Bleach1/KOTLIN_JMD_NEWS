@@ -1,5 +1,6 @@
 Selector原理:https://blog.csdn.net/wangxingwu_314/article/details/8166496
 VIew事件传递机制：https://blog.csdn.net/ns_code/article/details/49848801
+https://www.jianshu.com/p/ca06765c735c(Rxpermission)
 从后台回来调起广告
 1.onActivityPaused()
   onActivityResumed()
