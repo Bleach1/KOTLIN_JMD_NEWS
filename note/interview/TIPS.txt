@@ -1,4 +1,9 @@
 
+
+AlarmManager:
+https://www.jianshu.com/p/32f438a0c239
+https://www.jianshu.com/p/8a2ce9d02640
+
 xml不提示  删除 .idea .iml
 .android  rename build-cache.bak
 .AndroidStudio3.x--system--caches
