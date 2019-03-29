@@ -1,3 +1,23 @@
+
+xml不提示  删除 .idea .iml
+.android  rename build-cache.bak
+.AndroidStudio3.x--system--caches
+                           compiler
+                           compile-server
+                           conversion
+                           external_build_system
+                           frameworks
+                           resource_folder_cache
+                
+
+             类                 函数
+静态代码块>构造代码块>构造函数>普通代码块
+
+待到秋来九月八
+我花开后百花杀
+冲天香镇透长安
+满城尽带黄金甲
+
 Selector原理:https://blog.csdn.net/wangxingwu_314/article/details/8166496
 VIew事件传递机制：https://blog.csdn.net/ns_code/article/details/49848801
 https://www.jianshu.com/p/ca06765c735c(Rxpermission)
