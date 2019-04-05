@@ -131,7 +131,7 @@ Service:
   并利用其内部的Looper实例化一个ServiceHandler对象；
   而这个ServiceHandler用于处理消息的handleMessage()方法会去调用IntentService的onHandleIntent()，
   这也是为什么可在该方法中处理后台任务的逻辑；当有Intent任务请求时会把Intent封装到Message，
-  然后ServiceHandler会把消息发送出，而发送消息是在onStartCommand()完成的，
+  然后ServiceHandler会把消息发送出，而-----发送消息是在onStartCommand()完成的，
   只能通过startService()才可走该生命周期方法，因此不能通过bindService创建IntentService。
 Service保活：
             Service设置成START_STICKY
