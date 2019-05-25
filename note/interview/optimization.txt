@@ -47,9 +47,12 @@ LeakCanary：
            正常情况下，当一个activity被Destroy时，
            那这个activity对象应该变成 null才是正确的。如果没有变成 null，那么就意味着发生了内存泄漏。
            当某个 Activity 被 destory 后，将它传给 RefWatcher 去做观测，确保其后续会被正常回收；
+
            RefWatcher 首先把 Activity 使用 KeyedWeakReference 引用起来，并使用一个 ReferenceQueue 来记录该 KeyedWeakReference 指向的对象是否已被回收；
            AndroidWatchExecutor 会在 5s 后，开始检查这个弱引用内的 Activity 是否被正常回收。判断条件是：若 Activity 被正常回收，那么引用它的 KeyedWeakReference 会被自动放入 ReferenceQueue 中。
+
            判断方式是：先看 Activity 对应的 KeyedWeakReference 是否已经放入 ReferenceQueue 中；如果没有，则手动 GC：gcTrigger.runGc();；然后再一次判断 ReferenceQueue 是否已经含有对应的 KeyedWeakReference。若还未被回收，则认为可能发生内存泄漏。
+           
            利用 HeapAnalyzer 对 dump 的内存情况进行分析并进一步确认，若确定发生泄漏，则利用 DisplayLeakService 发送通知。
 
      匿名内部类不能访问外部类方法中的局部变量，除非该变量被声明为final类型
