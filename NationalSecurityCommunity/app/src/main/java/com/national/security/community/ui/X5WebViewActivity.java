@@ -10,15 +10,10 @@ import android.view.WindowManager;
 import android.widget.ProgressBar;
 
 import com.national.security.community.R;
-import com.national.security.community.event.MessageEvent;
 import com.tencent.smtt.export.external.interfaces.JsResult;
 import com.tencent.smtt.sdk.WebChromeClient;
 import com.tencent.smtt.sdk.WebView;
 import com.tencent.smtt.sdk.WebViewClient;
-
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
-import org.greenrobot.eventbus.ThreadMode;
 
 import butterknife.BindView;
 
@@ -33,8 +28,6 @@ public class X5WebViewActivity extends AppCompatActivity {
     public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.x5_webview);
-
-        EventBus.getDefault().register(this);
 
         //视频为了避免闪屏和透明问题
         getWindow().setFormat(PixelFormat.TRANSLUCENT);
@@ -82,12 +75,6 @@ public class X5WebViewActivity extends AppCompatActivity {
         });
     }
 
-    //订阅方法，当接收到事件的时候，会调用该方法
-    //线程   优先级   粘性
-    @Subscribe(threadMode = ThreadMode.MAIN, priority = 1, sticky = true)
-    public void onEvent(MessageEvent messageEvent) {
-    }
-
     @Override
     protected void onResume() {
         super.onResume();
@@ -103,7 +90,6 @@ public class X5WebViewActivity extends AppCompatActivity {
     @Override
     protected void onDestroy() {
         super.onDestroy();
-        EventBus.getDefault().unregister(this);
         if (webView != null) {
             webView.removeAllViews();
             webView.destroy();

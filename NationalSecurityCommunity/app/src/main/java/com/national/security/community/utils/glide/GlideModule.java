@@ -1,3 +1,4 @@
+/*
 package com.national.security.community.utils.glide;
 
 import android.app.ActivityManager;
@@ -15,20 +16,24 @@ import com.bumptech.glide.request.RequestOptions;
 
 import java.io.InputStream;
 
+*/
 /**
  * @description: GlideModule
  * @author: ljn
  * @time: 2018/10/29
- */
+ *//*
+
 @com.bumptech.glide.annotation.GlideModule
 public class GlideModule extends AppGlideModule {
-    /**
+    */
+/**
      * 如果是处于 lowMemory 的时候，将图片的 DecodeFormat 设置为 RGB_565 ，
      * RGB_565 和默认的 ARGB_8888 比，每个像素会少 2 个byte
      *
      * @param context
      * @param builder
-     */
+     *//*
+
     @Override
     public void applyOptions(@NonNull Context context, @NonNull GlideBuilder builder) {
         ActivityManager activityManager = (ActivityManager) context.getSystemService(Context.ACTIVITY_SERVICE);
@@ -46,3 +51,4 @@ public class GlideModule extends AppGlideModule {
         registry.replace(GlideUrl.class, InputStream.class, new OkHttpUrlLoader.Factory());
     }
 }
+*/

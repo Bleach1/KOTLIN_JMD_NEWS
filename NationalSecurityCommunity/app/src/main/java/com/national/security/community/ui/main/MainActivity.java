@@ -24,19 +24,15 @@ import com.national.security.community.Config;
 import com.national.security.community.R;
 import com.national.security.community.architecture_components.LifeListener;
 import com.national.security.community.base.BaseActivity;
-import com.national.security.community.event.MessageEvent;
 import com.national.security.community.ui.CustomDialog;
 import com.national.security.community.ui.home.HomeFragment;
 import com.national.security.community.ui.mine.MineFragment;
 import com.national.security.community.ui.msg.MsgFragment;
-import com.national.security.community.utils.JNIUtil;
 import com.national.security.community.utils.NinePatchPic;
 import com.national.security.community.utils.UniqueIDUtil;
 import com.national.security.community.utils.network.NetWorkUtil;
 import com.national.security.community.widgets.BottomBar;
 import com.national.security.community.widgets.BottomBarTab;
-
-import org.greenrobot.eventbus.EventBus;
 
 import java.util.HashMap;
 import java.util.List;
@@ -230,7 +226,6 @@ public class MainActivity extends BaseActivity<MainPresenter> implements MainCon
     @Override
     public void showMsg(String msg) {
         Toast.makeText(this, "弹一个", Toast.LENGTH_LONG).show();
-        EventBus.getDefault().post(new MessageEvent("Hello !....."));
     }
 
     @Override
