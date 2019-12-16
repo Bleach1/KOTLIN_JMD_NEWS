@@ -66,6 +66,9 @@ Launcher启动：
                                        Instrumention --callActivityOnCreat
                                        Activity      --onCreat
                                               
+
+http://www.cnblogs.com/gne-hwz/p/6758308.html
+
 ActivityManagerService:主要负责系统中四大组件的启动、切换、调度及应用程序的管理和调度等工作。
 AMS extend ActivityManagerNative(AMN) implement Watchdog.Monitor,BatteryStatsImpl.BatteryCallback
 AMN extend Binder implement IActivityManager   AMN将作为Binder通信的服务端为用户提供支持。

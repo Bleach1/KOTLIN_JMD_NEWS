@@ -1,0 +1,74 @@
+基本数据类型
+num int double  都是对象级别默认为null
+bool
+String
+List<String> languages = ['Java', 'Dart', 'Python', 'C++', 'Kotlin'];
+Set<String> languages = {'Java', 'Dart', 'Python', 'C++', 'Kotlin',"Java"};
+Map<int, String> map = {1: 'one', 2: 'two', 3: 'three'};
+Runes
+Symbols
+
+
+余   商
+%   ～/
+
+??=,当变量的值为null时，执行赋值语句，否则不赋值
+
+??运算符:前表达式值为null则取后者。否则，后表达式不会被执行
+
+
+级联操作符  ..
+var paint = Paint();                                     var paint = Paint();
+paint.strokeCap = StrokeCap.round;             ==>>      paint 
+paint.style = PaintingStyle.stroke;                          ..strokeCap = StrokeCap.round
+                                                             ..style = PaintingStyle.stroke
+
+
+
+类库中的命名冲突     取别名
+import 'package:toly/utils/color_utils.dart' as myMath;
+import 'dart:math';
+
+被隐藏的对象无法被外界访问
+import 'package:toly/utils/color_utils.dart' show sin;//只显示sin函数
+import 'package:toly/utils/color_utils.dart' hide sin;//只隐藏sin函数
+
+_xxxx私有的
+
+多继承 mixin   mixin定义的类不能有构造方法
+
+class Person extends Living with Walker,Runner{
+  Person(){
+    print("Person");
+  }
+}
+
+关于混入的方法重名:取后混入的
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

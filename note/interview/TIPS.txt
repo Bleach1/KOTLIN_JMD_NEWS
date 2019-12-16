@@ -1,3 +1,4 @@
+
 ···	14576AlarmManager:
 https://www.jianshu.com/p/32f438a0c239
 https://www.jianshu.com/p/8a2ce9d02640
@@ -23,12 +24,14 @@ xml不提示  删除 .idea .iml
 
 Selector原理:https://blog.csdn.net/wangxingwu_314/article/details/8166496
 VIew事件传递机制：https://blog.csdn.net/ns_code/article/details/49848801
-https://www.jianshu.com/p/ca06765c735c(Rxpermission)
+https://www.jianshu.com/p/ca06765c735c(如何避免使用onActivityResult，Rxpermission)
+
 从后台回来调起广告
 1.onActivityPaused()
   onActivityResumed()
   Application.onTrimMemory() 的回调中，
   level 参数为 TRIM_MEMORY_UI_HIDDEN 的时候，就是 App 退出到后台的时机。
+
 2.枚举替换 @IntDef/@StringDef + @interface注解替换
 AIDL:
      Server:
@@ -41,7 +44,9 @@ AIDL:
             2.通过包名，类名绑定IRemoteService
             3.在onServiceConnected中通过IMyAidlInterface.Stub.asInterface(service)拿到AIDL
             4.调用方法
+
 M3u8:https://blog.csdn.net/u012230055/article/details/78180822
+
 TCP、Http、Https:
  Http Https：SSL/TLS  https: 对称 非对称 Hash 证书 TLS安全层
  1. “窗口”对应的是一段可以被发送者发送出去的字节序列，其连续的范围称之为“窗口”；
@@ -309,6 +314,7 @@ SparseArray：核心二分查找
 View绘制：https://www.cnblogs.com/jycboy/p/6219915.html
            
 Tinker:https://blog.csdn.net/fy993912_chris/article/details/79000699
+
 Kotlin:
        类型推断
        null安全
@@ -333,7 +339,6 @@ BroadcastReceiver已经不处于active状态，被系统杀掉的概率极高，
 如果你在onReceive去开线程进行异步操作或者打开Dialog都有可能在没达到你要的结果时进程就被系统杀掉。
 因为这个进程可能只有这个Receiver这个组件在运行，当Receiver也执行完后就是一个empty进程，是最容易被系统杀掉的。
 替代的方案是用Notificaiton或者Service（这种情况当然不能用bindService）。
-
 
   保存view的状态
   onSaveStateInstance
@@ -384,7 +389,7 @@ https://mp.weixin.qq.com/s/Qey-3JDdKYG04mo9WeBZ2g（RecyclerView）
 https://github.com/LRH1993/android_interview
 
 
-1.  补间动画：只产生了一个动画效果，其真实的坐标并没有发生改变（只是改变了View的显示效果而已，并不会真正的改变View的属性）。View做在做动画的时候，它并没有真正的移动它的位置，而是根据动画时间的插值，计算出一个Matrix，然后不停的invalidate，在onDraw中的Canvas上使用这个计算出来的Matrix去draw这个View的内容，并有onLayout中还是原来的位置，所以点击事件只能点击到原来的位置才能触发
+1.  补间动画：只产生了一个动画效果，其真实的坐标并没有发生改变（只是改变了View的显示效果而已，并不会真正的改变View的属性）。View做在做动画的时候，它并没有真正的移动它的位置，而是根据动画时间的插值，计算出一个Matrix，然后不停的invalidate，在onDraw中的Canvas上使用这个计算出来的Matrix去draw这个View的内容，并有onLayout中还是原来的位置，所以点击事件只能点击到原来的位置才能触发
 
 2. ObjectAnimator：一般直接用与View，要求作用的View提供该属性（如View的scaleX属性）的getter、setter方法（如setScaleX()方法），可以直接改变view的属性所以View的位置也跟随属性的改变而改变，点击事件的触发位置为动画结束的位置。
 
@@ -425,3 +430,5 @@ double        8
 传输层：Socket TCP UDP
 网络层：IP
 https://www.jianshu.com/p/6cb48a19d8fc(子线程修改UI)
+基础数据类型  引用数据类型
+java 字段中有默认值 局部变量没有

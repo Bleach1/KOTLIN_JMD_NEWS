@@ -40,6 +40,10 @@ FragmentStatePagerAdapter只保留当前页面，当页面不可见时，该Frag
 
 add不会重新初始化fragment，replace每次都会
 
+https://www.cnblogs.com/BobAdmin/p/5441799.html(分屏Fragment)
+
+
+
 自定义View执行invalidate()方法,为什么有时候不会回调onDraw()
    自定义一个view时，重写onDraw。调用view.invalidate(),会触发onDraw和computeScroll()。
    前提是该view被附加在当前窗口.view.postInvalidate(); //是在非UI线程上调用的

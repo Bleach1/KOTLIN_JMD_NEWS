@@ -2,7 +2,11 @@
 <project version="4">
   <component name="ProjectModuleManager">
     <modules>
+      <module fileurl="file://$PROJECT_DIR$/KOTLIN_JMD_NEWS-NationalSecurityCommunity.iml" filepath="$PROJECT_DIR$/KOTLIN_JMD_NEWS-NationalSecurityCommunity.iml" />
       <module fileurl="file://$PROJECT_DIR$/NationalSecurityCommunity.iml" filepath="$PROJECT_DIR$/NationalSecurityCommunity.iml" />
+      <module fileurl="file://$PROJECT_DIR$/app/NationalSecurityCommunity-app.iml" filepath="$PROJECT_DIR$/app/NationalSecurityCommunity-app.iml" />
+      <module fileurl="file://$PROJECT_DIR$/javaproject/NationalSecurityCommunity-javaproject.iml" filepath="$PROJECT_DIR$/javaproject/NationalSecurityCommunity-javaproject.iml" />
+      <module fileurl="file://$PROJECT_DIR$/plugin/NationalSecurityCommunity-plugin.iml" filepath="$PROJECT_DIR$/plugin/NationalSecurityCommunity-plugin.iml" />
       <module fileurl="file://$PROJECT_DIR$/app/app.iml" filepath="$PROJECT_DIR$/app/app.iml" />
       <module fileurl="file://$PROJECT_DIR$/javaproject/javaproject.iml" filepath="$PROJECT_DIR$/javaproject/javaproject.iml" />
       <module fileurl="file://$PROJECT_DIR$/plugin/plugin.iml" filepath="$PROJECT_DIR$/plugin/plugin.iml" />

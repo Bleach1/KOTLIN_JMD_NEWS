@@ -90,3 +90,9 @@ http://www.cnblogs.com/chihirotan/p/6486436.html
      2--ExecutorService.submit()
         通过ExecutorService.submit()方法提交的任务，可以获取任务执行完的返回值。
   (5)线程池处理任务原理
+
+
+http://blog.csdn.net/gongpulin/article/details/51212241
+http://www.cnblogs.com/greta/p/5624839.html
+http://blog.csdn.net/cs408/article/details/48930803
+http://www.cnblogs.com/chihirotan/p/6486436.html

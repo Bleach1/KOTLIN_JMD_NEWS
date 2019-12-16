@@ -114,12 +114,3 @@ path：第三部分就是主机资源的具体地址，如目录和文件名等
 是否有爬虫  :scrapy list
 执行爬虫    :scrapy crawl 爬虫name
 
-Dart:
-     var--Dart中var变量一旦赋值，类型便会确定，则不能再改变其类型
-
-     dynamic
-            ---会在赋值时自动进行类型推断，不同在于，赋值后可以改变其类型
-     Object
-     final
-          ---一个 final 变量只能被设置一次，两者区别在于：const 变量是一个编译时常量，final变量在第一次使用时被初始化
-     const
