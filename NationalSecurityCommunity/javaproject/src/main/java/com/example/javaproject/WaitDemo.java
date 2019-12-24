@@ -15,10 +15,10 @@ public class WaitDemo implements ThreadTest {
     }
 
     /*
-    * wait 释放锁进入等待队列
-    *
-    *
-    * */
+     * wait 释放锁进入等待队列
+     *
+     *
+     * */
     private synchronized void printString() {
         while (str == null) {
             try {
@@ -50,6 +50,18 @@ public class WaitDemo implements ThreadTest {
             @Override
             public void run() {
                 super.run();
+
+                //让出自己的时间片  给同级别线程
+                Thread.yield();
+
+                //代码.........
+                //强行插入
+                try {
+                    thread1.join();
+                } catch (InterruptedException e) {
+                    e.printStackTrace();
+                }
+                //代码...
                 try {
                     Thread.sleep(1000);
                 } catch (InterruptedException e) {
