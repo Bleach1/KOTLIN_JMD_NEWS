@@ -46,6 +46,62 @@ class Person extends Living with Walker,Runner{
 关于混入的方法重名:取后混入的
 
 
+async 异步方法
+await 等待异步方法执行完成
+
+
+
+
+widgets
+color和decoration是互斥的
+Container
+Text
+Image：
+圆角1.decoration border 2.ClipOval
+ListView
+GrideView
+Column
+Row
+Expland  flex
+Padding
+Stack +Align +Positoned  framelayout
+AspectRatio可以设置子元素的宽高比 //一般用于平铺图片
+Card
+Wrap可以换行相对Row Column
+
+BottomNavigationBar
+Scaffold
+AppBar
+Tab
+Drawer    UserAccountDrawerHeader
+Diveder()线
+SizeBox占位
+
+ButtonBar//按钮组
+
+RaiseButton
+FlatButton
+OutlineButton  //边框按钮
+
+
+ShapeBorder  
+BeveledRectangleBorder 顶端斜角
+BoxBorder
+CircleBorder 圆形
+InputBorder
+RoundedRectangleBorder 顶端圆角
+StadiumBorder 体育场型
+
+BorderRadius.circular(radius)
+
+
+
+Radio
+RadioListTitle
+
+
+
+
 
 
 
