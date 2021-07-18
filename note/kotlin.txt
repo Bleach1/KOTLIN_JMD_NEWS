@@ -87,8 +87,8 @@ for ((k, v) in map) {
     println("$k -> $v")
 }
 
-for (i in 1..100) { …… }  // 闭区间：包含 100
-for (i in 1 until 100) { …… } // 半开区间：不包含 100
+for (i in 1..100) { …… }  // 闭区间：包含 100 [1,100]
+for (i in 1 until 100) { …… } // 半开区间：不包含 100[1,100)
 for (x in 2..10 step 2) { …… }
 for (x in 10 downTo 1) { …… }
 if (x in 1..10) { …… }
@@ -193,4 +193,38 @@ interface xxx{
 _ 用于未使用的参数（lambda）
 
 使用Const修饰的成员变量不会生成get方法
+
+
+一个函数使用函数作为参数或者结果----高阶函数
+fun b(){}
+::函数引用
+::b变成对象
+
+fun  setOnClickListener(onClick:(View)->Unit){}
+//匿名函数----不是函数是函数类型的对象
+view.setOnClickListener(fun(v:View):Unit{
+
+})
+//lambda
+
+view.setOnClickListener({v:View->xxxx})
+
+//lambda是函数的最后一个参数可以写在外面
+view.setOnClickListener(){v:View->xxxx}
+
+//唯一参数
+view.setOnClickListener{v:View->xxxx}
+view.setOnClickListener{xxxx}
+
+
+inline:Kotlin的最新实验性的特性内联类允许创建我们想要的数据类型，并且还不会损失我们需要的性能!
+首先，内联类必须包含一个基础值，这就意味它需要一个主构造器来接收 这个基础值，此外它必须是只读的(val)
+如果有需要，可以将该属性设为私有的，但构造函数必须是公有的
+内联类中不能包含init block初始化块
+
+
+协程：同步的方式写出异步代码
+     不卡线程--非阻塞式挂起--suspend(提醒)(挂起协程)
+     suspending  Merge
+     withContext 指定线程执行完后  切换回来
 

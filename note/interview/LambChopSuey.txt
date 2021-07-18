@@ -5,7 +5,7 @@ SQLite数据库升级：
 SQLite数据库只允许增加字段而不允许修改和删除表字段，只能创建新表保留原有字段，删除原表
 
 统计启动时间：
-    本地统计：adb shell am start -w packagename/activity
+    本地统计：adb shell am start -W packagename/activity
     线上统计：
             Application 构造函数
             Application.attachBaseContext()·
@@ -34,7 +34,7 @@ Android系统启动：
                1.创建和挂载启动所需要的文件目录
                2.初始化和启动属性服务
                3.解析init.rc文件并启动Zygote进程
-               Zygote进程启动：
+               Zygote(app_process--cpp进程)进程启动：---加载系统资源类
                1.创建AppRuntime并调用其start方法，启动Zygote进程
                2.创建java虚拟机并注册JNI方法
                3.通过JNI调用ZygoteInit的main函数进入Zygote的java框架层
@@ -44,6 +44,22 @@ Android系统启动：
                1.启动Binder线程池，与其他进程通信
                2.创建SystemServiceManager，用于对系统服务的创建、启动、生命周期管理
                3.启动各种系统服务
+
+
+
+PMS:
+
+1.管理 加载 魂村apk文件  Package对象  缓存到一个key value集合中
+2.当AMS需要加载Activity  PMS提供对应的信息 javabean
+    1.通过包名找到对应的apk文件
+    2.解压apk
+    3.dom解析找到启动的Activity
+AMS:先去PMS查找    
+    4.反射加载
+    5.App启动
+
+
+
 
 Launcher启动：
             AMS-systemReady.....startHomeActivityLocked(获取所需的Intent,启动Launcher)
